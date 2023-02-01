@@ -1,0 +1,149 @@
+components:
+  requestBodies:
+    ModuleCreateRequestBody:
+      description: Body needed to create a Module
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleCreate"
+    ModuleSearchRequestBody:
+      description: Body needed to search Modules
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleSearchRequestBody"
+    ModulePatchRequestBody:
+      description: Body needed to modify a Module
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModulePatch"
+    ModuleUpdateRequestBody:
+      description: Body needed to update a Module
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleUpdate"
+    ModulePopulateRequestBody:
+      description: Body needed populate fields in Module
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModulePopulateRequestBody"
+  schemas:
+    ModuleCreate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+    ModulePatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+    ModuleSearchRequestBody:
+      $ref: "#/components/schemas/ModuleSearch"
+    ModuleUpdate:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+    ModuleSearch:
+      allOf:
+        - $ref: "#/components/schemas/ModulePaginationQuery"
+        - $ref: "#/components/schemas/ModuleConditionQuery"
+        - $ref: "#/components/schemas/ModulePopulateRequestBody"
+    ModuleConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+    ModuleConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ModuleConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ModuleConditionFields"
+    ModulePaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/ModulePagination"
+    ModulePagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/ModuleSort"
+    ModuleSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    ModulePopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/ModulePopulateFields"
+    ModulePopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/ModulePopulateField"
+    ModulePopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/ModulePopulateEnum"
+        match:
+          type: object
+    ModulePopulateEnum:
+      type: string
+      enum:
+        - endpoints

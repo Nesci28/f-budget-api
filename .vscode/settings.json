@@ -1,0 +1,109 @@
+{
+  "files.exclude": {
+    "**/generators/**": true,
+    "**/minio/**": true,
+    "**/mongo/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.angular/**": true,
+    "**/home/**": true
+  },
+  "files.watcherExclude": {
+    "**/generators/**": true,
+    "**/minio/**": true,
+    "**/mongo/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.angular/**": true,
+    "**/home/**": true,
+    "package-lock.json": true,
+    "**/yest/**": true
+  },
+  "search.exclude": {
+    "**/generators/**": true,
+    "**/backup/**": true,
+    "resolved.yaml": true,
+    "resolved-deep.yaml": true,
+    "**/minio/**": true,
+    "**/mongo/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/.angular/**": true,
+    "**/home/**": true,
+    "package-lock.json": true,
+    "**/yest/**": true,
+    "test-report.html": true
+  },
+  "explorer.compactFolders": false,
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.preferences.quoteStyle": "double",
+  "typescriptHero.imports.stringQuoteStyle": "\"",
+  "eslint.alwaysShowStatus": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    }
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    }
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  // "typescriptHero.imports.organizeOnSave": true,
+  "editor.detectIndentation": false,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorTheme": "Dracula Refined",
+  "editor.tabSize": 2,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "todohighlight.keywords": ["LOGIC_CHECK:"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "angular.enable-strict-mode-prompt": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#6a67bd",
+    "activityBar.activeBorder": "#b30bb4",
+    "activityBar.background": "#6a67bd",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#d8a8a6",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#4c49a8",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#6a67bd",
+    "titleBar.activeBackground": "#4c49a8",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#4c49a899",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "sash.hoverBorder": "#6a67bd",
+    "statusBarItem.remoteBackground": "#4c49a8",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799"
+  },
+  "peacock.remoteColor": "#4c49a8",
+  "peacock.color": "#215732",
+  "thunder-client.saveToWorkspace": true,
+  "thunder-client.customLocation": "",
+  "thunder-client.workspaceRelativePath": "./requests"
+}

@@ -1,0 +1,137 @@
+components:
+  requestBodies:
+    EndpointCreateRequestBody:
+      description: Body needed to create a Endpoint
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointCreate"
+    EndpointSearchRequestBody:
+      description: Body needed to search Endpoints
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointSearchRequestBody"
+    EndpointPatchRequestBody:
+      description: Body needed to modify a Endpoint
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointPatch"
+    EndpointUpdateRequestBody:
+      description: Body needed to update a Endpoint
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointUpdate"
+  schemas:
+    EndpointCreate:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+        errorCount:
+          type: number
+        successCount:
+          type: number
+        avgRequestPayloadSize:
+          type: number
+        avgResponsePayloadSize:
+          type: number
+        avgResponseTime:
+          type: number
+    EndpointPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        path:
+          type: string
+        errorCount:
+          type: number
+        successCount:
+          type: number
+        avgRequestPayloadSize:
+          type: number
+        avgResponsePayloadSize:
+          type: number
+        avgResponseTime:
+          type: number
+    EndpointSearchRequestBody:
+      $ref: "#/components/schemas/EndpointSearch"
+    EndpointUpdate:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+        errorCount:
+          type: number
+        successCount:
+          type: number
+        avgRequestPayloadSize:
+          type: number
+        avgResponsePayloadSize:
+          type: number
+        avgResponseTime:
+          type: number
+    EndpointSearch:
+      allOf:
+        - $ref: "#/components/schemas/EndpointPaginationQuery"
+        - $ref: "#/components/schemas/EndpointConditionQuery"
+    EndpointConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+    EndpointConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/EndpointConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/EndpointConditionFields"
+    EndpointPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/EndpointPagination"
+    EndpointPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/EndpointSort"
+    EndpointSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting

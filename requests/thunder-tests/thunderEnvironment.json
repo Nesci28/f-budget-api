@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "36acf51d-393f-4e56-80ae-30520575f4d5",
+    "name": "yest-stats",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2023-02-01T14:51:42.495Z",
+    "modified": "2023-02-01T14:51:42.495Z",
+    "data": [
+      {
+        "name": "baseUrl",
+        "value": "http://localhost:3000"
+      },
+      {
+        "name": "jwt",
+        "value": ""
+      }
+    ]
+  }
+]

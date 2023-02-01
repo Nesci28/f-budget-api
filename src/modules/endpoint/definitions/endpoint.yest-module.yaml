@@ -1,0 +1,28 @@
+configs:
+  moduleName: Module
+  connectionName: yest-stats
+components:
+  schemas:
+    Endpoint:
+      type: object
+      required:
+        - path
+      properties:
+        path:
+          type: string
+        errorCount:
+          x-default: 0
+          type: number
+        successCount:
+          x-default: 0
+          type: number
+        avgRequestPayloadSize:
+          x-default: 0
+          type: number
+        avgResponsePayloadSize:
+          x-default: 0
+          type: number
+        avgResponseTime:
+          x-default: 0
+          type: number
+

@@ -1,0 +1,250 @@
+components:
+  requestBodies:
+    UserCreateRequestBody:
+      description: Body needed to create a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserCreate"
+    UserSearchRequestBody:
+      description: Body needed to search Users
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserSearchRequestBody"
+    UserPatchRequestBody:
+      description: Body needed to modify a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserPatch"
+    UserUpdateRequestBody:
+      description: Body needed to update a User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserUpdate"
+    UserPopulateRequestBody:
+      description: Body needed populate fields in User
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserPopulateRequestBody"
+  schemas:
+    UserCreate:
+      type: object
+      required:
+        - email
+        - password
+        - role
+      properties:
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+        password:
+          type: string
+        projectIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            required:
+              - token
+              - deviceUUID
+              - userAgent
+              - rememberMe
+              - iat
+              - exp
+            properties:
+              token:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken
+              deviceUUID:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
+              dealerUserId:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+              userAgent:
+                type: string
+              rememberMe:
+                type: boolean
+              iat:
+                description: Issued At (timestamp in UTC)
+                type: number
+              exp:
+                description: Expiration Time (timestamp in UTC)
+                type: number
+        role:
+          $ref: ./user.schemas.yaml#/components/schemas/UserRole
+    UserPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+        password:
+          type: string
+        projectIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            properties:
+              token:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken
+              deviceUUID:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
+              dealerUserId:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+              userAgent:
+                type: string
+              rememberMe:
+                type: boolean
+              iat:
+                description: Issued At (timestamp in UTC)
+                type: number
+              exp:
+                description: Expiration Time (timestamp in UTC)
+                type: number
+        role:
+          $ref: ./user.schemas.yaml#/components/schemas/UserRole
+    UserSearchRequestBody:
+      $ref: "#/components/schemas/UserSearch"
+    UserUpdate:
+      type: object
+      required:
+        - email
+        - password
+        - role
+      properties:
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+        password:
+          type: string
+        projectIds:
+          type: array
+          items:
+            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        refreshTokens:
+          type: array
+          items:
+            type: object
+            required:
+              - token
+              - deviceUUID
+              - userAgent
+              - rememberMe
+              - iat
+              - exp
+            properties:
+              token:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BearerToken
+              deviceUUID:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
+              dealerUserId:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+              userAgent:
+                type: string
+              rememberMe:
+                type: boolean
+              iat:
+                description: Issued At (timestamp in UTC)
+                type: number
+              exp:
+                description: Expiration Time (timestamp in UTC)
+                type: number
+        role:
+          $ref: ./user.schemas.yaml#/components/schemas/UserRole
+    UserSearch:
+      allOf:
+        - $ref: "#/components/schemas/UserPaginationQuery"
+        - $ref: "#/components/schemas/UserConditionQuery"
+        - $ref: "#/components/schemas/UserPopulateRequestBody"
+    UserConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        refreshTokens.token:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+    UserConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/UserConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/UserConditionFields"
+    UserPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/UserPagination"
+    UserPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/UserSort"
+    UserSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        email:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        refreshTokens.token:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    UserPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/UserPopulateFields"
+    UserPopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/UserPopulateField"
+    UserPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/UserPopulateEnum"
+        match:
+          type: object
+    UserPopulateEnum:
+      type: string
+      enum:
+        - projects

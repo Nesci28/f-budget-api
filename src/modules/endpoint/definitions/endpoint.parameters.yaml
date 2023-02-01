@@ -1,0 +1,23 @@
+components:
+  parameters:
+    EndpointId:
+      name: id
+      description: Endpoint's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsEndpointDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsEndpointArchived:
+      name: isArchived
+      description: Get archived Endpoint
+      in: query
+      required: false
+      schema:
+        type: boolean

@@ -1,0 +1,7 @@
+registry=https://nexus.okidoo.co/repository/npm-all/
+always-auth=true
+timeout=120000
+//nexus.okidoo.co/repository/npm-all/:_authToken=
+//nexus.okidoo.co/repository/npm/:_authToken=
+prefix=/home/node/.npm
+# force=true

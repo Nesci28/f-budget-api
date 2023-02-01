@@ -1,0 +1,102 @@
+components:
+  responses:
+    EndpointCreateResponse:
+      description: Returns a Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointCreateResponse"
+    EndpointGetAllResponse:
+      description: Returns an array of Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointGetAllResponse"
+    EndpointFindByIdResponse:
+      description: Returns a Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointFindByIdResponse"
+    EndpointSearchResponse:
+      description: Returns a paginated array of Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointSearchResponse"
+    EndpointPatchResponse:
+      description: Returns a modified Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointPatchResponse"
+    EndpointUpdateResponse:
+      description: Returns an updated Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointUpdateResponse"
+    EndpointArchiveResponse:
+      description: Returns a ResultHandler with the archived Endpoint
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EndpointArchiveResponse"
+  schemas:
+    EndpointCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint
+    EndpointArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./endpoint.schemas.yaml#/components/schemas/Endpoint

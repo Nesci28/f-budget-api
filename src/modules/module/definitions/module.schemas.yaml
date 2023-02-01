@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Module:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            endpointIds:
+              type: array
+              items:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID

@@ -1,0 +1,39 @@
+components:
+  requestBodies:
+    LoginRequestBody:
+      description: Body needed to login
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginRequestBody"
+    RefreshTokenRequestBody:
+      description: Body needed to refresh the Jwt Token
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RefreshTokenRequestBody"
+  schemas:
+    LoginRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - rememberMe
+        - deviceUUID
+      properties:
+        email:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
+        password:
+          type: string
+          x-faker: internet.password
+        rememberMe:
+          type: boolean
+        deviceUUID:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid"
+    RefreshTokenRequestBody:
+      type: object
+      properties:
+        userId:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"

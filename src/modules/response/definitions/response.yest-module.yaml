@@ -1,0 +1,47 @@
+configs:
+  moduleName: Response
+  connectionName: yest-stats
+components:
+  schemas:
+    Response:
+      type: object
+      required:
+        - requestId
+        - projectId
+        - payload
+        - payloadSize
+        - time
+        - status
+      properties:
+        requestId:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        projectId:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        payload:
+          type: string
+        payloadSize:
+          type: number
+        time:
+          type: number
+        status:
+          x-index: true
+          $ref: "#/components/schemas/ResponseStatus"
+        uuid:
+          type: string
+        error:
+          type: string
+        request:
+          x-localField: requestId
+          $ref: "../../request/definitions/request.schemas.yaml#/components/schemas/Request"
+        project:
+          x-localField: projectId
+          $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"
+
+    ResponseStatus:
+      type: string
+      enum:
+        - 500
+        - 429
+        - 404
+        - 401
+        - 400

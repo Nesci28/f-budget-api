@@ -1,0 +1,177 @@
+paths:
+  /project:
+    post:
+      tags:
+        - Project
+      operationId: projectCreate
+      summary: Creates a new Project
+      description: Creates a new Project
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectCreateRequestBody"
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/IsProjectDryRun"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /project-all:
+    post:
+      tags:
+        - Project
+      operationId: projectGetAll
+      summary: Get all Project
+      description: Get all Project
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/IsProjectArchived"
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /project-search:
+    post:
+      tags:
+        - Project
+      operationId: projectSearch
+      summary: Search Project
+      description: Search Project
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectSearchRequestBody"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /project/{id}:
+    post:
+      tags:
+        - Project
+      operationId: projectGetById
+      summary: Get by Id a Project
+      description: Get by Id a Project
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Project
+      operationId: projectPatch
+      summary: Patch a Project
+      description: Patch a Project
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectPatchRequestBody"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Project
+      operationId: projectUpdate
+      summary: Update a Project
+      description: Update a Project
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
+        - $ref: "./project.parameters.yaml#/components/parameters/IsProjectDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Project
+      operationId: projectArchive
+      summary: Archive a Project
+      description: Archive a Project
+      parameters:
+        - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./project.responses.yaml#/components/responses/ProjectArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+    "colName": "Yest-Stats",
+    "created": "2023-02-01T14:50:50.303Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "327586ca-b6e6-4941-8950-9fe92a0bd1b5",
+        "name": "Auth",
+        "containerId": "",
+        "created": "2023-02-01T14:50:55.690Z",
+        "sortNum": 10000
+      }
+    ]
+  }
+]

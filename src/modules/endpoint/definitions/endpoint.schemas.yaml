@@ -1,0 +1,21 @@
+components:
+  schemas:
+    Endpoint:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - path
+          properties:
+            path:
+              type: string
+            errorCount:
+              type: number
+            successCount:
+              type: number
+            avgRequestPayloadSize:
+              type: number
+            avgResponsePayloadSize:
+              type: number
+            avgResponseTime:
+              type: number

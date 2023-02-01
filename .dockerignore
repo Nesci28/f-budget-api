@@ -1,0 +1,11 @@
+**/minio
+**/mongo
+.devcontainer
+.vscode
+backup
+dist
+generators
+node_modules
+requests
+scripts
+test

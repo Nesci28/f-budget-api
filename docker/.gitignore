@@ -1,0 +1,5 @@
+**.env
+.npmrc
+mongo/
+minio/
+mongo_auth.key

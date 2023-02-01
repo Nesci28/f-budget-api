@@ -1,0 +1,55 @@
+version: '3.7'
+services:
+  yest-stats-api:
+    image: docker.okidoo.co/node-dev-18:latest
+    container_name: yest-stats-api
+    dns: 1.1.1.1
+    env_file:
+      - ./.yest-stats-api.env
+      - ./.git.env
+    command: tail -F anything
+    networks:
+      - yest-stats
+      - yest-api
+    ports:
+      - ${API_PORT}:3000
+    volumes:
+      - ./.npmrc:/home/node/.npmrc
+      - ../:/home/node/app
+      - ~/.ssh/:/home/node/.ssh/
+    environment:
+      TZ: "America/Toronto"
+    depends_on:
+      yest-stats-mongo:
+        condition: service_healthy
+
+  yest-stats-mongo:
+    image: mongo:latest
+    ports:
+      - ${MONGO_PORT_1}:27017
+    env_file:
+      - ./.mongo.env
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - yest-stats
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017 --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  yest-stats-redis:
+    image: redis:latest
+    container_name: yest-stats-redis
+    networks:
+      - yest-stats
+    ports:
+      - ${REDIS_PORT}:6379
+
+networks:
+  yest-stats:
+  yest-api:
+    external: true
+    name: yest-api_yest-api

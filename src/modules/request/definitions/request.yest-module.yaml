@@ -1,0 +1,25 @@
+configs:
+  moduleName: Request
+  connectionName: yest-stats
+components:
+  schemas:
+    Request:
+      type: object
+      required:
+        - endpointId
+        - projectId
+      properties:
+        endpointId:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        projectId:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        payload:
+          type: string
+        payloadSize:
+          type: number
+        endpoint:
+          x-localField: endpointId
+          $ref: "../../endpoint/definitions/endpoint.schemas.yaml#/components/schemas/Endpoint"
+        project:
+          x-localField: projectId
+          $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"

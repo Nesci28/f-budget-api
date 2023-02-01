@@ -1,0 +1,7 @@
+.yest-config.yaml
+node_modules/
+**/yest/**
+test-report.html
+**/dist/**
+**/ftp/**
+**/ftp_backups/**

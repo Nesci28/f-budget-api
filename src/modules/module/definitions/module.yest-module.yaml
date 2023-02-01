@@ -1,0 +1,21 @@
+configs:
+  moduleName: Module
+  connectionName: yest-stats
+components:
+  schemas:
+    Module:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        endpoints:
+          x-localField: endpointIds
+          type: array
+          items:
+            $ref: "../../endpoint/definitions/endpoint.schemas.yaml#/components/schemas/Endpoint"

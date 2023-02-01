@@ -1,0 +1,23 @@
+configs:
+  moduleName: Project
+  connectionName: yest-stats
+components:
+  schemas:
+    Project:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        moduleIds:
+          type: array
+          items:
+            $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        logo:
+          type: string
+        modules:
+          x-localField: moduleIds
+          type: array
+          items:
+            $ref: "../../module/definitions/module.schemas.yaml#/components/schemas/Module"

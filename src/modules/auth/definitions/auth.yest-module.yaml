@@ -1,0 +1,6 @@
+configs:
+  moduleName: Auth
+  connectionName: yest-stats
+components:
+  schemas: {}
+

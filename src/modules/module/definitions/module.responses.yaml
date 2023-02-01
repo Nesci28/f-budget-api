@@ -1,0 +1,102 @@
+components:
+  responses:
+    ModuleCreateResponse:
+      description: Returns a Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleCreateResponse"
+    ModuleGetAllResponse:
+      description: Returns an array of Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleGetAllResponse"
+    ModuleFindByIdResponse:
+      description: Returns a Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleFindByIdResponse"
+    ModuleSearchResponse:
+      description: Returns a paginated array of Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleSearchResponse"
+    ModulePatchResponse:
+      description: Returns a modified Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModulePatchResponse"
+    ModuleUpdateResponse:
+      description: Returns an updated Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleUpdateResponse"
+    ModuleArchiveResponse:
+      description: Returns a ResultHandler with the archived Module
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ModuleArchiveResponse"
+  schemas:
+    ModuleCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModuleGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModuleFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModuleSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModulePatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModuleUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./module.schemas.yaml#/components/schemas/Module
+    ModuleArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./module.schemas.yaml#/components/schemas/Module

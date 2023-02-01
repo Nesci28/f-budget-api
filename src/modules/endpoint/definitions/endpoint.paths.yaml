@@ -1,0 +1,173 @@
+paths:
+  /endpoint:
+    post:
+      tags:
+        - Endpoint
+      operationId: endpointCreate
+      summary: Creates a new Endpoint
+      description: Creates a new Endpoint
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointCreateRequestBody"
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/IsEndpointDryRun"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /endpoint-all:
+    post:
+      tags:
+        - Endpoint
+      operationId: endpointGetAll
+      summary: Get all Endpoint
+      description: Get all Endpoint
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/IsEndpointArchived"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /endpoint-search:
+    post:
+      tags:
+        - Endpoint
+      operationId: endpointSearch
+      summary: Search Endpoint
+      description: Search Endpoint
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointSearchRequestBody"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /endpoint/{id}:
+    post:
+      tags:
+        - Endpoint
+      operationId: endpointGetById
+      summary: Get by Id a Endpoint
+      description: Get by Id a Endpoint
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Endpoint
+      operationId: endpointPatch
+      summary: Patch a Endpoint
+      description: Patch a Endpoint
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointPatchRequestBody"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Endpoint
+      operationId: endpointUpdate
+      summary: Update a Endpoint
+      description: Update a Endpoint
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/IsEndpointDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Endpoint
+      operationId: endpointArchive
+      summary: Archive a Endpoint
+      description: Archive a Endpoint
+      parameters:
+        - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./endpoint.responses.yaml#/components/responses/EndpointArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

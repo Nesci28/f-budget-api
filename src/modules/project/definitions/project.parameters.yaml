@@ -1,0 +1,23 @@
+components:
+  parameters:
+    ProjectId:
+      name: id
+      description: Project's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsProjectDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsProjectArchived:
+      name: isArchived
+      description: Get archived Project
+      in: query
+      required: false
+      schema:
+        type: boolean

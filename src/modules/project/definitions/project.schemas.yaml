@@ -1,0 +1,21 @@
+components:
+  schemas:
+    Project:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            moduleIds:
+              type: array
+              items:
+                $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            logo:
+              type: string
+            modules:
+              type: array
+              items:
+                $ref: ../../module/definitions/module.schemas.yaml#/components/schemas/Module
