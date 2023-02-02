@@ -1,7 +1,3 @@
-import {
-  PropertyControlOptionRepository,
-  PropertyControlRepository,
-} from "@yest/mongoose";
 import { MongoMemoryHandler } from "@yest/mongoose-test";
 import { YestRouterModule } from "@yest/router";
 import { SecurityService } from "@yest/security";
@@ -16,7 +12,6 @@ import {
   Context,
   createMany,
   createOne,
-  createOptionIds,
   generateOptionIdMap,
   updateField,
 } from "./global";
@@ -38,7 +33,7 @@ export default async (): Promise<void> => {
     destroy$: globalThis.context.testHandler.destroy$,
   });
   clonedMeta.imports.push(
-    globalThis.context.mongoMemory.setup(27028),
+    globalThis.context.mongoMemory.setup(27028, configs.mongooseConnectionName),
     yestModuleRouter,
   );
   Reflect.defineMetadata("testMode", true, AppModule);
@@ -50,13 +45,6 @@ export default async (): Promise<void> => {
 
   const startSetupDate = new Date().getTime();
   // Fill CTX
-  globalThis.context.propertyControlRepository = (
-    globalThis.context.testHandler as TestHandler
-  ).get<PropertyControlRepository>("PropertyControlRepository");
-  globalThis.context.propertyControlOptionRepository = (
-    globalThis.context.testHandler as TestHandler
-  ).get<PropertyControlOptionRepository>("PropertyControlOptionRepository");
-
   globalThis.context.securityService = (
     globalThis.context.testHandler as TestHandler
   ).get<SecurityService>(SecurityService);
@@ -86,7 +74,6 @@ export default async (): Promise<void> => {
   globalThis.context.updateField = updateField;
   globalThis.context.optionIdMap = generateOptionIdMap();
   globalThis.context.testHandler.optionIdMap = globalThis.context.optionIdMap;
-  globalThis.context.createOptionIds = createOptionIds;
 
   const endSetupDate = new Date().getTime();
   console.log(`Setup done in: ${endSetupDate - startSetupDate}ms`);

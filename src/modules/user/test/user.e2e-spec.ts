@@ -52,11 +52,6 @@ describe("UserController", () => {
 
   beforeEach(async () => {
     await ctx.mongoMemory.clean();
-    await ctx.createOptionIds(
-      ctx.testHandler,
-      ctx.propertyControlRepository,
-      ctx.propertyControlOptionRepository,
-    );
     jest.restoreAllMocks();
   });
 

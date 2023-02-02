@@ -69,14 +69,14 @@ export class AuthService {
     }
   }
 
-  public async login(email: string, passwordHash: string): Promise<User> {
+  public async login(email: string, password: string): Promise<User> {
     const user = await this.userService.getUserByEmail(email);
-    const { password } = user;
-    if (!password) {
+    const { password: passwordHash } = user;
+    if (!passwordHash) {
       throw new InternalServerException("No password in User");
     }
 
-    const isPasswordMatch = await bcrypt.compare(passwordHash, password);
+    const isPasswordMatch = await bcrypt.compare(password, passwordHash);
     if (!isPasswordMatch) {
       throw new ResultHandlerException(AuthErrors.wrongCredentials);
     }

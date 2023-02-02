@@ -19,7 +19,6 @@
   "verbose": true,
   "reporters": [
     "default",
-    "jest-spin-reporter",
     [
       "./node_modules/jest-html-reporter",
       {

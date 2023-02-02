@@ -55,10 +55,10 @@ export class MongoResponse extends MongoBase implements Response {
   public time: number;
 
   @Prop({
-    type: String,
+    type: Number,
     required: true,
     index: true,
-    enum: ["500", "429", "404", "401", "400"],
+    enum: [500, 429, 404, 401, 400],
   })
   public status: ResponseStatus;
 

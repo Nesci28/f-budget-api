@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   EndpointArchiveResponse,
   EndpointCreate,
@@ -21,7 +21,7 @@ import { EndpointService } from "./endpoint.service";
 export class EndpointController {
   constructor(private readonly endpointService: EndpointService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointCreate(
     @Body() endpoint: EndpointCreate,
     @Query()
@@ -34,7 +34,7 @@ export class EndpointController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointSearch(
     @Body() body: EndpointSearch,
   ): Promise<EndpointSearchResponse> {
@@ -43,7 +43,7 @@ export class EndpointController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointGetById(
     @Param() params: { id: string },
   ): Promise<EndpointFindByIdResponse> {
@@ -52,7 +52,7 @@ export class EndpointController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointGetAll(
     @Query() query: { isArchived?: boolean },
   ): Promise<EndpointGetAllResponse> {
@@ -61,7 +61,7 @@ export class EndpointController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointPatch(
     @Param() params: { id: string },
     @Body() endpoint: EndpointPatch,
@@ -71,7 +71,7 @@ export class EndpointController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointUpdate(
     @Param() params: { id: string },
     @Body() endpoint: EndpointUpdate,
@@ -90,7 +90,7 @@ export class EndpointController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async endpointArchive(
     @Param() params: { id: string },
   ): Promise<EndpointArchiveResponse> {

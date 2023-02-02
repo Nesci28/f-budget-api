@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   RequestArchiveResponse,
   RequestCreate,
@@ -16,13 +16,14 @@ import {
   RequestUpdateResponse,
 } from "@yest/yest-stats-api-typescript-fetch";
 
+import { IpsGuard } from "../../guards/ip.guard";
 import { RequestService } from "./request.service";
 
 @Controller()
 export class RequestController {
   constructor(private readonly requestService: RequestService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(IpsGuard)
   public async requestCreate(
     @Body() request: RequestCreate,
     @Query()
@@ -35,7 +36,7 @@ export class RequestController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async requestSearch(
     @Body() body: RequestSearch,
   ): Promise<RequestSearchResponse> {
@@ -44,7 +45,7 @@ export class RequestController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async requestGetById(
     @Param() params: { id: string },
     @Body() body: RequestPopulateRequestBody,
@@ -55,7 +56,7 @@ export class RequestController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async requestGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: RequestPopulateRequestBody,
@@ -66,7 +67,7 @@ export class RequestController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(IpsGuard)
   public async requestPatch(
     @Param() params: { id: string },
     @Body() request: RequestPatch,
@@ -76,7 +77,7 @@ export class RequestController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(IpsGuard)
   public async requestUpdate(
     @Param() params: { id: string },
     @Body() request: RequestUpdate,
@@ -91,7 +92,7 @@ export class RequestController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async requestArchive(
     @Param() params: { id: string },
   ): Promise<RequestArchiveResponse> {

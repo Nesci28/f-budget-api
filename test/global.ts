@@ -1,9 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-  PropertyControlOptionRepository,
-  PropertyControlOptionValue,
-  PropertyControlRepository,
-} from "@yest/mongoose";
+
 import { MongoMemoryHandler } from "@yest/mongoose-test";
 import { SecurityService } from "@yest/security";
 import { TestHandler } from "@yest/test";
@@ -26,9 +22,6 @@ export interface Context<T, U> {
   configMember: Configuration;
   memberUserId: string;
   securityService: SecurityService;
-  propertyControlRepository: PropertyControlRepository;
-  propertyControlOptionRepository: PropertyControlOptionRepository;
-  optionIdMap: OptionIdMap;
   createOne: (
     modelName: string,
     testHandler: TestHandler,
@@ -47,11 +40,6 @@ export interface Context<T, U> {
     forbiddenFields: string[],
     testHandler: TestHandler,
   ) => { key: string; update: U };
-  createOptionIds(
-    testHandler: TestHandler,
-    propertyControlRepository: PropertyControlRepository,
-    propertyControlOptionRepository: PropertyControlOptionRepository,
-  ): Promise<PropertyControlOptionValue[]>;
 }
 
 export function updateField<T extends Record<any, any>, U>(
@@ -130,19 +118,6 @@ export function generateOptionIdMap(): OptionIdMap {
     boolean: booleanId,
     date: dateId,
   };
-}
-
-export async function createOptionIds(
-  testHandler: TestHandler,
-  propertyControlRepository: PropertyControlRepository,
-  propertyControlOptionRepository: PropertyControlOptionRepository,
-): Promise<void> {
-  try {
-    const options = testHandler.generateOptions();
-    await propertyControlOptionRepository.createMany(options);
-  } catch (error) {
-    throw new Error("Error generating options.");
-  }
 }
 
 export async function cleanDbs(ctx: Context<any, any>): Promise<void> {

@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   UserArchiveResponse,
   UserCreate,
@@ -22,7 +22,7 @@ import { UserService } from "./user.service";
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userCreate(
     @Body() user: UserCreate,
     @Query()
@@ -35,7 +35,7 @@ export class UserController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userSearch(
     @Body() body: UserSearch,
   ): Promise<UserSearchResponse> {
@@ -44,7 +44,7 @@ export class UserController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userGetById(
     @Param() params: { id: string },
     @Body() body: UserPopulateRequestBody,
@@ -55,7 +55,7 @@ export class UserController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: UserPopulateRequestBody,
@@ -66,7 +66,7 @@ export class UserController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userPatch(
     @Param() params: { id: string },
     @Body() user: UserPatch,
@@ -76,7 +76,7 @@ export class UserController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userUpdate(
     @Param() params: { id: string },
     @Body() user: UserUpdate,
@@ -91,7 +91,7 @@ export class UserController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async userArchive(
     @Param() params: { id: string },
   ): Promise<UserArchiveResponse> {

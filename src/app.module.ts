@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { APP_FILTER } from "@nestjs/core";
+import { APP_FILTER, APP_GUARD } from "@nestjs/core";
 import { MongooseModule, MongooseModuleOptions } from "@nestjs/mongoose";
 import { ThrottlerModule } from "@nestjs/throttler";
 import { YestHealthcheckModule } from "@yest/healthcheck";
@@ -19,6 +19,8 @@ import { ThrottlerStorageRedisService } from "nestjs-throttler-storage-redis";
 import { v4 } from "uuid";
 
 import { configs } from "./constants/configs.constant";
+import { IpsGuard } from "./guards/ip.guard";
+import { LocalStrategy } from "./guards/local.strategy";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { EndpointModule } from "./modules/endpoint/endpoint.module";
@@ -27,7 +29,6 @@ import { ProjectModule } from "./modules/project/project.module";
 import { RequestModule } from "./modules/request/request.module";
 import { ResponseModule } from "./modules/response/response.module";
 import { UserModule } from "./modules/user/user.module";
-import { LocalStrategy } from "./passport/local.strategy";
 
 const configModule = ConfigModule.forRoot({
   validationSchema: Joi.object({
@@ -130,6 +131,10 @@ const moduleImports = [
 
 const appProviders = [
   LocalStrategy,
+  {
+    provide: APP_GUARD,
+    useClass: IpsGuard,
+  },
   {
     provide: APP_FILTER,
     useClass: ResultHandlerInterceptor,

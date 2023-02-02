@@ -33,7 +33,7 @@ components:
             project:
               $ref: ../../project/definitions/project.schemas.yaml#/components/schemas/Project
     ResponseStatus:
-      type: string
+      type: number
       enum:
         - 500
         - 429

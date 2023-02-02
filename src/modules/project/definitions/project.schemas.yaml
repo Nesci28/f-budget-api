@@ -9,6 +9,10 @@ components:
           properties:
             name:
               type: string
+            serverIps:
+              type: array
+              items:
+                type: string
             moduleIds:
               type: array
               items:

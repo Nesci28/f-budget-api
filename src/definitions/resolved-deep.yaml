@@ -2095,28 +2095,6 @@ components:
       enum:
         - Fr
         - En
-    LoginRequestBody:
-      type: object
-      required:
-        - email
-        - password
-        - rememberMe
-        - deviceUUID
-      properties:
-        email:
-          $ref: '#/components/schemas/Email'
-        password:
-          type: string
-          x-faker: internet.password
-        rememberMe:
-          type: boolean
-        deviceUUID:
-          $ref: '#/components/schemas/Uuid'
-    RefreshTokenRequestBody:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/ObjectID'
     LoginResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2170,6 +2148,85 @@ components:
         exp:
           description: Expiration time
           type: number
+    LoginRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - rememberMe
+        - deviceUUID
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+          x-faker: internet.password
+        rememberMe:
+          type: boolean
+        deviceUUID:
+          $ref: '#/components/schemas/Uuid'
+    RefreshTokenRequestBody:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/ObjectID'
+    EndpointCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Endpoint'
+    EndpointFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Endpoint'
+    EndpointPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
     EndpointCreate:
       type: object
       required:
@@ -2277,63 +2334,6 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
-    EndpointCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
     Endpoint:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2545,6 +2545,10 @@ components:
       properties:
         name:
           type: string
+        serverIps:
+          type: array
+          items:
+            type: string
         moduleIds:
           type: array
           items:
@@ -2558,6 +2562,10 @@ components:
       properties:
         name:
           type: string
+        serverIps:
+          type: array
+          items:
+            type: string
         moduleIds:
           type: array
           items:
@@ -2574,6 +2582,10 @@ components:
       properties:
         name:
           type: string
+        serverIps:
+          type: array
+          items:
+            type: string
         moduleIds:
           type: array
           items:
@@ -2725,6 +2737,10 @@ components:
           properties:
             name:
               type: string
+            serverIps:
+              type: array
+              items:
+                type: string
             moduleIds:
               type: array
               items:
@@ -2862,6 +2878,26 @@ components:
       enum:
         - endpoint
         - project
+    Request:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - endpointId
+            - projectId
+          properties:
+            endpointId:
+              $ref: '#/components/schemas/ObjectID'
+            projectId:
+              $ref: '#/components/schemas/ObjectID'
+            payload:
+              type: string
+            payloadSize:
+              type: number
+            endpoint:
+              $ref: '#/components/schemas/Endpoint'
+            project:
+              $ref: '#/components/schemas/Project'
     RequestCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2919,26 +2955,6 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/Request'
-    Request:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - endpointId
-            - projectId
-          properties:
-            endpointId:
-              $ref: '#/components/schemas/ObjectID'
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            payload:
-              type: string
-            payloadSize:
-              type: number
-            endpoint:
-              $ref: '#/components/schemas/Endpoint'
-            project:
-              $ref: '#/components/schemas/Project'
     ResponseCreate:
       type: object
       required:
@@ -2966,7 +2982,7 @@ components:
           type: string
           pattern: ^[0-9a-f]{24}$
         status:
-          type: string
+          type: number
           enum:
             - 500
             - 429
@@ -2994,7 +3010,7 @@ components:
           type: string
           pattern: ^[0-9a-f]{24}$
         status:
-          type: string
+          type: number
           enum:
             - 500
             - 429
@@ -3030,7 +3046,7 @@ components:
           type: string
           pattern: ^[0-9a-f]{24}$
         status:
-          type: string
+          type: number
           enum:
             - 500
             - 429
@@ -3210,7 +3226,7 @@ components:
             project:
               $ref: '#/components/schemas/Project'
     ResponseStatus:
-      type: string
+      type: number
       enum:
         - 500
         - 429
@@ -3584,20 +3600,6 @@ components:
         exp:
           description: Expiration Time (timestamp in UTC)
           type: number
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
     Province:
       type: string
       enum:
@@ -4178,6 +4180,20 @@ components:
           type: array
           items:
             type: string
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
     AccessModelCreate:
       type: object
       required:
@@ -5968,12 +5984,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserArchiveResponse'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
     SuccessResultResponse:
       description: Successful request (no content)
       content:
@@ -6016,6 +6026,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     AccessModelCreateResponse:
       description: Returns a AccessModel
       content:

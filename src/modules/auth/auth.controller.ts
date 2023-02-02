@@ -20,7 +20,7 @@ import {
 import { Response } from "express";
 
 import { configs } from "../../constants/configs.constant";
-import { LocalGuard } from "../../passport/local.guard";
+import { LocalGuard } from "../../guards/local.guard";
 import { DateUtil } from "../../utils/date.util";
 import { AuthService } from "./auth.service";
 

@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   ResponseArchiveResponse,
   ResponseCreate,
@@ -22,7 +22,7 @@ import { ResponseService } from "./response.service";
 export class ResponseController {
   constructor(private readonly responseService: ResponseService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseCreate(
     @Body() response: ResponseCreate,
     @Query()
@@ -35,7 +35,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseSearch(
     @Body() body: ResponseSearch,
   ): Promise<ResponseSearchResponse> {
@@ -44,7 +44,7 @@ export class ResponseController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseGetById(
     @Param() params: { id: string },
     @Body() body: ResponsePopulateRequestBody,
@@ -55,7 +55,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: ResponsePopulateRequestBody,
@@ -66,7 +66,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responsePatch(
     @Param() params: { id: string },
     @Body() response: ResponsePatch,
@@ -76,7 +76,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseUpdate(
     @Param() params: { id: string },
     @Body() response: ResponseUpdate,
@@ -95,7 +95,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async responseArchive(
     @Param() params: { id: string },
   ): Promise<ResponseArchiveResponse> {

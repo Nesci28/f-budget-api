@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   ModuleArchiveResponse,
   ModuleCreate,
@@ -22,7 +22,7 @@ import { ModuleService } from "./module.service";
 export class ModuleController {
   constructor(private readonly moduleService: ModuleService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleCreate(
     @Body() module: ModuleCreate,
     @Query()
@@ -35,7 +35,7 @@ export class ModuleController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleSearch(
     @Body() body: ModuleSearch,
   ): Promise<ModuleSearchResponse> {
@@ -44,7 +44,7 @@ export class ModuleController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleGetById(
     @Param() params: { id: string },
     @Body() body: ModulePopulateRequestBody,
@@ -55,7 +55,7 @@ export class ModuleController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: ModulePopulateRequestBody,
@@ -66,7 +66,7 @@ export class ModuleController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async modulePatch(
     @Param() params: { id: string },
     @Body() module: ModulePatch,
@@ -76,7 +76,7 @@ export class ModuleController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleUpdate(
     @Param() params: { id: string },
     @Body() module: ModuleUpdate,
@@ -91,7 +91,7 @@ export class ModuleController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async moduleArchive(
     @Param() params: { id: string },
   ): Promise<ModuleArchiveResponse> {

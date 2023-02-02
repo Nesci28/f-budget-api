@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 import {
   ProjectArchiveResponse,
   ProjectCreate,
@@ -22,7 +22,7 @@ import { ProjectService } from "./project.service";
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectCreate(
     @Body() project: ProjectCreate,
     @Query()
@@ -35,7 +35,7 @@ export class ProjectController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectSearch(
     @Body() body: ProjectSearch,
   ): Promise<ProjectSearchResponse> {
@@ -44,7 +44,7 @@ export class ProjectController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectGetById(
     @Param() params: { id: string },
     @Body() body: ProjectPopulateRequestBody,
@@ -55,7 +55,7 @@ export class ProjectController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: ProjectPopulateRequestBody,
@@ -66,7 +66,7 @@ export class ProjectController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectPatch(
     @Param() params: { id: string },
     @Body() project: ProjectPatch,
@@ -76,7 +76,7 @@ export class ProjectController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectUpdate(
     @Param() params: { id: string },
     @Body() project: ProjectUpdate,
@@ -91,7 +91,7 @@ export class ProjectController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async projectArchive(
     @Param() params: { id: string },
   ): Promise<ProjectArchiveResponse> {
