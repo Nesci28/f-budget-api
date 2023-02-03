@@ -78,8 +78,10 @@ export class ProjectService implements OnApplicationBootstrap {
       project.moduleIds = moduleIds;
     }
 
+    const resPatched = await this.projectRepository.update(res.id, project);
+
     await this.setAllowedIps();
-    return res;
+    return resPatched;
   }
 
   public async createMany(projectBulk: ProjectCreate[]): Promise<Project[]> {
