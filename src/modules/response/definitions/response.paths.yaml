@@ -6,8 +6,6 @@ paths:
       operationId: responseCreate
       summary: Creates a new Response
       description: Creates a new Response
-      security:
-        - E2E: []
       requestBody:
         $ref: "./response.request-bodies.yaml#/components/requestBodies/ResponseCreateRequestBody"
       parameters:
@@ -58,8 +56,6 @@ paths:
       operationId: responseSearch
       summary: Search Response
       description: Search Response
-      security:
-        - E2E: []
       requestBody:
         $ref: "./response.request-bodies.yaml#/components/requestBodies/ResponseSearchRequestBody"
       responses:
@@ -109,8 +105,6 @@ paths:
       description: Patch a Response
       parameters:
         - $ref: "./response.parameters.yaml#/components/parameters/ResponseId"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./response.request-bodies.yaml#/components/requestBodies/ResponsePatchRequestBody"
       responses:
@@ -135,8 +129,6 @@ paths:
       parameters:
         - $ref: "./response.parameters.yaml#/components/parameters/ResponseId"
         - $ref: "./response.parameters.yaml#/components/parameters/IsResponseDryRun"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./response.request-bodies.yaml#/components/requestBodies/ResponseUpdateRequestBody"
       responses:

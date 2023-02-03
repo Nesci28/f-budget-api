@@ -6,8 +6,6 @@ paths:
       operationId: projectCreate
       summary: Creates a new Project
       description: Creates a new Project
-      security:
-        - E2E: []
       requestBody:
         $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectCreateRequestBody"
       parameters:
@@ -58,8 +56,6 @@ paths:
       operationId: projectSearch
       summary: Search Project
       description: Search Project
-      security:
-        - E2E: []
       requestBody:
         $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectSearchRequestBody"
       responses:
@@ -109,8 +105,6 @@ paths:
       description: Patch a Project
       parameters:
         - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectPatchRequestBody"
       responses:
@@ -135,8 +129,6 @@ paths:
       parameters:
         - $ref: "./project.parameters.yaml#/components/parameters/ProjectId"
         - $ref: "./project.parameters.yaml#/components/parameters/IsProjectDryRun"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./project.request-bodies.yaml#/components/requestBodies/ProjectUpdateRequestBody"
       responses:

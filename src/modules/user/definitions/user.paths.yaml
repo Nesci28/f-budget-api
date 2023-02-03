@@ -6,8 +6,6 @@ paths:
       operationId: userCreate
       summary: Creates a new User
       description: Creates a new User
-      security:
-        - E2E: []
       requestBody:
         $ref: "./user.request-bodies.yaml#/components/requestBodies/UserCreateRequestBody"
       parameters:
@@ -58,8 +56,6 @@ paths:
       operationId: userSearch
       summary: Search User
       description: Search User
-      security:
-        - E2E: []
       requestBody:
         $ref: "./user.request-bodies.yaml#/components/requestBodies/UserSearchRequestBody"
       responses:
@@ -109,8 +105,6 @@ paths:
       description: Patch a User
       parameters:
         - $ref: "./user.parameters.yaml#/components/parameters/UserId"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./user.request-bodies.yaml#/components/requestBodies/UserPatchRequestBody"
       responses:
@@ -135,8 +129,6 @@ paths:
       parameters:
         - $ref: "./user.parameters.yaml#/components/parameters/UserId"
         - $ref: "./user.parameters.yaml#/components/parameters/IsUserDryRun"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./user.request-bodies.yaml#/components/requestBodies/UserUpdateRequestBody"
       responses:

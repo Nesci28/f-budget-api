@@ -16,7 +16,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 paths:
-  /auth/login:
+  /auth:
     post:
       tags:
         - Auth
@@ -37,7 +37,6 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /auth/refresh:
     get:
       tags:
         - Auth
@@ -63,8 +62,6 @@ paths:
       operationId: endpointCreate
       summary: Creates a new Endpoint
       description: Creates a new Endpoint
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/EndpointCreateRequestBody'
       parameters:
@@ -113,8 +110,6 @@ paths:
       operationId: endpointSearch
       summary: Search Endpoint
       description: Search Endpoint
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/EndpointSearchRequestBody'
       responses:
@@ -162,8 +157,6 @@ paths:
       description: Patch a Endpoint
       parameters:
         - $ref: '#/components/parameters/EndpointId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/EndpointPatchRequestBody'
       responses:
@@ -188,8 +181,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/EndpointId'
         - $ref: '#/components/parameters/IsEndpointDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/EndpointUpdateRequestBody'
       responses:
@@ -235,8 +226,6 @@ paths:
       operationId: moduleCreate
       summary: Creates a new Module
       description: Creates a new Module
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ModuleCreateRequestBody'
       parameters:
@@ -287,8 +276,6 @@ paths:
       operationId: moduleSearch
       summary: Search Module
       description: Search Module
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ModuleSearchRequestBody'
       responses:
@@ -338,8 +325,6 @@ paths:
       description: Patch a Module
       parameters:
         - $ref: '#/components/parameters/ModuleId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ModulePatchRequestBody'
       responses:
@@ -364,8 +349,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/ModuleId'
         - $ref: '#/components/parameters/IsModuleDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ModuleUpdateRequestBody'
       responses:
@@ -411,8 +394,6 @@ paths:
       operationId: projectCreate
       summary: Creates a new Project
       description: Creates a new Project
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ProjectCreateRequestBody'
       parameters:
@@ -463,8 +444,6 @@ paths:
       operationId: projectSearch
       summary: Search Project
       description: Search Project
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ProjectSearchRequestBody'
       responses:
@@ -514,8 +493,6 @@ paths:
       description: Patch a Project
       parameters:
         - $ref: '#/components/parameters/ProjectId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ProjectPatchRequestBody'
       responses:
@@ -540,8 +517,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/ProjectId'
         - $ref: '#/components/parameters/IsProjectDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ProjectUpdateRequestBody'
       responses:
@@ -587,8 +562,6 @@ paths:
       operationId: requestCreate
       summary: Creates a new Request
       description: Creates a new Request
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/RequestCreateRequestBody'
       parameters:
@@ -639,8 +612,6 @@ paths:
       operationId: requestSearch
       summary: Search Request
       description: Search Request
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/RequestSearchRequestBody'
       responses:
@@ -690,8 +661,6 @@ paths:
       description: Patch a Request
       parameters:
         - $ref: '#/components/parameters/RequestId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/RequestPatchRequestBody'
       responses:
@@ -716,8 +685,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/RequestId'
         - $ref: '#/components/parameters/IsRequestDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/RequestUpdateRequestBody'
       responses:
@@ -763,8 +730,6 @@ paths:
       operationId: responseCreate
       summary: Creates a new Response
       description: Creates a new Response
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ResponseCreateRequestBody'
       parameters:
@@ -815,8 +780,6 @@ paths:
       operationId: responseSearch
       summary: Search Response
       description: Search Response
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ResponseSearchRequestBody'
       responses:
@@ -866,8 +829,6 @@ paths:
       description: Patch a Response
       parameters:
         - $ref: '#/components/parameters/ResponseId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ResponsePatchRequestBody'
       responses:
@@ -892,8 +853,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/ResponseId'
         - $ref: '#/components/parameters/IsResponseDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/ResponseUpdateRequestBody'
       responses:
@@ -939,8 +898,6 @@ paths:
       operationId: userCreate
       summary: Creates a new User
       description: Creates a new User
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserCreateRequestBody'
       parameters:
@@ -991,8 +948,6 @@ paths:
       operationId: userSearch
       summary: Search User
       description: Search User
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserSearchRequestBody'
       responses:
@@ -1042,8 +997,6 @@ paths:
       description: Patch a User
       parameters:
         - $ref: '#/components/parameters/UserId'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserPatchRequestBody'
       responses:
@@ -1068,8 +1021,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
         - $ref: '#/components/parameters/IsUserDryRun'
-      security:
-        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserUpdateRequestBody'
       responses:
@@ -2095,6 +2046,28 @@ components:
       enum:
         - Fr
         - En
+    LoginRequestBody:
+      type: object
+      required:
+        - email
+        - password
+        - rememberMe
+        - deviceUUID
+      properties:
+        email:
+          $ref: '#/components/schemas/Email'
+        password:
+          type: string
+          x-faker: internet.password
+        rememberMe:
+          type: boolean
+        deviceUUID:
+          $ref: '#/components/schemas/Uuid'
+    RefreshTokenRequestBody:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/ObjectID'
     LoginResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2148,85 +2121,6 @@ components:
         exp:
           description: Expiration time
           type: number
-    LoginRequestBody:
-      type: object
-      required:
-        - email
-        - password
-        - rememberMe
-        - deviceUUID
-      properties:
-        email:
-          $ref: '#/components/schemas/Email'
-        password:
-          type: string
-          x-faker: internet.password
-        rememberMe:
-          type: boolean
-        deviceUUID:
-          $ref: '#/components/schemas/Uuid'
-    RefreshTokenRequestBody:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/ObjectID'
-    EndpointCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
     EndpointCreate:
       type: object
       required:
@@ -2334,6 +2228,63 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+    EndpointCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Endpoint'
+    EndpointFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Endpoint'
+    EndpointPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
+    EndpointArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Endpoint'
     Endpoint:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2353,6 +2304,76 @@ components:
               type: number
             avgResponseTime:
               type: number
+    ModuleCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Module'
+    ModuleGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Module'
+    ModuleFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Module'
+    ModuleSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Module'
+    ModulePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Module'
+    ModuleUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Module'
+    ModuleArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Module'
+    Module:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+            endpointIds:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectID'
     ModuleCreate:
       type: object
       required:
@@ -2465,76 +2486,6 @@ components:
       type: string
       enum:
         - endpoints
-    ModuleCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Module'
-    ModuleFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Module'
-    ModulePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    Module:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-            endpointIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
     ProjectCreate:
       type: object
       required:
@@ -2866,26 +2817,6 @@ components:
       enum:
         - endpoint
         - project
-    Request:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - endpointId
-            - projectId
-          properties:
-            endpointId:
-              $ref: '#/components/schemas/ObjectID'
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            payload:
-              type: string
-            payloadSize:
-              type: number
-            endpoint:
-              $ref: '#/components/schemas/Endpoint'
-            project:
-              $ref: '#/components/schemas/Project'
     RequestCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2943,6 +2874,26 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/Request'
+    Request:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - endpointId
+            - projectId
+          properties:
+            endpointId:
+              $ref: '#/components/schemas/ObjectID'
+            projectId:
+              $ref: '#/components/schemas/ObjectID'
+            payload:
+              type: string
+            payloadSize:
+              type: number
+            endpoint:
+              $ref: '#/components/schemas/Endpoint'
+            project:
+              $ref: '#/components/schemas/Project'
     ResponseCreate:
       type: object
       required:
@@ -3534,6 +3485,20 @@ components:
         exp:
           description: Expiration Time (timestamp in UTC)
           type: number
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
     Province:
       type: string
       enum:
@@ -4114,20 +4079,6 @@ components:
           type: array
           items:
             type: string
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
     AccessModelCreate:
       type: object
       required:
@@ -5654,6 +5605,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserArchiveResponse'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     SuccessResultResponse:
       description: Successful request (no content)
       content:
@@ -5696,12 +5653,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
     AccessModelCreateResponse:
       description: Returns a AccessModel
       content:
@@ -6004,6 +5955,9 @@ components:
       description: Body needed to create a Project
       required: true
       content:
+        multipart/form-data:
+          schema:
+            type: object
         application/json:
           schema:
             $ref: '#/components/schemas/ProjectCreate'

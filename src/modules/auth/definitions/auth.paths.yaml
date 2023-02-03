@@ -1,5 +1,5 @@
 paths:
-  /auth/login:
+  /auth:
     post:
       tags:
         - Auth
@@ -20,7 +20,6 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
         500:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
-  /auth/refresh:
     get:
       tags:
         - Auth

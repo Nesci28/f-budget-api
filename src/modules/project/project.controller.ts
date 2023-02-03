@@ -1,4 +1,13 @@
-import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Param,
+  Query,
+  UploadedFiles,
+  UseGuards,
+  UseInterceptors,
+} from "@nestjs/common";
+import { FileFieldsInterceptor } from "@nestjs/platform-express";
 import { ResultHandler } from "@yest/result-handler";
 import { JwtTokenGuard } from "@yest/security";
 import {
@@ -15,6 +24,7 @@ import {
   ProjectUpdate,
   ProjectUpdateResponse,
 } from "@yest/yest-stats-api-typescript-fetch";
+import { Express } from "express";
 
 import { ProjectService } from "./project.service";
 
@@ -23,7 +33,18 @@ export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @UseGuards(JwtTokenGuard)
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: "resolvedFile", maxCount: 1 },
+      { name: "logoFile", maxCount: 1 },
+    ]),
+  )
   public async projectCreate(
+    @UploadedFiles()
+    files: {
+      resolvedFile?: Express.Multer.File[];
+      logoFile?: Express.Multer.File[];
+    },
     @Body() project: ProjectCreate,
     @Query()
     query: {
@@ -31,7 +52,15 @@ export class ProjectController {
     },
   ): Promise<ProjectCreateResponse> {
     const { isDryRun } = query;
-    const res = await this.projectService.create(project, isDryRun);
+    const { resolvedFile, logoFile } = files;
+    const resolvedYaml = resolvedFile?.[0].buffer.toString();
+    const logo = logoFile?.[0].buffer.toString("base64");
+    const res = await this.projectService.create(
+      project,
+      isDryRun,
+      resolvedYaml,
+      logo,
+    );
     return ResultHandler.ok(res);
   }
 

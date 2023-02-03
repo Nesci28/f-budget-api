@@ -4,6 +4,9 @@ components:
       description: Body needed to create a Project
       required: true
       content:
+        multipart/form-data:
+          schema:
+            type: object
         application/json:
           schema:
             $ref: "#/components/schemas/ProjectCreate"

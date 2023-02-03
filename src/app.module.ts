@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { APP_FILTER, APP_GUARD } from "@nestjs/core";
+import { APP_FILTER } from "@nestjs/core";
 import { MongooseModule, MongooseModuleOptions } from "@nestjs/mongoose";
 import { ThrottlerModule } from "@nestjs/throttler";
 import { YestHealthcheckModule } from "@yest/healthcheck";
@@ -19,7 +19,6 @@ import { ThrottlerStorageRedisService } from "nestjs-throttler-storage-redis";
 import { v4 } from "uuid";
 
 import { configs } from "./constants/configs.constant";
-import { IpsGuard } from "./guards/ip.guard";
 import { LocalStrategy } from "./guards/local.strategy";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
@@ -131,10 +130,6 @@ const moduleImports = [
 
 const appProviders = [
   LocalStrategy,
-  {
-    provide: APP_GUARD,
-    useClass: IpsGuard,
-  },
   {
     provide: APP_FILTER,
     useClass: ResultHandlerInterceptor,

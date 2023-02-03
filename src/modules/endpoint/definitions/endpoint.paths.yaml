@@ -6,8 +6,6 @@ paths:
       operationId: endpointCreate
       summary: Creates a new Endpoint
       description: Creates a new Endpoint
-      security:
-        - E2E: []
       requestBody:
         $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointCreateRequestBody"
       parameters:
@@ -56,8 +54,6 @@ paths:
       operationId: endpointSearch
       summary: Search Endpoint
       description: Search Endpoint
-      security:
-        - E2E: []
       requestBody:
         $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointSearchRequestBody"
       responses:
@@ -105,8 +101,6 @@ paths:
       description: Patch a Endpoint
       parameters:
         - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointPatchRequestBody"
       responses:
@@ -131,8 +125,6 @@ paths:
       parameters:
         - $ref: "./endpoint.parameters.yaml#/components/parameters/EndpointId"
         - $ref: "./endpoint.parameters.yaml#/components/parameters/IsEndpointDryRun"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./endpoint.request-bodies.yaml#/components/requestBodies/EndpointUpdateRequestBody"
       responses:

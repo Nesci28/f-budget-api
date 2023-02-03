@@ -22,26 +22,31 @@ export class MongoEndpoint extends MongoBase implements Endpoint {
 
   @Prop({
     type: Number,
+    default: 0,
   })
   public errorCount?: number;
 
   @Prop({
     type: Number,
+    default: 0,
   })
   public successCount?: number;
 
   @Prop({
     type: Number,
+    default: 0,
   })
   public avgRequestPayloadSize?: number;
 
   @Prop({
     type: Number,
+    default: 0,
   })
   public avgResponsePayloadSize?: number;
 
   @Prop({
     type: Number,
+    default: 0,
   })
   public avgResponseTime?: number;
 }

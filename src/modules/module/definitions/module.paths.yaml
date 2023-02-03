@@ -6,8 +6,6 @@ paths:
       operationId: moduleCreate
       summary: Creates a new Module
       description: Creates a new Module
-      security:
-        - E2E: []
       requestBody:
         $ref: "./module.request-bodies.yaml#/components/requestBodies/ModuleCreateRequestBody"
       parameters:
@@ -58,8 +56,6 @@ paths:
       operationId: moduleSearch
       summary: Search Module
       description: Search Module
-      security:
-        - E2E: []
       requestBody:
         $ref: "./module.request-bodies.yaml#/components/requestBodies/ModuleSearchRequestBody"
       responses:
@@ -109,8 +105,6 @@ paths:
       description: Patch a Module
       parameters:
         - $ref: "./module.parameters.yaml#/components/parameters/ModuleId"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./module.request-bodies.yaml#/components/requestBodies/ModulePatchRequestBody"
       responses:
@@ -135,8 +129,6 @@ paths:
       parameters:
         - $ref: "./module.parameters.yaml#/components/parameters/ModuleId"
         - $ref: "./module.parameters.yaml#/components/parameters/IsModuleDryRun"
-      security:
-        - E2E: []
       requestBody:
         $ref: "./module.request-bodies.yaml#/components/requestBodies/ModuleUpdateRequestBody"
       responses:
