@@ -34,7 +34,6 @@ const configModule = ConfigModule.forRoot({
   validationSchema: Joi.object({
     CORS: Joi.string(),
     BODY_LIMIT_SIZE: Joi.string().required(),
-    BASE_URL: Joi.string().required(),
     DEFAULT_EMAIL: Joi.string().required(),
     DEFAULT_PASSWORD: Joi.string().required(),
     JWT_PUBLIC_KEY: Joi.string().required(),
