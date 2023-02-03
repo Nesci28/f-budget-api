@@ -38,9 +38,14 @@ components:
     RequestCreate:
       type: object
       required:
-        - endpointId
         - projectId
+        - uuid
+        - path
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         endpointId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -53,6 +58,10 @@ components:
       x-min-properties: 1
       type: object
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         endpointId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -66,9 +75,14 @@ components:
     RequestUpdate:
       type: object
       required:
-        - endpointId
         - projectId
+        - uuid
+        - path
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         endpointId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -82,6 +96,7 @@ components:
         - $ref: "#/components/schemas/RequestPaginationQuery"
         - $ref: "#/components/schemas/RequestConditionQuery"
         - $ref: "#/components/schemas/RequestPopulateRequestBody"
+        - $ref: "#/components/schemas/RequestDistinctQuery"
     RequestConditionFields:
       type: object
       x-min-properties: 1
@@ -94,6 +109,12 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        endpointId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
     RequestConditionQuery:
       type: object
       x-min-required:
@@ -133,6 +154,12 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        endpointId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     RequestPopulateRequestBody:
       type: object
       properties:
@@ -156,3 +183,16 @@ components:
       enum:
         - endpoint
         - project
+    RequestDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/RequestDistinctFields"
+    RequestDistinctFields:
+      type: string
+      enum:
+        - uuid
+        - endpointId
+        - projectId

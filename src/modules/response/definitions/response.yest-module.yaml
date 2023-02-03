@@ -12,10 +12,16 @@ components:
         - payloadSize
         - time
         - status
+        - uuid
+        - endpointId
+        - path
       properties:
+        path:
+          type: string
         requestId:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         projectId:
+          x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         payload:
           type: string
@@ -27,15 +33,21 @@ components:
           x-index: true
           $ref: "#/components/schemas/ResponseStatus"
         uuid:
-          type: string
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid"
         error:
           type: string
+        endpointId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         request:
           x-localField: requestId
           $ref: "../../request/definitions/request.schemas.yaml#/components/schemas/Request"
         project:
           x-localField: projectId
           $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"
+        endpoint:
+          x-localField: endpointId
+          $ref: "../../endpoint/definitions/endpoint.schemas.yaml#/components/schemas/Endpoint"
 
     ResponseStatus:
       type: number

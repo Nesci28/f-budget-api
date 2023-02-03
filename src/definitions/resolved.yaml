@@ -2125,18 +2125,29 @@ components:
       type: object
       required:
         - path
+        - httpMethod
+        - projectId
       properties:
         path:
           type: string
+        httpMethod:
+          $ref: '#/components/schemas/HttpMethod'
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
         errorCount:
+          default: 0
           type: number
         successCount:
+          default: 0
           type: number
         avgRequestPayloadSize:
+          default: 0
           type: number
         avgResponsePayloadSize:
+          default: 0
           type: number
         avgResponseTime:
+          default: 0
           type: number
     EndpointPatch:
       x-min-properties: 1
@@ -2144,15 +2155,24 @@ components:
       properties:
         path:
           type: string
+        httpMethod:
+          $ref: '#/components/schemas/HttpMethod'
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
         errorCount:
+          default: 0
           type: number
         successCount:
+          default: 0
           type: number
         avgRequestPayloadSize:
+          default: 0
           type: number
         avgResponsePayloadSize:
+          default: 0
           type: number
         avgResponseTime:
+          default: 0
           type: number
     EndpointSearchRequestBody:
       $ref: '#/components/schemas/EndpointSearch'
@@ -2160,23 +2180,36 @@ components:
       type: object
       required:
         - path
+        - httpMethod
+        - projectId
       properties:
         path:
           type: string
+        httpMethod:
+          $ref: '#/components/schemas/HttpMethod'
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
         errorCount:
+          default: 0
           type: number
         successCount:
+          default: 0
           type: number
         avgRequestPayloadSize:
+          default: 0
           type: number
         avgResponsePayloadSize:
+          default: 0
           type: number
         avgResponseTime:
+          default: 0
           type: number
     EndpointSearch:
       allOf:
         - $ref: '#/components/schemas/EndpointPaginationQuery'
         - $ref: '#/components/schemas/EndpointConditionQuery'
+        - $ref: '#/components/schemas/EndpointPopulateRequestBody'
+        - $ref: '#/components/schemas/EndpointDistinctQuery'
     EndpointConditionFields:
       type: object
       x-min-properties: 1
@@ -2189,6 +2222,12 @@ components:
           $ref: '#/components/schemas/SearchDateCondition'
         archived:
           $ref: '#/components/schemas/SearchBooleanCondition'
+        path:
+          $ref: '#/components/schemas/SearchStringCondition'
+        httpMethod:
+          $ref: '#/components/schemas/SearchStringCondition'
+        projectId:
+          $ref: '#/components/schemas/SearchStringCondition'
     EndpointConditionQuery:
       type: object
       x-min-required:
@@ -2228,6 +2267,47 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+        path:
+          $ref: '#/components/schemas/Sorting'
+        httpMethod:
+          $ref: '#/components/schemas/Sorting'
+        projectId:
+          $ref: '#/components/schemas/Sorting'
+    EndpointPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/EndpointPopulateFields'
+    EndpointPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointPopulateField'
+    EndpointPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/EndpointPopulateEnum'
+        match:
+          type: object
+    EndpointPopulateEnum:
+      type: string
+      enum:
+        - project
+    EndpointDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndpointDistinctFields'
+    EndpointDistinctFields:
+      type: string
+      enum:
+        - path
+        - httpMethod
+        - projectId
     EndpointCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2291,19 +2371,177 @@ components:
         - type: object
           required:
             - path
+            - httpMethod
+            - projectId
           properties:
             path:
               type: string
+            httpMethod:
+              $ref: '#/components/schemas/HttpMethod'
+            projectId:
+              $ref: '#/components/schemas/ObjectID'
             errorCount:
+              default: 0
               type: number
             successCount:
+              default: 0
               type: number
             avgRequestPayloadSize:
+              default: 0
               type: number
             avgResponsePayloadSize:
+              default: 0
               type: number
             avgResponseTime:
+              default: 0
               type: number
+            project:
+              $ref: '#/components/schemas/Project'
+    HttpMethod:
+      type: string
+      enum:
+        - Get
+        - Post
+        - Put
+        - Patch
+        - Delete
+    ModuleCreate:
+      type: object
+      required:
+        - name
+        - projectId
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+    ModulePatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+    ModuleSearchRequestBody:
+      $ref: '#/components/schemas/ModuleSearch'
+    ModuleUpdate:
+      type: object
+      required:
+        - name
+        - projectId
+      properties:
+        projectId:
+          $ref: '#/components/schemas/ObjectID'
+        name:
+          type: string
+        endpointIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+    ModuleSearch:
+      allOf:
+        - $ref: '#/components/schemas/ModulePaginationQuery'
+        - $ref: '#/components/schemas/ModuleConditionQuery'
+        - $ref: '#/components/schemas/ModulePopulateRequestBody'
+        - $ref: '#/components/schemas/ModuleDistinctQuery'
+    ModuleConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        projectId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    ModuleConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ModuleConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ModuleConditionFields'
+    ModulePaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ModulePagination'
+    ModulePagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/ModuleSort'
+    ModuleSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        projectId:
+          $ref: '#/components/schemas/Sorting'
+    ModulePopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/ModulePopulateFields'
+    ModulePopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModulePopulateField'
+    ModulePopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/ModulePopulateEnum'
+        match:
+          type: object
+    ModulePopulateEnum:
+      type: string
+      enum:
+        - endpoints
+        - project
+    ModuleDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModuleDistinctFields'
+    ModuleDistinctFields:
+      type: string
+      enum:
+        - projectId
     ModuleCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2367,125 +2605,22 @@ components:
         - type: object
           required:
             - name
+            - projectId
           properties:
+            projectId:
+              $ref: '#/components/schemas/ObjectID'
             name:
               type: string
             endpointIds:
               type: array
               items:
                 $ref: '#/components/schemas/ObjectID'
-    ModuleCreate:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModulePatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModuleSearchRequestBody:
-      $ref: '#/components/schemas/ModuleSearch'
-    ModuleUpdate:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModuleSearch:
-      allOf:
-        - $ref: '#/components/schemas/ModulePaginationQuery'
-        - $ref: '#/components/schemas/ModuleConditionQuery'
-        - $ref: '#/components/schemas/ModulePopulateRequestBody'
-    ModuleConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-    ModuleConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ModuleConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ModuleConditionFields'
-    ModulePaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/ModulePagination'
-    ModulePagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/ModuleSort'
-    ModuleSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-    ModulePopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/ModulePopulateFields'
-    ModulePopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/ModulePopulateField'
-    ModulePopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/ModulePopulateEnum'
-        match:
-          type: object
-    ModulePopulateEnum:
-      type: string
-      enum:
-        - endpoints
+            endpoints:
+              type: array
+              items:
+                $ref: '#/components/schemas/Endpoint'
+            project:
+              $ref: '#/components/schemas/Project'
     ProjectCreate:
       type: object
       required:
@@ -2699,9 +2834,14 @@ components:
     RequestCreate:
       type: object
       required:
-        - endpointId
         - projectId
+        - uuid
+        - path
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: '#/components/schemas/Uuid'
         endpointId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2714,6 +2854,10 @@ components:
       x-min-properties: 1
       type: object
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: '#/components/schemas/Uuid'
         endpointId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2727,9 +2871,14 @@ components:
     RequestUpdate:
       type: object
       required:
-        - endpointId
         - projectId
+        - uuid
+        - path
       properties:
+        path:
+          type: string
+        uuid:
+          $ref: '#/components/schemas/Uuid'
         endpointId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2743,6 +2892,7 @@ components:
         - $ref: '#/components/schemas/RequestPaginationQuery'
         - $ref: '#/components/schemas/RequestConditionQuery'
         - $ref: '#/components/schemas/RequestPopulateRequestBody'
+        - $ref: '#/components/schemas/RequestDistinctQuery'
     RequestConditionFields:
       type: object
       x-min-properties: 1
@@ -2755,6 +2905,12 @@ components:
           $ref: '#/components/schemas/SearchDateCondition'
         archived:
           $ref: '#/components/schemas/SearchBooleanCondition'
+        uuid:
+          $ref: '#/components/schemas/SearchStringCondition'
+        endpointId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        projectId:
+          $ref: '#/components/schemas/SearchStringCondition'
     RequestConditionQuery:
       type: object
       x-min-required:
@@ -2794,6 +2950,12 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+        uuid:
+          $ref: '#/components/schemas/Sorting'
+        endpointId:
+          $ref: '#/components/schemas/Sorting'
+        projectId:
+          $ref: '#/components/schemas/Sorting'
     RequestPopulateRequestBody:
       type: object
       properties:
@@ -2817,6 +2979,19 @@ components:
       enum:
         - endpoint
         - project
+    RequestDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestDistinctFields'
+    RequestDistinctFields:
+      type: string
+      enum:
+        - uuid
+        - endpointId
+        - projectId
     RequestCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2881,7 +3056,13 @@ components:
           required:
             - endpointId
             - projectId
+            - uuid
+            - path
           properties:
+            path:
+              type: string
+            uuid:
+              $ref: '#/components/schemas/Uuid'
             endpointId:
               $ref: '#/components/schemas/ObjectID'
             projectId:
@@ -2903,7 +3084,12 @@ components:
         - payloadSize
         - time
         - status
+        - uuid
+        - endpointId
+        - path
       properties:
+        path:
+          type: string
         requestId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2917,13 +3103,17 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         uuid:
-          type: string
+          $ref: '#/components/schemas/Uuid'
         error:
           type: string
+        endpointId:
+          $ref: '#/components/schemas/ObjectID'
     ResponsePatch:
       x-min-properties: 1
       type: object
       properties:
+        path:
+          type: string
         requestId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2937,9 +3127,11 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         uuid:
-          type: string
+          $ref: '#/components/schemas/Uuid'
         error:
           type: string
+        endpointId:
+          $ref: '#/components/schemas/ObjectID'
     ResponseSearchRequestBody:
       $ref: '#/components/schemas/ResponseSearch'
     ResponseUpdate:
@@ -2951,7 +3143,12 @@ components:
         - payloadSize
         - time
         - status
+        - uuid
+        - endpointId
+        - path
       properties:
+        path:
+          type: string
         requestId:
           $ref: '#/components/schemas/ObjectID'
         projectId:
@@ -2965,14 +3162,17 @@ components:
         status:
           $ref: '#/components/schemas/ResponseStatus'
         uuid:
-          type: string
+          $ref: '#/components/schemas/Uuid'
         error:
           type: string
+        endpointId:
+          $ref: '#/components/schemas/ObjectID'
     ResponseSearch:
       allOf:
         - $ref: '#/components/schemas/ResponsePaginationQuery'
         - $ref: '#/components/schemas/ResponseConditionQuery'
         - $ref: '#/components/schemas/ResponsePopulateRequestBody'
+        - $ref: '#/components/schemas/ResponseDistinctQuery'
     ResponseConditionFields:
       type: object
       x-min-properties: 1
@@ -2985,7 +3185,11 @@ components:
           $ref: '#/components/schemas/SearchDateCondition'
         archived:
           $ref: '#/components/schemas/SearchBooleanCondition'
+        projectId:
+          $ref: '#/components/schemas/SearchStringCondition'
         status:
+          $ref: '#/components/schemas/SearchStringCondition'
+        endpointId:
           $ref: '#/components/schemas/SearchStringCondition'
     ResponseConditionQuery:
       type: object
@@ -3026,7 +3230,11 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+        projectId:
+          $ref: '#/components/schemas/Sorting'
         status:
+          $ref: '#/components/schemas/Sorting'
+        endpointId:
           $ref: '#/components/schemas/Sorting'
     ResponsePopulateRequestBody:
       type: object
@@ -3051,6 +3259,20 @@ components:
       enum:
         - request
         - project
+        - endpoint
+    ResponseDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseDistinctFields'
+    ResponseDistinctFields:
+      type: string
+      enum:
+        - projectId
+        - status
+        - endpointId
     ResponseCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -3119,7 +3341,12 @@ components:
             - payloadSize
             - time
             - status
+            - uuid
+            - endpointId
+            - path
           properties:
+            path:
+              type: string
             requestId:
               $ref: '#/components/schemas/ObjectID'
             projectId:
@@ -3133,13 +3360,17 @@ components:
             status:
               $ref: '#/components/schemas/ResponseStatus'
             uuid:
-              type: string
+              $ref: '#/components/schemas/Uuid'
             error:
               type: string
+            endpointId:
+              $ref: '#/components/schemas/ObjectID'
             request:
               $ref: '#/components/schemas/Request'
             project:
               $ref: '#/components/schemas/Project'
+            endpoint:
+              $ref: '#/components/schemas/Endpoint'
     ResponseStatus:
       type: number
       enum:
@@ -5917,6 +6148,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/EndpointUpdate'
+    EndpointPopulateRequestBody:
+      description: Body needed populate fields in Endpoint
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EndpointPopulateRequestBody'
     ModuleCreateRequestBody:
       description: Body needed to create a Module
       required: true

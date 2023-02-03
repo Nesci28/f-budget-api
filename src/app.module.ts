@@ -1,3 +1,4 @@
+import { BullModule, BullRootModuleOptions } from "@nestjs/bull";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_FILTER } from "@nestjs/core";
@@ -103,8 +104,27 @@ const throttlerModule = ThrottlerModule.forRootAsync({
   },
 });
 
+const redisModule = BullModule.forRootAsync({
+  imports: [ConfigModule],
+  inject: [ConfigService],
+  useFactory: (config: ConfigService): BullRootModuleOptions => {
+    const host = config.get("REDIS_HOST");
+    const port = config.get("REDIS_PORT");
+
+    return {
+      redis: {
+        host,
+        port,
+        db: configs.redisBullDb,
+        name: "bull-client",
+      },
+    };
+  },
+});
+
 export const appImports = [
   configModule,
+  redisModule,
   RequestContextModule,
   YestSecurityModule.forRootAsync(YestSecurityModule, {
     imports: [AuthModule],

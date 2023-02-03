@@ -9,6 +9,7 @@ export const configs = {
   throttlerTTL: 60,
   throttlerLoginLimit: 5,
   redisThrottlerDb: 1,
+  redisBullDb: 2,
   mongooseConnectionName: "yest-stats",
   bcryptRound: 12,
 };

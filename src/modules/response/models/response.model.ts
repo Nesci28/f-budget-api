@@ -2,6 +2,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, getRefModel, MongoBase, MongoUtil } from "@yest/mongoose";
 import {
+  Endpoint,
   Project,
   Request,
   Response,
@@ -21,6 +22,12 @@ export type ResponseDocument = MongoResponse & Document<MongoResponse>;
 })
 export class MongoResponse extends MongoBase implements Response {
   @Prop({
+    type: String,
+    required: true,
+  })
+  public path: string;
+
+  @Prop({
     type: Types.ObjectId,
     set: MongoUtil.setterObjectId,
     get: MongoUtil.getterObjectId,
@@ -33,6 +40,7 @@ export class MongoResponse extends MongoBase implements Response {
     set: MongoUtil.setterObjectId,
     get: MongoUtil.getterObjectId,
     required: true,
+    index: true,
   })
   public projectId: string;
 
@@ -58,23 +66,35 @@ export class MongoResponse extends MongoBase implements Response {
     type: Number,
     required: true,
     index: true,
-    enum: [500, 429, 404, 401, 400],
+    enum: ["500", "429", "404", "401", "400"],
   })
   public status: ResponseStatus;
 
   @Prop({
     type: String,
+    required: true,
   })
-  public uuid?: string;
+  public uuid: string;
 
   @Prop({
     type: String,
   })
   public error?: string;
 
+  @Prop({
+    type: Types.ObjectId,
+    set: MongoUtil.setterObjectId,
+    get: MongoUtil.getterObjectId,
+    required: true,
+    index: true,
+  })
+  public endpointId: string;
+
   public request?: Request;
 
   public project?: Project;
+
+  public endpoint?: Endpoint;
 }
 
 const schema = SchemaFactory.createForClass(MongoResponse);
@@ -100,6 +120,19 @@ schema.virtual("project", {
     return model;
   },
   localField: "projectId",
+  foreignField: "id",
+  autopopulate: false,
+  justOne: true,
+
+  get: MongoUtil.getterUnsetPopulate,
+});
+
+schema.virtual("endpoint", {
+  ref: () => {
+    const model = getRefModel(connections, "MongoEndpoint");
+    return model;
+  },
+  localField: "endpointId",
   foreignField: "id",
   autopopulate: false,
   justOne: true,

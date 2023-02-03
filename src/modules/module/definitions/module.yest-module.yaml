@@ -7,7 +7,11 @@ components:
       type: object
       required:
         - name
+        - projectId
       properties:
+        projectId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         name:
           type: string
         endpointIds:
@@ -19,3 +23,6 @@ components:
           type: array
           items:
             $ref: "../../endpoint/definitions/endpoint.schemas.yaml#/components/schemas/Endpoint"
+        project:
+          x-localField: projectId
+          $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"

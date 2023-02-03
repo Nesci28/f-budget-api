@@ -1,10 +1,17 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  Logger,
+} from "@nestjs/common";
 import * as requestIp from "@supercharge/request-ip";
 
 import { ProjectService } from "../modules/project/project.service";
 
 @Injectable()
 export class IpsGuard implements CanActivate {
+  private logger = new Logger(IpsGuard.name);
+
   constructor(private readonly projectService: ProjectService) {}
 
   public canActivate(context: ExecutionContext): boolean {
@@ -14,6 +21,8 @@ export class IpsGuard implements CanActivate {
     if (!ip) {
       return false;
     }
+
+    this.logger.debug(ip);
 
     const { allowedIps } = this.projectService;
     const isAllowed = allowedIps.includes(ip);

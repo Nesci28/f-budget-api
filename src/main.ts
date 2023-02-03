@@ -8,7 +8,7 @@ import * as morgan from "morgan";
 
 import { AppModule } from "./app.module";
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   const logger = new Logger("main");
 
   const app = await NestFactory.create(AppModule);

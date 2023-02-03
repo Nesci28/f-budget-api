@@ -6,16 +6,37 @@ components:
         - type: object
           required:
             - path
+            - httpMethod
+            - projectId
           properties:
             path:
               type: string
+            httpMethod:
+              $ref: "#/components/schemas/HttpMethod"
+            projectId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
             errorCount:
+              default: 0
               type: number
             successCount:
+              default: 0
               type: number
             avgRequestPayloadSize:
+              default: 0
               type: number
             avgResponsePayloadSize:
+              default: 0
               type: number
             avgResponseTime:
+              default: 0
               type: number
+            project:
+              $ref: ../../project/definitions/project.schemas.yaml#/components/schemas/Project
+    HttpMethod:
+      type: string
+      enum:
+        - Get
+        - Post
+        - Put
+        - Patch
+        - Delete

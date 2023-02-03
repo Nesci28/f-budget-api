@@ -7,22 +7,43 @@ components:
       type: object
       required:
         - path
+        - httpMethod
+        - projectId
       properties:
         path:
+          x-index: true
           type: string
+        httpMethod:
+          x-index: true
+          $ref: "#/components/schemas/HttpMethod"
+        projectId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         errorCount:
-          x-default: 0
+          default: 0
           type: number
         successCount:
-          x-default: 0
+          default: 0
           type: number
         avgRequestPayloadSize:
-          x-default: 0
+          default: 0
           type: number
         avgResponsePayloadSize:
-          x-default: 0
+          default: 0
           type: number
         avgResponseTime:
-          x-default: 0
+          default: 0
           type: number
+        project:
+          x-localField: projectId
+          $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"
+
+    HttpMethod:
+      type: string
+      enum:
+        - Get
+        - Post
+        - Put
+        - Patch
+        - Delete
 

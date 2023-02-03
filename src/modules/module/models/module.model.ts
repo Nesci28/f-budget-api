@@ -1,7 +1,11 @@
 /* eslint-disable no-use-before-define */
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, getRefModel, MongoBase, MongoUtil } from "@yest/mongoose";
-import { Endpoint, Module } from "@yest/yest-stats-api-typescript-fetch";
+import {
+  Endpoint,
+  Module,
+  Project,
+} from "@yest/yest-stats-api-typescript-fetch";
 import { connections, Types } from "mongoose";
 
 export type ModuleDocument = MongoModule & Document<MongoModule>;
@@ -16,6 +20,15 @@ export type ModuleDocument = MongoModule & Document<MongoModule>;
 })
 export class MongoModule extends MongoBase implements Module {
   @Prop({
+    type: Types.ObjectId,
+    set: MongoUtil.setterObjectId,
+    get: MongoUtil.getterObjectId,
+    required: true,
+    index: true,
+  })
+  public projectId: string;
+
+  @Prop({
     type: String,
     required: true,
   })
@@ -29,6 +42,8 @@ export class MongoModule extends MongoBase implements Module {
   public endpointIds?: string[];
 
   public endpoints?: Endpoint[];
+
+  public project?: Project;
 }
 
 const schema = SchemaFactory.createForClass(MongoModule);
@@ -46,6 +61,19 @@ schema.virtual("endpoints", {
   justOne: false,
 
   get: MongoUtil.getterUnsetPopulates,
+});
+
+schema.virtual("project", {
+  ref: () => {
+    const model = getRefModel(connections, "MongoProject");
+    return model;
+  },
+  localField: "projectId",
+  foreignField: "id",
+  autopopulate: false,
+  justOne: true,
+
+  get: MongoUtil.getterUnsetPopulate,
 });
 
 export const MongoModuleSchema = schema;

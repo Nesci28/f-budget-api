@@ -32,7 +32,7 @@ export class RequestController {
     },
   ): Promise<RequestCreateResponse> {
     const { isDryRun } = query;
-    const res = await this.requestService.create(request, isDryRun);
+    const res = this.requestService.create(request, isDryRun);
     return ResultHandler.ok(res);
   }
 

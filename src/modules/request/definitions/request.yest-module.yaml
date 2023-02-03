@@ -8,10 +8,19 @@ components:
       required:
         - endpointId
         - projectId
+        - uuid
+        - path
       properties:
+        path:
+          type: string
+        uuid:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid"
         endpointId:
+          x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         projectId:
+          x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         payload:
           type: string

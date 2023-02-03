@@ -1,3 +1,4 @@
+import { InjectQueue } from "@nestjs/bull";
 import { Injectable } from "@nestjs/common";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
@@ -9,20 +10,40 @@ import {
   RequestSearch,
   RequestUpdate,
 } from "@yest/yest-stats-api-typescript-fetch";
+import { Queue } from "bull";
+import mongoose from "mongoose";
 
 import { RequestErrors } from "./request.errors";
 import { RequestRepository } from "./request.repository";
 
 @Injectable()
 export class RequestService {
-  constructor(private readonly requestRepository: RequestRepository) {}
+  constructor(
+    @InjectQueue("request") private requestQueue: Queue,
+    private readonly requestRepository: RequestRepository,
+  ) {}
 
-  public async create(
-    request: RequestCreate,
-    isDryRun?: boolean,
-  ): Promise<Request> {
-    const res = await this.requestRepository.create(request, isDryRun);
-    return res;
+  public create(request: RequestCreate, isDryRun?: boolean): Request {
+    const requestId = new mongoose.Types.ObjectId().toHexString();
+    const requestWithId = {
+      ...request,
+      id: requestId,
+    };
+
+    void this.requestQueue.add(
+      { request: requestWithId, isDryRun },
+      { removeOnComplete: true },
+    );
+
+    const date = new Date();
+    const requestModel: Request = {
+      ...requestWithId,
+      endpointId: new mongoose.Types.ObjectId().toHexString(),
+      createdAt: date,
+      updatedAt: date,
+      archived: false,
+    };
+    return requestModel;
   }
 
   public async createMany(requestBulk: RequestCreate[]): Promise<Request[]> {

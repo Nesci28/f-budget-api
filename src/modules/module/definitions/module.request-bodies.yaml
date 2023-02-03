@@ -39,7 +39,10 @@ components:
       type: object
       required:
         - name
+        - projectId
       properties:
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
         endpointIds:
@@ -50,6 +53,8 @@ components:
       x-min-properties: 1
       type: object
       properties:
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
         endpointIds:
@@ -62,7 +67,10 @@ components:
       type: object
       required:
         - name
+        - projectId
       properties:
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
         endpointIds:
@@ -74,6 +82,7 @@ components:
         - $ref: "#/components/schemas/ModulePaginationQuery"
         - $ref: "#/components/schemas/ModuleConditionQuery"
         - $ref: "#/components/schemas/ModulePopulateRequestBody"
+        - $ref: "#/components/schemas/ModuleDistinctQuery"
     ModuleConditionFields:
       type: object
       x-min-properties: 1
@@ -86,6 +95,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
     ModuleConditionQuery:
       type: object
       x-min-required:
@@ -125,6 +136,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     ModulePopulateRequestBody:
       type: object
       properties:
@@ -147,3 +160,15 @@ components:
       type: string
       enum:
         - endpoints
+        - project
+    ModuleDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/ModuleDistinctFields"
+    ModuleDistinctFields:
+      type: string
+      enum:
+        - projectId

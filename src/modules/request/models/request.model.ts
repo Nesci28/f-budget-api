@@ -20,10 +20,24 @@ export type RequestDocument = MongoRequest & Document<MongoRequest>;
 })
 export class MongoRequest extends MongoBase implements Request {
   @Prop({
+    type: String,
+    required: true,
+  })
+  public path: string;
+
+  @Prop({
+    type: String,
+    required: true,
+    index: true,
+  })
+  public uuid: string;
+
+  @Prop({
     type: Types.ObjectId,
     set: MongoUtil.setterObjectId,
     get: MongoUtil.getterObjectId,
     required: true,
+    index: true,
   })
   public endpointId: string;
 
@@ -32,6 +46,7 @@ export class MongoRequest extends MongoBase implements Request {
     set: MongoUtil.setterObjectId,
     get: MongoUtil.getterObjectId,
     required: true,
+    index: true,
   })
   public projectId: string;
 

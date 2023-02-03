@@ -16,13 +16,14 @@ import {
   ResponseUpdateResponse,
 } from "@yest/yest-stats-api-typescript-fetch";
 
+import { IpsGuard } from "../../guards/ip.guard";
 import { ResponseService } from "./response.service";
 
 @Controller()
 export class ResponseController {
   constructor(private readonly responseService: ResponseService) {}
 
-  @UseGuards(JwtTokenGuard)
+  @UseGuards(IpsGuard)
   public async responseCreate(
     @Body() response: ResponseCreate,
     @Query()
@@ -31,7 +32,7 @@ export class ResponseController {
     },
   ): Promise<ResponseCreateResponse> {
     const { isDryRun } = query;
-    const res = await this.responseService.create(response, isDryRun);
+    const res = this.responseService.create(response, isDryRun);
     return ResultHandler.ok(res);
   }
 
@@ -66,7 +67,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard)
+  @UseGuards(IpsGuard)
   public async responsePatch(
     @Param() params: { id: string },
     @Body() response: ResponsePatch,
@@ -76,7 +77,7 @@ export class ResponseController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard)
+  @UseGuards(IpsGuard)
   public async responseUpdate(
     @Param() params: { id: string },
     @Body() response: ResponseUpdate,

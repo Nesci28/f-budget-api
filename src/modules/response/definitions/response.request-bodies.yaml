@@ -44,7 +44,12 @@ components:
         - payloadSize
         - time
         - status
+        - uuid
+        - endpointId
+        - path
       properties:
+        path:
+          type: string
         requestId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -58,13 +63,17 @@ components:
         status:
           $ref: ./response.schemas.yaml#/components/schemas/ResponseStatus
         uuid:
-          type: string
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         error:
           type: string
+        endpointId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
     ResponsePatch:
       x-min-properties: 1
       type: object
       properties:
+        path:
+          type: string
         requestId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -78,9 +87,11 @@ components:
         status:
           $ref: ./response.schemas.yaml#/components/schemas/ResponseStatus
         uuid:
-          type: string
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         error:
           type: string
+        endpointId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
     ResponseSearchRequestBody:
       $ref: "#/components/schemas/ResponseSearch"
     ResponseUpdate:
@@ -92,7 +103,12 @@ components:
         - payloadSize
         - time
         - status
+        - uuid
+        - endpointId
+        - path
       properties:
+        path:
+          type: string
         requestId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         projectId:
@@ -106,14 +122,17 @@ components:
         status:
           $ref: ./response.schemas.yaml#/components/schemas/ResponseStatus
         uuid:
-          type: string
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
         error:
           type: string
+        endpointId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
     ResponseSearch:
       allOf:
         - $ref: "#/components/schemas/ResponsePaginationQuery"
         - $ref: "#/components/schemas/ResponseConditionQuery"
         - $ref: "#/components/schemas/ResponsePopulateRequestBody"
+        - $ref: "#/components/schemas/ResponseDistinctQuery"
     ResponseConditionFields:
       type: object
       x-min-properties: 1
@@ -126,7 +145,11 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
         status:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        endpointId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
     ResponseConditionQuery:
       type: object
@@ -167,7 +190,11 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        projectId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         status:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        endpointId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     ResponsePopulateRequestBody:
       type: object
@@ -192,3 +219,17 @@ components:
       enum:
         - request
         - project
+        - endpoint
+    ResponseDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/ResponseDistinctFields"
+    ResponseDistinctFields:
+      type: string
+      enum:
+        - projectId
+        - status
+        - endpointId

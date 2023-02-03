@@ -1,3 +1,4 @@
+import { BullModule } from "@nestjs/bull";
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
@@ -19,6 +20,9 @@ import { RequestService } from "./request.service";
       ],
       configs.mongooseConnectionName,
     ),
+    BullModule.registerQueue({
+      name: "request",
+    }),
     ProjectModule,
   ],
   controllers: [RequestController],

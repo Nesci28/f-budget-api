@@ -1,3 +1,4 @@
+import { InjectQueue } from "@nestjs/bull";
 import { Injectable } from "@nestjs/common";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
@@ -9,20 +10,41 @@ import {
   ResponseSearch,
   ResponseUpdate,
 } from "@yest/yest-stats-api-typescript-fetch";
+import { Queue } from "bull";
+import mongoose from "mongoose";
 
 import { ResponseErrors } from "./response.errors";
 import { ResponseRepository } from "./response.repository";
 
 @Injectable()
 export class ResponseService {
-  constructor(private readonly responseRepository: ResponseRepository) {}
+  constructor(
+    @InjectQueue("response") private responseQueue: Queue,
+    private readonly responseRepository: ResponseRepository,
+  ) {}
 
-  public async create(
-    response: ResponseCreate,
-    isDryRun?: boolean,
-  ): Promise<Response> {
-    const res = await this.responseRepository.create(response, isDryRun);
-    return res;
+  public create(response: ResponseCreate, isDryRun?: boolean): Response {
+    const responseId = new mongoose.Types.ObjectId().toHexString();
+    const responseWithId = {
+      ...response,
+      id: responseId,
+    };
+
+    void this.responseQueue.add(
+      { response: responseWithId, isDryRun },
+      { removeOnComplete: true },
+    );
+
+    const date = new Date();
+    const responseModel: Response = {
+      ...responseWithId,
+      requestId: new mongoose.Types.ObjectId().toHexString(),
+      endpointId: new mongoose.Types.ObjectId().toHexString(),
+      createdAt: date,
+      updatedAt: date,
+      archived: false,
+    };
+    return responseModel;
   }
 
   public async createMany(responseBulk: ResponseCreate[]): Promise<Response[]> {

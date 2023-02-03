@@ -2,7 +2,10 @@ import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
 import {
+  Endpoint,
   EndpointCreate,
+  HttpMethod,
+  Module,
   ModuleCreate,
   Project,
   ProjectCreate,
@@ -11,6 +14,7 @@ import {
   ProjectSearch,
   ProjectUpdate,
 } from "@yest/yest-stats-api-typescript-fetch";
+import { flatten as flat } from "flat";
 import { flatten, uniq } from "lodash";
 import * as YAML from "yamljs";
 
@@ -45,55 +49,35 @@ export class ProjectService implements OnApplicationBootstrap {
       project.logo = logoBase64;
     }
 
+    const res = await this.projectRepository.create(project, isDryRun);
+
     if (resolvedYamlStr) {
       const resolvedYaml = YAML.parse(resolvedYamlStr);
+      const pathFlatten = flat(resolvedYaml.paths);
+      const paths = Object.keys(pathFlatten)
+        .filter((x) => {
+          const isTagPath = x.endsWith(".tags.0");
+          return isTagPath;
+        })
+        .reduce<Record<string, string>>((accu, curr) => {
+          const path = pathFlatten[curr];
+          // eslint-disable-next-line no-param-reassign
+          accu[curr] = path;
+          return accu;
+        }, {});
 
-      const endpointCreates: EndpointCreate[] = Object.keys(
-        resolvedYaml.paths,
-      ).map((x) => {
-        return {
-          path: x,
-        };
+      // Creates all the Endpoints
+      const endpoints = await this.createEndpoints(paths, res.id);
+
+      // Creates all the Modules
+      const modules = await this.createModules(paths, endpoints, res.id);
+      const moduleIds = modules.map((x) => {
+        return x.id;
       });
-      const endpoints = await this.endpointService.createMany(endpointCreates);
-
-      const moduleNames: string[] = uniq(
-        flatten(
-          Object.keys(resolvedYaml.paths).map((x) => {
-            const pathHttpMethods = resolvedYaml.paths[x];
-            const tags = Object.keys(pathHttpMethods).map((p) => {
-              const pathHttpMethod = pathHttpMethods[p];
-              return pathHttpMethod.tags[0];
-            });
-            return tags;
-          }),
-        ),
-      );
-      const moduleCreates: ModuleCreate[] = moduleNames.map((x) => {
-        const pathsFilteredByModule = Object.keys(resolvedYaml.paths).filter(
-          (p) => {
-            const [tag] = resolvedYaml.paths[p].tags;
-            return tag === x;
-          },
-        );
-        const endpointsFilteredByModule = endpoints.filter((e) => {
-          return pathsFilteredByModule.includes(e.path);
-        });
-        const endpointIds = endpointsFilteredByModule.map((e) => {
-          return e.id;
-        });
-
-        return {
-          name: x,
-          endpointIds,
-        };
-      });
-      console.log("moduleCreates :>> ", moduleCreates);
-
-      console.log("resolvedYaml :>> ", resolvedYaml);
+      // eslint-disable-next-line no-param-reassign
+      project.moduleIds = moduleIds;
     }
 
-    const res = await this.projectRepository.create(project, isDryRun);
     await this.setAllowedIps();
     return res;
   }
@@ -168,6 +152,67 @@ export class ProjectService implements OnApplicationBootstrap {
     return project;
   }
 
+  private async createModules(
+    paths: Record<string, string>,
+    endpoints: Endpoint[],
+    projectId: string,
+  ): Promise<Module[]> {
+    // Get the Module Names
+    const moduleNames: string[] = uniq(Object.values(paths));
+
+    // Create all the Modules
+    const moduleCreates: ModuleCreate[] = [];
+    for (let i = 0; i < moduleNames.length; i += 1) {
+      const moduleName = moduleNames[i];
+      const pathEntries = Object.entries(paths);
+      const pathEntriesFiltered = pathEntries.filter((x) => {
+        const isSameModule = x[1] === moduleName;
+        return isSameModule;
+      });
+
+      const endpointIds: string[] = [];
+      for (let j = 0; j < pathEntriesFiltered.length; j += 1) {
+        const [pathEntryFiltered] = pathEntriesFiltered[j];
+        const [path, httpMethod] = pathEntryFiltered.split(".");
+        const httpMethodTransformed = this.transformHttpMethod(httpMethod);
+        const endpoint = endpoints.find((x) => {
+          return x.path === path && x.httpMethod === httpMethodTransformed;
+        });
+        if (!endpoint) {
+          throw new Error("Endpoint should exists");
+        }
+        const { id: endpointId } = endpoint;
+        endpointIds.push(endpointId);
+      }
+      const moduleCreate: ModuleCreate = {
+        name: moduleName,
+        endpointIds,
+        projectId,
+      };
+      moduleCreates.push(moduleCreate);
+    }
+
+    const modules = await this.moduleService.createMany(moduleCreates);
+    return modules;
+  }
+
+  private async createEndpoints(
+    paths: Record<string, string>,
+    projectId: string,
+  ): Promise<Endpoint[]> {
+    const endpointCreates: EndpointCreate[] = Object.keys(paths).map((x) => {
+      const [path, httpMethod] = x.split(".");
+      return {
+        path,
+        httpMethod: this.transformHttpMethod(httpMethod),
+        projectId,
+      };
+    });
+    const endpoints = await this.endpointService.createMany(endpointCreates);
+
+    return endpoints;
+  }
+
   private async setAllowedIps(): Promise<void> {
     const projects = await this.projectRepository.getAll();
     const allowedIps = uniq(
@@ -177,6 +222,23 @@ export class ProjectService implements OnApplicationBootstrap {
         }),
       ).filter(Boolean),
     ) as string[];
-    this.allowedIps = allowedIps;
+    this.allowedIps = ["::ffff:127.0.0.1", "127.0.0.1", ...allowedIps];
+  }
+
+  private transformHttpMethod(httpMethod: string): HttpMethod {
+    switch (httpMethod) {
+      case "get":
+        return HttpMethod.Get;
+      case "post":
+        return HttpMethod.Post;
+      case "put":
+        return HttpMethod.Put;
+      case "patch":
+        return HttpMethod.Patch;
+      case "delete":
+        return HttpMethod.Delete;
+      default:
+        throw new Error("Missing HttpMethod");
+    }
   }
 }

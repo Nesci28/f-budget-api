@@ -11,7 +11,12 @@ components:
             - payloadSize
             - time
             - status
+            - uuid
+            - endpointId
+            - path
           properties:
+            path:
+              type: string
             requestId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
             projectId:
@@ -25,13 +30,17 @@ components:
             status:
               $ref: "#/components/schemas/ResponseStatus"
             uuid:
-              type: string
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
             error:
               type: string
+            endpointId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
             request:
               $ref: ../../request/definitions/request.schemas.yaml#/components/schemas/Request
             project:
               $ref: ../../project/definitions/project.schemas.yaml#/components/schemas/Project
+            endpoint:
+              $ref: ../../endpoint/definitions/endpoint.schemas.yaml#/components/schemas/Endpoint
     ResponseStatus:
       type: number
       enum:
