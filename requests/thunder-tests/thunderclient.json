@@ -72,5 +72,137 @@
         }
       ]
     }
+  },
+  {
+    "_id": "923bf787-758f-43ef-8b0f-0f12c72828d6",
+    "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+    "containerId": "ce12fe04-99b2-4270-a90a-c7918e21ed66",
+    "name": "Module-Search (projectId + all)",
+    "url": "{{baseUrl}}/module-search",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-02-04T16:11:45.642Z",
+    "modified": "2023-02-04T16:18:38.998Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"pagination\": {\n    \"limit\": -1\n  },\n  \"and\": [\n    {\n      \"archived\": [\n        {\n          \"operator\": \"Equal\",\n          \"value\": false\n        }\n      ]\n    },\n    {\n      \"projectId\": [\n        {\n          \"operator\": \"Equal\",\n          \"values\": [\"63de8033e17074defed3a4f8\"]\n        }\n      ]\n    }\n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{jwt}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "03621d7a-090d-4f5b-8a85-fc1f1bb15f91",
+          "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+          "triggerCondition": "run-always",
+          "triggerValue": ""
+        }
+      ]
+    }
+  },
+  {
+    "_id": "b6e9734c-1369-4e23-836d-6fbb52993191",
+    "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+    "containerId": "ce12fe04-99b2-4270-a90a-c7918e21ed66",
+    "name": "Module-Search (projectId + limit + populate)",
+    "url": "{{baseUrl}}/module-search",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-02-04T16:19:16.962Z",
+    "modified": "2023-02-04T16:20:27.834Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"pagination\": {\n    \"limit\": 10,\n    \"page\": 1\n  },\n  \"and\": [\n    {\n      \"archived\": [\n        {\n          \"operator\": \"Equal\",\n          \"value\": false\n        }\n      ]\n    },\n    {\n      \"projectId\": [\n        {\n          \"operator\": \"Equal\",\n          \"values\": [\"63de8033e17074defed3a4f8\"]\n        }\n      ]\n    }\n  ],\n  \"populate\": [\n    { \"label\": \"endpoints\" }  \n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{jwt}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "03621d7a-090d-4f5b-8a85-fc1f1bb15f91",
+          "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+          "triggerCondition": "run-always",
+          "triggerValue": ""
+        }
+      ]
+    }
+  },
+  {
+    "_id": "d26e1a0c-89ef-4de8-99ba-503f239f4ce1",
+    "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+    "containerId": "56089094-38bc-45de-8844-2cb204d08643",
+    "name": "Endpoint-Search (projectId + infiniteScroll)",
+    "url": "{{baseUrl}}/endpoint-search",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-02-04T16:22:38.339Z",
+    "modified": "2023-02-04T16:23:29.663Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"pagination\": {\n    \"limit\": 25,\n    \"page\": 1\n  },\n  \"and\": [\n    {\n      \"archived\": [\n        {\n          \"operator\": \"Equal\",\n          \"value\": false\n        }\n      ]\n    },\n    {\n      \"projectId\": [\n        {\n          \"operator\": \"Equal\",\n          \"values\": [\"63de8033e17074defed3a4f8\"]\n        }\n      ]\n    }\n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{jwt}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "03621d7a-090d-4f5b-8a85-fc1f1bb15f91",
+          "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+          "triggerCondition": "run-always",
+          "triggerValue": ""
+        }
+      ]
+    }
+  },
+  {
+    "_id": "fd224f2c-9756-4e58-8d26-7fd2f0c013a5",
+    "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+    "containerId": "56089094-38bc-45de-8844-2cb204d08643",
+    "name": "Response-Search (projectId + limit + date + populate)",
+    "url": "{{baseUrl}}/response-search",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-02-04T16:23:44.459Z",
+    "modified": "2023-02-04T16:27:38.557Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"pagination\": {\n    \"limit\": 25,\n    \"page\": 1\n  },\n  \"and\": [\n    {\n      \"archived\": [\n        {\n          \"operator\": \"Equal\",\n          \"value\": false\n        }\n      ]\n    },\n    {\n      \"endpointId\": [\n        {\n          \"operator\": \"Equal\",\n          \"values\": [\"63de8033e17074defed3a50a\"]\n        }\n      ]\n    },\n    {\n      \"createdAt\": [\n        { \"operator\": \"GreaterThanEqual\", \"values\": [\"2023-02-04T00:00:00.000Z\"] }\n      ]\n    }\n  ],\n  \"populate\": [\n    { \"label\": \"request\" }\n  ]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{jwt}}"
+    },
+    "tests": [],
+    "preReq": {
+      "runRequests": [
+        {
+          "reqId": "03621d7a-090d-4f5b-8a85-fc1f1bb15f91",
+          "colId": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
+          "triggerCondition": "run-always",
+          "triggerValue": ""
+        }
+      ]
+    }
   }
 ]
