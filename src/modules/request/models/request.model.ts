@@ -52,13 +52,15 @@ export class MongoRequest extends MongoBase implements Request {
 
   @Prop({
     type: String,
+    required: true,
   })
-  public payload?: string;
+  public payload: string;
 
   @Prop({
     type: Number,
+    required: true,
   })
-  public payloadSize?: number;
+  public payloadSize: number;
 
   public endpoint?: Endpoint;
 

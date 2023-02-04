@@ -38,14 +38,12 @@ components:
     ResponseCreate:
       type: object
       required:
-        - requestId
         - projectId
         - payload
         - payloadSize
         - time
         - status
         - uuid
-        - endpointId
         - path
       properties:
         path:
@@ -97,14 +95,12 @@ components:
     ResponseUpdate:
       type: object
       required:
-        - requestId
         - projectId
         - payload
         - payloadSize
         - time
         - status
         - uuid
-        - endpointId
         - path
       properties:
         path:

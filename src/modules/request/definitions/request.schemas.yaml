@@ -9,6 +9,8 @@ components:
             - projectId
             - uuid
             - path
+            - payload
+            - payloadSize
           properties:
             path:
               type: string

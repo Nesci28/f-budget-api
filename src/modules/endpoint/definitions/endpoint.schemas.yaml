@@ -8,6 +8,13 @@ components:
             - path
             - httpMethod
             - projectId
+            - errorCount
+            - successCount
+            - avgRequestPayloadSize
+            - avgResponsePayloadSize
+            - avgResponseTime
+            - requestCount
+            - responseCount
           properties:
             path:
               type: string
@@ -28,6 +35,12 @@ components:
               default: 0
               type: number
             avgResponseTime:
+              default: 0
+              type: number
+            requestCount:
+              default: 0
+              type: number
+            responseCount:
               default: 0
               type: number
             project:

@@ -52,6 +52,7 @@ export class UserRepository extends BaseRepository<UserModels> {
   @ToObjFromPaginateMongo("repoSearch", "userWithPasswordModel")
   public async searchLogin(
     searchParams: UserSearch,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     projection?: Projection,
   ): Promise<YestPaginateResult<User, never>> {
     const searchParamsCloned = cloneDeep(searchParams);
