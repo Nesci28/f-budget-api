@@ -13,6 +13,7 @@ components:
           x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         name:
+          x-index: true
           type: string
         endpointIds:
           type: array

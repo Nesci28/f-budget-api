@@ -97,6 +97,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
         projectId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        name:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
     ModuleConditionQuery:
       type: object
       x-min-required:
@@ -138,6 +140,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         projectId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        name:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     ModulePopulateRequestBody:
       type: object
       properties:
@@ -172,3 +176,4 @@ components:
       type: string
       enum:
         - projectId
+        - name

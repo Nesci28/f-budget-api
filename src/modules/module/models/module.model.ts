@@ -31,6 +31,7 @@ export class MongoModule extends MongoBase implements Module {
   @Prop({
     type: String,
     required: true,
+    index: true,
   })
   public name: string;
 
