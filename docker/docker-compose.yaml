@@ -1,15 +1,15 @@
 version: '3.7'
 services:
-  yest-stats-api:
+  f-budget-api:
     image: docker.okidoo.co/node-dev-18:latest
-    container_name: yest-stats-api
+    container_name: f-budget-api
     dns: 1.1.1.1
     env_file:
-      - ./.yest-stats-api.env
+      - ./.f-budget-api.env
       - ./.git.env
     command: tail -F anything
     networks:
-      - yest-stats
+      - f-budget
       - yest-api
     ports:
       - ${API_PORT}:3000
@@ -20,10 +20,10 @@ services:
     environment:
       TZ: "America/Toronto"
     depends_on:
-      yest-stats-mongo:
+      f-budget-mongo:
         condition: service_healthy
 
-  yest-stats-mongo:
+  f-budget-mongo:
     image: mongo:latest
     ports:
       - ${MONGO_PORT_1}:27017
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./mongo:/data/db
     networks:
-      - yest-stats
+      - f-budget
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017 --quiet
       interval: 10s
@@ -40,16 +40,21 @@ services:
       retries: 5
       start_period: 40s
 
-  yest-stats-redis:
-    image: redis:latest
-    container_name: yest-stats-redis
-    networks:
-      - yest-stats
+  f-budget-minio:
+    image: minio/minio:latest
     ports:
-      - ${REDIS_PORT}:6379
+      - ${MINIO_9000}:9000
+      - ${MINIO_9001}:9001
+    env_file:
+      - ./.minio.env
+    networks:
+      - f-budget
+    volumes:
+      - ./minio:/data
+    command: server /data --console-address ":9001"
 
 networks:
-  yest-stats:
+  f-budget:
   yest-api:
     external: true
     name: yest-api_yest-api

@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { SupportedLanguage } from "@yest/yest-stats-api-typescript-fetch";
+import { SupportedLanguage } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
 export const UserErrors = {

@@ -3,7 +3,7 @@ import {
   UserCreate,
   UserPatch,
   UserUpdate,
-} from "@yest/yest-stats-api-typescript-fetch";
+} from "@f-budget/f-budget-api-typescript-fetch";
 
 import { Context } from "../../../../test/global";
 import { UserRepository } from "../user.repository";

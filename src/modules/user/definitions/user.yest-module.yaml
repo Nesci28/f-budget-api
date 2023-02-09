@@ -1,6 +1,6 @@
 configs:
   moduleName: User
-  connectionName: yest-stats
+  connectionName: f-budget
 components:
   schemas:
     User:
@@ -8,45 +8,24 @@ components:
       required:
         - email
         - password
-        - role
       properties:
         email:
           x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email"
         password:
           type: string
-        role:
-          $ref: "#/components/schemas/UserRole"
-        projectIds:
-          type: array
-          items:
-            $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         refreshTokens:
           type: array
           items:
             $ref: "#/components/schemas/RefreshToken"
-        projects:
-          x-localField: projectIds
-          type: array
-          items:
-            $ref: "../../project/definitions/project.schemas.yaml#/components/schemas/Project"
 
     JwtTokenPayload:
       type: object
       required:
         - userId
-        - role
       properties:
         userId:
           type: string
-        role:
-          $ref: "#/components/schemas/UserRole"
-
-    UserRole:
-      type: string
-      enum:
-        - admin
-        - member
 
     RefreshToken:
       type: object

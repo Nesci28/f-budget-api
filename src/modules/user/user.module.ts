@@ -3,7 +3,6 @@ import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { configs } from "../../constants/configs.constant";
-import { ProjectModule } from "../project/project.module";
 import { MongoUserSchema } from "./models/user.model";
 import { MongoUserWithPasswordSchema } from "./models/user-with-password.model";
 import { UserController } from "./user.controller";
@@ -26,7 +25,6 @@ import { UserService } from "./user.service";
       configs.mongooseConnectionName,
     ),
     ConfigModule,
-    ProjectModule,
   ],
   controllers: [UserController],
   providers: [

@@ -1,8 +1,4 @@
-import {
-  AuthApi,
-  UserCreate,
-  UserRole,
-} from "@yest/yest-stats-api-typescript-fetch";
+import { AuthApi, UserCreate } from "@f-budget/f-budget-api-typescript-fetch";
 
 import { cleanDbs, Context } from "../../../../test/global";
 import { UserRepository } from "../../user/user.repository";
@@ -28,7 +24,6 @@ describe("AuthController", () => {
     ctx.userCreate = {
       email: "test@test.com",
       password: "password",
-      role: UserRole.Admin,
     };
   });
 

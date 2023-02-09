@@ -1,4 +1,4 @@
-import { User } from "@yest/yest-stats-api-typescript-fetch";
+import { User } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
 import { UserErrors } from "../../user.errors";

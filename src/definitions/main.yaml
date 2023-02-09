@@ -1,14 +1,14 @@
 openapi: 3.0.3
 servers:
-  - url: https://yest-stats-api.zone51.fun
+  - url: https://f-budget-api.nos.sh
 info:
-  description: This is a documentation for yest-stats-api
+  description: This is a documentation for f-budget-api
   x-locale: fr_CA
   version: 0.0.1
   title: api
   termsOfService: http://swagger.io/terms/
   contact:
-    email: support@okidoo.ca
+    email: markgagnon28@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html

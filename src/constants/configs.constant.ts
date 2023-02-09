@@ -7,9 +7,10 @@ export const configs = {
   refreshExpirationLongMS: ms(process.env.REFRESH_EXPIRATION_LONG),
   refreshExpirationShortMS: ms(process.env.REFRESH_EXPIRATION_SHORT),
   throttlerTTL: 60,
+  throttlerLimit: 100,
   throttlerLoginLimit: 5,
   redisThrottlerDb: 1,
   redisBullDb: 2,
-  mongooseConnectionName: "yest-stats",
+  mongooseConnectionName: "f-budget",
   bcryptRound: 12,
 };

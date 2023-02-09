@@ -24,7 +24,7 @@ COPY ./src ./src
 RUN npm run build
 RUN npm prune --production --force && rm -rf ./src
 
-FROM node:16-buster-slim as runtime-dependencies
+FROM node:18-buster-slim as runtime-dependencies
 WORKDIR /app
 CMD [ "node", "--", "./main.js" ]
 

@@ -1,3 +1,10 @@
+import {
+  User,
+  UserCreate,
+  UserPatch,
+  UserSearch,
+  UserUpdate,
+} from "@f-budget/f-budget-api-typescript-fetch";
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import {
@@ -7,16 +14,7 @@ import {
   ToObjFromPaginateMongo,
   YestPaginateResult,
 } from "@yest/mongoose";
-import { PopulateIn } from "@yest/mongoose/dist/src/mongo.interface";
 import { ResultHandlerException } from "@yest/router";
-import {
-  User,
-  UserCreate,
-  UserPatch,
-  UserPopulateField,
-  UserSearch,
-  UserUpdate,
-} from "@yest/yest-stats-api-typescript-fetch";
 import { cloneDeep } from "lodash";
 import { Model } from "mongoose";
 
@@ -31,7 +29,7 @@ export type UserModels = {
   modelUpdate: UserUpdate;
   modelPatch: UserPatch;
   modelSearch: UserSearch;
-  modelPopulate: Array<UserPopulateField>;
+  modelPopulate: Array<never>;
   modelDocument: UserDocument;
   modelSearchDistincts: never;
 };
@@ -56,19 +54,6 @@ export class UserRepository extends BaseRepository<UserModels> {
     projection?: Projection,
   ): Promise<YestPaginateResult<User, never>> {
     const searchParamsCloned = cloneDeep(searchParams);
-    const { populate } = searchParams;
-
-    // Populate
-    if (populate) {
-      const pipelineStagePopulate = MongoSearch.buildQueryPopulates(
-        searchParamsCloned as UserSearch & { populate: PopulateIn[] },
-        this.userWithPasswordModel,
-      );
-      const resultPopulate = (
-        await this.userWithPasswordModel.aggregate(pipelineStagePopulate)
-      )[0];
-      return resultPopulate;
-    }
 
     // No populate and no Distincts
     const pipelineStage = MongoSearch.buildQuery(searchParamsCloned);
@@ -119,7 +104,7 @@ export class UserRepository extends BaseRepository<UserModels> {
 
   public async getAll(
     isArchived?: boolean,
-    populate?: UserPopulateField[],
+    populate?: never[],
   ): Promise<User[]> {
     try {
       const res = await super.getAll(isArchived, populate);
@@ -131,10 +116,7 @@ export class UserRepository extends BaseRepository<UserModels> {
     }
   }
 
-  public async getById(
-    modelId: string,
-    populate?: UserPopulateField[],
-  ): Promise<User> {
+  public async getById(modelId: string, populate?: never[]): Promise<User> {
     try {
       const res = await super.getById(modelId, populate);
       return res;

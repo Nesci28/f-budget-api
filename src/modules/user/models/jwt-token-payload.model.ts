@@ -1,10 +1,7 @@
 /* eslint-disable no-use-before-define */
+import { JwtTokenPayload } from "@f-budget/f-budget-api-typescript-fetch";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, MongoBase } from "@yest/mongoose";
-import {
-  JwtTokenPayload,
-  UserRole,
-} from "@yest/yest-stats-api-typescript-fetch";
 
 export type JwtTokenPayloadDocument = MongoJwtTokenPayload &
   Document<MongoJwtTokenPayload>;
@@ -23,13 +20,6 @@ export class MongoJwtTokenPayload extends MongoBase implements JwtTokenPayload {
     required: true,
   })
   public userId: string;
-
-  @Prop({
-    type: String,
-    required: true,
-    enum: ["admin", "member"],
-  })
-  public role: UserRole;
 }
 
 const schema = SchemaFactory.createForClass(MongoJwtTokenPayload);

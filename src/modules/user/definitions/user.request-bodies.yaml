@@ -27,29 +27,17 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/UserUpdate"
-    UserPopulateRequestBody:
-      description: Body needed populate fields in User
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UserPopulateRequestBody"
   schemas:
     UserCreate:
       type: object
       required:
         - email
         - password
-        - role
       properties:
         email:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         refreshTokens:
           type: array
           items:
@@ -78,8 +66,6 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: ./user.schemas.yaml#/components/schemas/UserRole
     UserPatch:
       x-min-properties: 1
       type: object
@@ -88,10 +74,6 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         refreshTokens:
           type: array
           items:
@@ -113,8 +95,6 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: ./user.schemas.yaml#/components/schemas/UserRole
     UserSearchRequestBody:
       $ref: "#/components/schemas/UserSearch"
     UserUpdate:
@@ -122,16 +102,11 @@ components:
       required:
         - email
         - password
-        - role
       properties:
         email:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         refreshTokens:
           type: array
           items:
@@ -160,13 +135,10 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: ./user.schemas.yaml#/components/schemas/UserRole
     UserSearch:
       allOf:
         - $ref: "#/components/schemas/UserPaginationQuery"
         - $ref: "#/components/schemas/UserConditionQuery"
-        - $ref: "#/components/schemas/UserPopulateRequestBody"
     UserConditionFields:
       type: object
       x-min-properties: 1
@@ -226,25 +198,3 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         refreshTokens.token:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
-    UserPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: "#/components/schemas/UserPopulateFields"
-    UserPopulateFields:
-      type: array
-      items:
-        $ref: "#/components/schemas/UserPopulateField"
-    UserPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: "#/components/schemas/UserPopulateEnum"
-        match:
-          type: object
-    UserPopulateEnum:
-      type: string
-      enum:
-        - projects

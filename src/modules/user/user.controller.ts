@@ -1,6 +1,3 @@
-import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
-import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard } from "@yest/security";
 import {
   UserArchiveResponse,
   UserCreate,
@@ -9,12 +6,14 @@ import {
   UserGetAllResponse,
   UserPatch,
   UserPatchResponse,
-  UserPopulateRequestBody,
   UserSearch,
   UserSearchResponse,
   UserUpdate,
   UserUpdateResponse,
-} from "@yest/yest-stats-api-typescript-fetch";
+} from "@f-budget/f-budget-api-typescript-fetch";
+import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
+import { ResultHandler } from "@yest/result-handler";
+import { JwtTokenGuard } from "@yest/security";
 
 import { UserService } from "./user.service";
 
@@ -47,7 +46,7 @@ export class UserController {
   @UseGuards(JwtTokenGuard)
   public async userGetById(
     @Param() params: { id: string },
-    @Body() body: UserPopulateRequestBody,
+    @Body() body: never,
   ): Promise<UserFindByIdResponse> {
     const { id: userId } = params;
     const { populate } = body;
@@ -58,7 +57,7 @@ export class UserController {
   @UseGuards(JwtTokenGuard)
   public async userGetAll(
     @Query() query: { isArchived?: boolean },
-    @Body() body: UserPopulateRequestBody,
+    @Body() body: never,
   ): Promise<UserGetAllResponse> {
     const { isArchived } = query;
     const { populate } = body;

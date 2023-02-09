@@ -1,10 +1,10 @@
-import { BullModule, BullRootModuleOptions } from "@nestjs/bull";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { APP_FILTER } from "@nestjs/core";
 import { MongooseModule, MongooseModuleOptions } from "@nestjs/mongoose";
 import { ThrottlerModule } from "@nestjs/throttler";
 import { YestHealthcheckModule } from "@yest/healthcheck";
+import { YestMinioModule } from "@yest/minio";
 import {
   InternalServerInterceptor,
   ResultHandlerInterceptor,
@@ -12,22 +12,15 @@ import {
   YestRouterModule,
 } from "@yest/router";
 import { YestSecurityModule } from "@yest/security";
-import Redis from "ioredis";
 import * as Joi from "joi";
 import { cloneDeep } from "lodash";
 import { RequestContextModule } from "nestjs-request-context";
-import { ThrottlerStorageRedisService } from "nestjs-throttler-storage-redis";
 import { v4 } from "uuid";
 
 import { configs } from "./constants/configs.constant";
 import { LocalStrategy } from "./guards/local.strategy";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
-import { EndpointModule } from "./modules/endpoint/endpoint.module";
-import { ModuleModule } from "./modules/module/module.module";
-import { ProjectModule } from "./modules/project/project.module";
-import { RequestModule } from "./modules/request/request.module";
-import { ResponseModule } from "./modules/response/response.module";
 import { UserModule } from "./modules/user/user.module";
 
 const configModule = ConfigModule.forRoot({
@@ -43,8 +36,6 @@ const configModule = ConfigModule.forRoot({
     REFRESH_PRIVATE_KEY: Joi.string().required(),
     REFRESH_EXPIRATION_LONG: Joi.string().required(),
     REFRESH_EXPIRATION_SHORT: Joi.string().required(),
-    REDIS_HOST: Joi.string().required(),
-    REDIS_PORT: Joi.string().required(),
     MONGO_USERNAME: Joi.string().required(),
     MONGO_PASSWORD: Joi.string().required(),
     MONGO_URL_1: Joi.string().required(),
@@ -58,6 +49,8 @@ const yestRouterModule = YestRouterModule.forRoot({
   apiDoc: configs.resolvedPath,
 });
 
+const yestMinio = YestMinioModule.registerAsync();
+
 const mongooseModule = MongooseModule.forRootAsync({
   imports: [ConfigModule],
   inject: [ConfigService],
@@ -67,8 +60,6 @@ const mongooseModule = MongooseModule.forRootAsync({
     const password = configService.get("MONGO_PASSWORD");
     const database = configService.get("MONGO_DB");
     const host1 = configService.get("MONGO_URL_1");
-    // const host2 = configService.get("MONGO_URL_2");
-    // const host3 = configService.get("MONGO_URL_3");
     const replicaSet = configService.get("MONGO_REPLICA_SET");
     const uri = `mongodb://${username}:${password}@${host1}`;
 
@@ -84,46 +75,13 @@ const mongooseModule = MongooseModule.forRootAsync({
   },
 });
 
-const throttlerModule = ThrottlerModule.forRootAsync({
-  imports: [ConfigModule],
-  inject: [ConfigService],
-  useFactory: (config: ConfigService) => {
-    const host = config.get("REDIS_HOST");
-    const port = config.get("REDIS_PORT");
-
-    return {
-      storage: new ThrottlerStorageRedisService(
-        new Redis({
-          db: configs.redisThrottlerDb,
-          port,
-          host,
-        }),
-      ),
-    };
-  },
-});
-
-const redisModule = BullModule.forRootAsync({
-  imports: [ConfigModule],
-  inject: [ConfigService],
-  useFactory: (config: ConfigService): BullRootModuleOptions => {
-    const host = config.get("REDIS_HOST");
-    const port = config.get("REDIS_PORT");
-
-    return {
-      redis: {
-        host,
-        port,
-        db: configs.redisBullDb,
-        name: "bull-client",
-      },
-    };
-  },
+const throttlerModule = ThrottlerModule.forRoot({
+  ttl: configs.throttlerTTL,
+  limit: configs.throttlerLimit,
 });
 
 export const appImports = [
   configModule,
-  redisModule,
   RequestContextModule,
   YestSecurityModule.forRootAsync(YestSecurityModule, {
     imports: [AuthModule],
@@ -137,15 +95,7 @@ export const appImports = [
   }),
 ];
 
-const moduleImports = [
-  AuthModule,
-  EndpointModule,
-  ModuleModule,
-  ProjectModule,
-  RequestModule,
-  ResponseModule,
-  UserModule,
-];
+const moduleImports = [AuthModule, UserModule];
 
 const appProviders = [
   LocalStrategy,
@@ -166,6 +116,7 @@ const appProviders = [
 export const meta = {
   imports: [
     yestHealthcheckModule,
+    yestMinio,
     ...appImports,
     ...moduleImports,
     throttlerModule,

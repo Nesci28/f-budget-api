@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
-import { User } from "@yest/yest-stats-api-typescript-fetch";
+import { User } from "@f-budget/f-budget-api-typescript-fetch";
 import { Strategy } from "passport-local";
 
 import { AuthService } from "../modules/auth/auth.service";

@@ -1,15 +1,15 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
-import { BasicOperator } from "@yest/contract";
-import { InternalServerException, ResultHandlerException } from "@yest/router";
-import { BaseAuthPayload } from "@yest/security";
 import {
   DecodedRefreshToken,
   JwtTokenPayload,
   RefreshToken,
   User,
   UserSearch,
-} from "@yest/yest-stats-api-typescript-fetch";
+} from "@f-budget/f-budget-api-typescript-fetch";
+import { Inject, Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { BasicOperator } from "@yest/contract";
+import { InternalServerException, ResultHandlerException } from "@yest/router";
+import { BaseAuthPayload } from "@yest/security";
 import * as bcrypt from "bcrypt";
 import { remove, unset } from "lodash";
 
@@ -102,7 +102,6 @@ export class AuthService {
   public async generateJwtPayload(user: User): Promise<string> {
     const jwt = this.signJwtToken({
       userId: user.id,
-      role: user.role,
     });
 
     return jwt;

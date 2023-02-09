@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 
+import {
+  BaseModel,
+  Configuration,
+} from "@f-budget/f-budget-api-typescript-fetch";
 import { MongoMemoryHandler } from "@yest/mongoose-test";
 import { SecurityService } from "@yest/security";
 import { TestHandler } from "@yest/test";
 import { OptionIdMap } from "@yest/test/dist/src/handler";
-import {
-  BaseModel,
-  Configuration,
-} from "@yest/yest-stats-api-typescript-fetch";
 import { get, isEqual } from "lodash";
 import mongoose from "mongoose";
 

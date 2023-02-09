@@ -10,13 +10,14 @@
     "build": "nest build",
     "start": "nest start",
     "start:debug": "export DEBUG_MODE=true && rm -rf ./dist && nest start --debug --watch",
-    "link": "cd /home/node/app/generators/typescript-fetch && npm link && cd /home/node/app && npm link -- save @yest/yest-stats-api-typescript-fetch",
+    "link": "cd /home/node/app/generators/typescript-fetch && npm link && cd /home/node/app && npm link -- save @f-budget/f-budget-api-typescript-fetch",
     "lint": "prettier-eslint \"{src,apps,libs,test}/**/*.ts\" --write",
     "test:e2e:debug": "node --expose-gc --inspect=0.0.0.0:9229 -r tsconfig-paths/register node_modules/.bin/jest --testTimeout=120000 --logHeapUsage --runInBand",
     "sort": "sort-package-json",
     "update": "npm-check-updates --target minor --reject @swc/core"
   },
   "dependencies": {
+    "@f-budget/f-budget-api-typescript-fetch": "^0.0.1",
     "@liaoliaots/nestjs-redis": "^8.2.2",
     "@nestjs/bull": "^0.6.2",
     "@nestjs/common": "^8.4.7",
@@ -30,6 +31,7 @@
     "@supercharge/request-ip": "^1.2.0",
     "@yest/contract": "^3.2.33",
     "@yest/healthcheck": "^1.0.3",
+    "@yest/minio": "^1.0.19",
     "@yest/mongoose": "^2.2.7-beta-2",
     "@yest/result-handler": "^3.0.4",
     "@yest/router": "^1.5.31",

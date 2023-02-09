@@ -1,3 +1,11 @@
+import {
+  JwtTokenPayload,
+  LoginRequestBody,
+  LoginResponse,
+  RefreshResponse,
+  RefreshToken,
+  User,
+} from "@f-budget/f-budget-api-typescript-fetch";
 import { Body, Controller, Query, Res, UseGuards } from "@nestjs/common";
 import { Throttle } from "@nestjs/throttler";
 import { ResultHandler } from "@yest/result-handler";
@@ -9,14 +17,6 @@ import {
   UserAgent,
   UserAgentInfo,
 } from "@yest/security";
-import {
-  JwtTokenPayload,
-  LoginRequestBody,
-  LoginResponse,
-  RefreshResponse,
-  RefreshToken,
-  User,
-} from "@yest/yest-stats-api-typescript-fetch";
 import { Response } from "express";
 
 import { configs } from "../../constants/configs.constant";

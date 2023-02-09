@@ -1,7 +1,7 @@
 [
   {
     "_id": "1bb5ebbe-c69d-4812-a1a1-52e187cdd5fb",
-    "colName": "Yest-Stats",
+    "colName": "F-Budget",
     "created": "2023-02-01T14:50:50.303Z",
     "sortNum": 10000,
     "folders": [
@@ -11,27 +11,6 @@
         "containerId": "",
         "created": "2023-02-01T14:50:55.690Z",
         "sortNum": 10000
-      },
-      {
-        "_id": "2b59a3dc-99a0-4b94-9954-e73273e48cf7",
-        "name": "Project",
-        "containerId": "",
-        "created": "2023-02-03T00:46:17.618Z",
-        "sortNum": 20000
-      },
-      {
-        "_id": "ce12fe04-99b2-4270-a90a-c7918e21ed66",
-        "name": "Page Summary",
-        "containerId": "",
-        "created": "2023-02-04T16:11:17.156Z",
-        "sortNum": 30000
-      },
-      {
-        "_id": "56089094-38bc-45de-8844-2cb204d08643",
-        "name": "Page Detail",
-        "containerId": "",
-        "created": "2023-02-04T16:22:12.376Z",
-        "sortNum": 40000
       }
     ]
   }

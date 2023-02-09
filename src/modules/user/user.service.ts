@@ -1,20 +1,17 @@
-import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { YestPaginateResult } from "@yest/mongoose";
-import { ResultHandlerException } from "@yest/router";
 import {
-  BasicOperator,
   User,
   UserCreate,
   UserPatch,
-  UserPopulateField,
-  UserRole,
   UserSearch,
   UserUpdate,
-} from "@yest/yest-stats-api-typescript-fetch";
+} from "@f-budget/f-budget-api-typescript-fetch";
+import { Injectable, OnApplicationBootstrap } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { BasicOperator } from "@yest/contract";
+import { YestPaginateResult } from "@yest/mongoose";
+import { ResultHandlerException } from "@yest/router";
 
 import { AuthErrors } from "../auth/auth.errors";
-import { ProjectService } from "../project/project.service";
 import { UserErrors } from "./user.errors";
 import { UserRepository } from "./user.repository";
 
@@ -23,36 +20,21 @@ export class UserService implements OnApplicationBootstrap {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly configService: ConfigService,
-    private readonly projectService: ProjectService,
   ) {}
 
   public async onApplicationBootstrap(): Promise<void> {
     const defaultEmail = this.configService.get<string>("DEFAULT_EMAIL")!;
-    let defaultUser: User;
     try {
-      defaultUser = await this.getUserByEmail(defaultEmail);
+      await this.getUserByEmail(defaultEmail);
     } catch (err) {
       const defaultPassword =
         this.configService.get<string>("DEFAULT_PASSWORD")!;
       const userCreate: UserCreate = {
         email: defaultEmail,
         password: defaultPassword,
-        role: UserRole.Admin,
       };
-      defaultUser = await this.userRepository.create(userCreate);
+      await this.userRepository.create(userCreate);
     }
-
-    if (!defaultUser) {
-      throw new Error("DefaultUser should be defined -> Impossible");
-    }
-    const projects = await this.projectService.getAll();
-    const projectIds = projects.map((x) => {
-      return x.id;
-    });
-    const userPatch: UserPatch = {
-      projectIds,
-    };
-    await this.patch(defaultUser.id, userPatch);
   }
 
   public async searchLogin(
@@ -81,16 +63,13 @@ export class UserService implements OnApplicationBootstrap {
 
   public async getAll(
     isArchived?: boolean,
-    populate?: UserPopulateField[],
+    populate?: never[],
   ): Promise<User[]> {
     const res = await this.userRepository.getAll(isArchived, populate);
     return res;
   }
 
-  public async getById(
-    userId: string,
-    populate?: UserPopulateField[],
-  ): Promise<User> {
+  public async getById(userId: string, populate?: never[]): Promise<User> {
     const res = await this.userRepository.getById(userId, populate);
     return res;
   }

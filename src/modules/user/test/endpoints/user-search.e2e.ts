@@ -1,4 +1,4 @@
-import { BasicOperator } from "@yest/yest-stats-api-typescript-fetch";
+import { BasicOperator } from "@f-budget/f-budget-api-typescript-fetch";
 
 import { UserContext } from "../user.e2e-spec";
 

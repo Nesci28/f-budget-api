@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
+import { RefreshToken } from "@f-budget/f-budget-api-typescript-fetch";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { MongoBaseChild, MongoUtil } from "@yest/mongoose";
-import { RefreshToken } from "@yest/yest-stats-api-typescript-fetch";
 import { Types } from "mongoose";
 
 @Schema({

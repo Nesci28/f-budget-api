@@ -1,14 +1,14 @@
 openapi: 3.0.3
 servers:
-  - url: https://yest-stats-api.zone51.fun
+  - url: https://f-budget-api.nos.sh
 info:
-  description: This is a documentation for yest-stats-api
+  description: This is a documentation for f-budget-api
   x-locale: fr_CA
   version: 0.0.1
   title: api
   termsOfService: http://swagger.io/terms/
   contact:
-    email: support@okidoo.ca
+    email: markgagnon28@gmail.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -56,842 +56,6 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /endpoint:
-    post:
-      tags:
-        - Endpoint
-      operationId: endpointCreate
-      summary: Creates a new Endpoint
-      description: Creates a new Endpoint
-      requestBody:
-        $ref: '#/components/requestBodies/EndpointCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsEndpointDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /endpoint-all:
-    post:
-      tags:
-        - Endpoint
-      operationId: endpointGetAll
-      summary: Get all Endpoint
-      description: Get all Endpoint
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsEndpointArchived'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /endpoint-search:
-    post:
-      tags:
-        - Endpoint
-      operationId: endpointSearch
-      summary: Search Endpoint
-      description: Search Endpoint
-      requestBody:
-        $ref: '#/components/requestBodies/EndpointSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /endpoint/{id}:
-    post:
-      tags:
-        - Endpoint
-      operationId: endpointGetById
-      summary: Get by Id a Endpoint
-      description: Get by Id a Endpoint
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/EndpointId'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Endpoint
-      operationId: endpointPatch
-      summary: Patch a Endpoint
-      description: Patch a Endpoint
-      parameters:
-        - $ref: '#/components/parameters/EndpointId'
-      requestBody:
-        $ref: '#/components/requestBodies/EndpointPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Endpoint
-      operationId: endpointUpdate
-      summary: Update a Endpoint
-      description: Update a Endpoint
-      parameters:
-        - $ref: '#/components/parameters/EndpointId'
-        - $ref: '#/components/parameters/IsEndpointDryRun'
-      requestBody:
-        $ref: '#/components/requestBodies/EndpointUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Endpoint
-      operationId: endpointArchive
-      summary: Archive a Endpoint
-      description: Archive a Endpoint
-      parameters:
-        - $ref: '#/components/parameters/EndpointId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/EndpointArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /module:
-    post:
-      tags:
-        - Module
-      operationId: moduleCreate
-      summary: Creates a new Module
-      description: Creates a new Module
-      requestBody:
-        $ref: '#/components/requestBodies/ModuleCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsModuleDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /module-all:
-    post:
-      tags:
-        - Module
-      operationId: moduleGetAll
-      summary: Get all Module
-      description: Get all Module
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsModuleArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/ModulePopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /module-search:
-    post:
-      tags:
-        - Module
-      operationId: moduleSearch
-      summary: Search Module
-      description: Search Module
-      requestBody:
-        $ref: '#/components/requestBodies/ModuleSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /module/{id}:
-    post:
-      tags:
-        - Module
-      operationId: moduleGetById
-      summary: Get by Id a Module
-      description: Get by Id a Module
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/ModuleId'
-      requestBody:
-        $ref: '#/components/requestBodies/ModulePopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Module
-      operationId: modulePatch
-      summary: Patch a Module
-      description: Patch a Module
-      parameters:
-        - $ref: '#/components/parameters/ModuleId'
-      requestBody:
-        $ref: '#/components/requestBodies/ModulePatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModulePatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Module
-      operationId: moduleUpdate
-      summary: Update a Module
-      description: Update a Module
-      parameters:
-        - $ref: '#/components/parameters/ModuleId'
-        - $ref: '#/components/parameters/IsModuleDryRun'
-      requestBody:
-        $ref: '#/components/requestBodies/ModuleUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Module
-      operationId: moduleArchive
-      summary: Archive a Module
-      description: Archive a Module
-      parameters:
-        - $ref: '#/components/parameters/ModuleId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/ModuleArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /project:
-    post:
-      tags:
-        - Project
-      operationId: projectCreate
-      summary: Creates a new Project
-      description: Creates a new Project
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsProjectDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /project-all:
-    post:
-      tags:
-        - Project
-      operationId: projectGetAll
-      summary: Get all Project
-      description: Get all Project
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsProjectArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /project-search:
-    post:
-      tags:
-        - Project
-      operationId: projectSearch
-      summary: Search Project
-      description: Search Project
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /project/{id}:
-    post:
-      tags:
-        - Project
-      operationId: projectGetById
-      summary: Get by Id a Project
-      description: Get by Id a Project
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Project
-      operationId: projectPatch
-      summary: Patch a Project
-      description: Patch a Project
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Project
-      operationId: projectUpdate
-      summary: Update a Project
-      description: Update a Project
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-        - $ref: '#/components/parameters/IsProjectDryRun'
-      requestBody:
-        $ref: '#/components/requestBodies/ProjectUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Project
-      operationId: projectArchive
-      summary: Archive a Project
-      description: Archive a Project
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/ProjectArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /request:
-    post:
-      tags:
-        - Request
-      operationId: requestCreate
-      summary: Creates a new Request
-      description: Creates a new Request
-      requestBody:
-        $ref: '#/components/requestBodies/RequestCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsRequestDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /request-all:
-    post:
-      tags:
-        - Request
-      operationId: requestGetAll
-      summary: Get all Request
-      description: Get all Request
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsRequestArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/RequestPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /request-search:
-    post:
-      tags:
-        - Request
-      operationId: requestSearch
-      summary: Search Request
-      description: Search Request
-      requestBody:
-        $ref: '#/components/requestBodies/RequestSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /request/{id}:
-    post:
-      tags:
-        - Request
-      operationId: requestGetById
-      summary: Get by Id a Request
-      description: Get by Id a Request
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/RequestId'
-      requestBody:
-        $ref: '#/components/requestBodies/RequestPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Request
-      operationId: requestPatch
-      summary: Patch a Request
-      description: Patch a Request
-      parameters:
-        - $ref: '#/components/parameters/RequestId'
-      requestBody:
-        $ref: '#/components/requestBodies/RequestPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Request
-      operationId: requestUpdate
-      summary: Update a Request
-      description: Update a Request
-      parameters:
-        - $ref: '#/components/parameters/RequestId'
-        - $ref: '#/components/parameters/IsRequestDryRun'
-      requestBody:
-        $ref: '#/components/requestBodies/RequestUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Request
-      operationId: requestArchive
-      summary: Archive a Request
-      description: Archive a Request
-      parameters:
-        - $ref: '#/components/parameters/RequestId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/RequestArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /response:
-    post:
-      tags:
-        - Response
-      operationId: responseCreate
-      summary: Creates a new Response
-      description: Creates a new Response
-      requestBody:
-        $ref: '#/components/requestBodies/ResponseCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsResponseDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /response-all:
-    post:
-      tags:
-        - Response
-      operationId: responseGetAll
-      summary: Get all Response
-      description: Get all Response
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsResponseArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/ResponsePopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /response-search:
-    post:
-      tags:
-        - Response
-      operationId: responseSearch
-      summary: Search Response
-      description: Search Response
-      requestBody:
-        $ref: '#/components/requestBodies/ResponseSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /response/{id}:
-    post:
-      tags:
-        - Response
-      operationId: responseGetById
-      summary: Get by Id a Response
-      description: Get by Id a Response
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/ResponseId'
-      requestBody:
-        $ref: '#/components/requestBodies/ResponsePopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Response
-      operationId: responsePatch
-      summary: Patch a Response
-      description: Patch a Response
-      parameters:
-        - $ref: '#/components/parameters/ResponseId'
-      requestBody:
-        $ref: '#/components/requestBodies/ResponsePatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponsePatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Response
-      operationId: responseUpdate
-      summary: Update a Response
-      description: Update a Response
-      parameters:
-        - $ref: '#/components/parameters/ResponseId'
-        - $ref: '#/components/parameters/IsResponseDryRun'
-      requestBody:
-        $ref: '#/components/requestBodies/ResponseUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Response
-      operationId: responseArchive
-      summary: Archive a Response
-      description: Archive a Response
-      parameters:
-        - $ref: '#/components/parameters/ResponseId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/ResponseArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
   /user:
     post:
       tags:
@@ -899,6 +63,8 @@ paths:
       operationId: userCreate
       summary: Creates a new User
       description: Creates a new User
+      security:
+        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserCreateRequestBody'
       parameters:
@@ -927,8 +93,6 @@ paths:
         - E2E: []
       parameters:
         - $ref: '#/components/parameters/IsUserArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/UserPopulateRequestBody'
       responses:
         '200':
           $ref: '#/components/responses/UserGetAllResponse'
@@ -949,6 +113,8 @@ paths:
       operationId: userSearch
       summary: Search User
       description: Search User
+      security:
+        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserSearchRequestBody'
       responses:
@@ -975,8 +141,6 @@ paths:
         - E2E: []
       parameters:
         - $ref: '#/components/parameters/UserId'
-      requestBody:
-        $ref: '#/components/requestBodies/UserPopulateRequestBody'
       responses:
         '200':
           $ref: '#/components/responses/UserFindByIdResponse'
@@ -998,6 +162,8 @@ paths:
       description: Patch a User
       parameters:
         - $ref: '#/components/parameters/UserId'
+      security:
+        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserPatchRequestBody'
       responses:
@@ -1022,6 +188,8 @@ paths:
       parameters:
         - $ref: '#/components/parameters/UserId'
         - $ref: '#/components/parameters/IsUserDryRun'
+      security:
+        - E2E: []
       requestBody:
         $ref: '#/components/requestBodies/UserUpdateRequestBody'
       responses:
@@ -1060,23 +228,16 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model:
-    post:
+  /healthcheck:
+    get:
       tags:
-        - AccessModel
-      operationId: accessModelCreate
-      summary: Creates a new AccessModel
-      description: Creates a new AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsAccessModelDryRun'
+        - Healthcheck
+      operationId: getHealthcheck
+      summary: Healthcheck
+      description: Returns a ResultHandler with the version number of the current build
       responses:
         '200':
-          $ref: '#/components/responses/AccessModelCreateResponse'
+          $ref: '#/components/responses/HealthcheckResponse'
         '400':
           $ref: '#/components/responses/BadRequestResultResponse'
         '401':
@@ -1085,164 +246,8 @@ paths:
           $ref: '#/components/responses/MissingPermissionResultResponse'
         '404':
           $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model-all:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelGetAll
-      summary: Get all AccessModel
-      description: Get all AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      parameters:
-        - $ref: '#/components/parameters/IsAccessModelArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model-search:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelSearch
-      summary: Search AccessModel
-      description: Search AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model/{id}:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelGetById
-      summary: Get by Id a AccessModel
-      description: Get by Id a AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - AccessModel
-      operationId: accessModelPatch
-      summary: Patch a AccessModel
-      description: Patch a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - AccessModel
-      operationId: accessModelUpdate
-      summary: Update a AccessModel
-      description: Update a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-        - $ref: '#/components/parameters/IsAccessModelDryRun'
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - AccessModel
-      operationId: accessModelArchive
-      summary: Archive a AccessModel
-      description: Archive a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      security:
-        - E2E: []
-        - Dev: []
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResultResponse'
   /access-scope:
     post:
       tags:
@@ -1586,6 +591,189 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/PropertyControlLinkArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelCreate
+      summary: Creates a new AccessModel
+      description: Creates a new AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsAccessModelDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model-all:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelGetAll
+      summary: Get all AccessModel
+      description: Get all AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      parameters:
+        - $ref: '#/components/parameters/IsAccessModelArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model-search:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelSearch
+      summary: Search AccessModel
+      description: Search AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model/{id}:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelGetById
+      summary: Get by Id a AccessModel
+      description: Get by Id a AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - AccessModel
+      operationId: accessModelPatch
+      summary: Patch a AccessModel
+      description: Patch a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - AccessModel
+      operationId: accessModelUpdate
+      summary: Update a AccessModel
+      description: Update a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+        - $ref: '#/components/parameters/IsAccessModelDryRun'
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - AccessModel
+      operationId: accessModelArchive
+      summary: Archive a AccessModel
+      description: Archive a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      security:
+        - E2E: []
+        - Dev: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelArchiveResponse'
         '400':
           $ref: '#/components/responses/BadRequestResultResponse'
         '401':
@@ -2002,26 +1190,6 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /healthcheck:
-    get:
-      tags:
-        - Healthcheck
-      operationId: getHealthcheck
-      summary: Healthcheck
-      description: Returns a ResultHandler with the version number of the current build
-      responses:
-        '200':
-          $ref: '#/components/responses/HealthcheckResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '406':
-          $ref: '#/components/responses/NotAcceptableResultResponse'
 components:
   securitySchemes:
     admin:
@@ -2122,1437 +1290,16 @@ components:
         exp:
           description: Expiration time
           type: number
-    EndpointCreate:
-      type: object
-      required:
-        - path
-        - httpMethod
-        - projectId
-      properties:
-        path:
-          type: string
-        httpMethod:
-          $ref: '#/components/schemas/HttpMethod'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        errorCount:
-          default: 0
-          type: number
-        successCount:
-          default: 0
-          type: number
-        avgRequestPayloadSize:
-          default: 0
-          type: number
-        avgResponsePayloadSize:
-          default: 0
-          type: number
-        avgResponseTime:
-          default: 0
-          type: number
-        requestCount:
-          default: 0
-          type: number
-        responseCount:
-          default: 0
-          type: number
-    EndpointPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        path:
-          type: string
-        httpMethod:
-          $ref: '#/components/schemas/HttpMethod'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        errorCount:
-          default: 0
-          type: number
-        successCount:
-          default: 0
-          type: number
-        avgRequestPayloadSize:
-          default: 0
-          type: number
-        avgResponsePayloadSize:
-          default: 0
-          type: number
-        avgResponseTime:
-          default: 0
-          type: number
-        requestCount:
-          default: 0
-          type: number
-        responseCount:
-          default: 0
-          type: number
-    EndpointSearchRequestBody:
-      $ref: '#/components/schemas/EndpointSearch'
-    EndpointUpdate:
-      type: object
-      required:
-        - path
-        - httpMethod
-        - projectId
-        - errorCount
-        - successCount
-        - avgRequestPayloadSize
-        - avgResponsePayloadSize
-        - avgResponseTime
-        - requestCount
-        - responseCount
-      properties:
-        path:
-          type: string
-        httpMethod:
-          $ref: '#/components/schemas/HttpMethod'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        errorCount:
-          default: 0
-          type: number
-        successCount:
-          default: 0
-          type: number
-        avgRequestPayloadSize:
-          default: 0
-          type: number
-        avgResponsePayloadSize:
-          default: 0
-          type: number
-        avgResponseTime:
-          default: 0
-          type: number
-        requestCount:
-          default: 0
-          type: number
-        responseCount:
-          default: 0
-          type: number
-    EndpointSearch:
-      allOf:
-        - $ref: '#/components/schemas/EndpointPaginationQuery'
-        - $ref: '#/components/schemas/EndpointConditionQuery'
-        - $ref: '#/components/schemas/EndpointPopulateRequestBody'
-        - $ref: '#/components/schemas/EndpointDistinctQuery'
-    EndpointConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        path:
-          $ref: '#/components/schemas/SearchStringCondition'
-        httpMethod:
-          $ref: '#/components/schemas/SearchStringCondition'
-        projectId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    EndpointConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EndpointConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EndpointConditionFields'
-    EndpointPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/EndpointPagination'
-    EndpointPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/EndpointSort'
-    EndpointSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        path:
-          $ref: '#/components/schemas/Sorting'
-        httpMethod:
-          $ref: '#/components/schemas/Sorting'
-        projectId:
-          $ref: '#/components/schemas/Sorting'
-    EndpointPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/EndpointPopulateFields'
-    EndpointPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/EndpointPopulateField'
-    EndpointPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/EndpointPopulateEnum'
-        match:
-          type: object
-    EndpointPopulateEnum:
-      type: string
-      enum:
-        - project
-    EndpointDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndpointDistinctFields'
-    EndpointDistinctFields:
-      type: string
-      enum:
-        - path
-        - httpMethod
-        - projectId
-    EndpointCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Endpoint'
-    EndpointPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    EndpointArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Endpoint'
-    Endpoint:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - path
-            - httpMethod
-            - projectId
-            - errorCount
-            - successCount
-            - avgRequestPayloadSize
-            - avgResponsePayloadSize
-            - avgResponseTime
-            - requestCount
-            - responseCount
-          properties:
-            path:
-              type: string
-            httpMethod:
-              $ref: '#/components/schemas/HttpMethod'
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            errorCount:
-              default: 0
-              type: number
-            successCount:
-              default: 0
-              type: number
-            avgRequestPayloadSize:
-              default: 0
-              type: number
-            avgResponsePayloadSize:
-              default: 0
-              type: number
-            avgResponseTime:
-              default: 0
-              type: number
-            requestCount:
-              default: 0
-              type: number
-            responseCount:
-              default: 0
-              type: number
-            project:
-              $ref: '#/components/schemas/Project'
-    HttpMethod:
-      type: string
-      enum:
-        - Get
-        - Post
-        - Put
-        - Patch
-        - Delete
-    ModuleCreate:
-      type: object
-      required:
-        - name
-        - projectId
-      properties:
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModulePatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModuleSearchRequestBody:
-      $ref: '#/components/schemas/ModuleSearch'
-    ModuleUpdate:
-      type: object
-      required:
-        - name
-        - projectId
-      properties:
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        name:
-          type: string
-        endpointIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-    ModuleSearch:
-      allOf:
-        - $ref: '#/components/schemas/ModulePaginationQuery'
-        - $ref: '#/components/schemas/ModuleConditionQuery'
-        - $ref: '#/components/schemas/ModulePopulateRequestBody'
-        - $ref: '#/components/schemas/ModuleDistinctQuery'
-    ModuleConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        projectId:
-          $ref: '#/components/schemas/SearchStringCondition'
-        name:
-          $ref: '#/components/schemas/SearchStringCondition'
-    ModuleConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ModuleConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ModuleConditionFields'
-    ModulePaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/ModulePagination'
-    ModulePagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/ModuleSort'
-    ModuleSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        projectId:
-          $ref: '#/components/schemas/Sorting'
-        name:
-          $ref: '#/components/schemas/Sorting'
-    ModulePopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/ModulePopulateFields'
-    ModulePopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/ModulePopulateField'
-    ModulePopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/ModulePopulateEnum'
-        match:
-          type: object
-    ModulePopulateEnum:
-      type: string
-      enum:
-        - endpoints
-        - project
-    ModuleDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModuleDistinctFields'
-    ModuleDistinctFields:
-      type: string
-      enum:
-        - projectId
-        - name
-    ModuleCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Module'
-    ModuleFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Module'
-    ModulePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    ModuleArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Module'
-    Module:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - name
-            - projectId
-          properties:
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            name:
-              type: string
-            endpointIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
-            endpoints:
-              type: array
-              items:
-                $ref: '#/components/schemas/Endpoint'
-            project:
-              $ref: '#/components/schemas/Project'
-    ProjectCreate:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-        serverIps:
-          type: array
-          items:
-            type: string
-        moduleIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        logo:
-          type: string
-    ProjectPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        name:
-          type: string
-        serverIps:
-          type: array
-          items:
-            type: string
-        moduleIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        logo:
-          type: string
-    ProjectSearchRequestBody:
-      $ref: '#/components/schemas/ProjectSearch'
-    ProjectUpdate:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-        serverIps:
-          type: array
-          items:
-            type: string
-        moduleIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        logo:
-          type: string
-    ProjectSearch:
-      allOf:
-        - $ref: '#/components/schemas/ProjectPaginationQuery'
-        - $ref: '#/components/schemas/ProjectConditionQuery'
-        - $ref: '#/components/schemas/ProjectPopulateRequestBody'
-    ProjectConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-    ProjectConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ProjectConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ProjectConditionFields'
-    ProjectPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/ProjectPagination'
-    ProjectPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/ProjectSort'
-    ProjectSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-    ProjectPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/ProjectPopulateFields'
-    ProjectPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/ProjectPopulateField'
-    ProjectPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/ProjectPopulateEnum'
-        match:
-          type: object
-    ProjectPopulateEnum:
-      type: string
-      enum:
-        - modules
-    ProjectCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Project'
-    ProjectGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Project'
-    ProjectFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Project'
-    ProjectSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Project'
-    ProjectPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Project'
-    ProjectUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Project'
-    ProjectArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Project'
-    Project:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - name
-          properties:
-            name:
-              type: string
-            serverIps:
-              type: array
-              items:
-                type: string
-            moduleIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
-            logo:
-              type: string
-            modules:
-              type: array
-              items:
-                $ref: '#/components/schemas/Module'
-    RequestCreate:
-      type: object
-      required:
-        - projectId
-        - uuid
-        - path
-        - payload
-        - payloadSize
-      properties:
-        path:
-          type: string
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-    RequestPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        path:
-          type: string
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-    RequestSearchRequestBody:
-      $ref: '#/components/schemas/RequestSearch'
-    RequestUpdate:
-      type: object
-      required:
-        - projectId
-        - uuid
-        - path
-        - payload
-        - payloadSize
-      properties:
-        path:
-          type: string
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-    RequestSearch:
-      allOf:
-        - $ref: '#/components/schemas/RequestPaginationQuery'
-        - $ref: '#/components/schemas/RequestConditionQuery'
-        - $ref: '#/components/schemas/RequestPopulateRequestBody'
-        - $ref: '#/components/schemas/RequestDistinctQuery'
-    RequestConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        uuid:
-          $ref: '#/components/schemas/SearchStringCondition'
-        endpointId:
-          $ref: '#/components/schemas/SearchStringCondition'
-        projectId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    RequestConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/RequestConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/RequestConditionFields'
-    RequestPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/RequestPagination'
-    RequestPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/RequestSort'
-    RequestSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        uuid:
-          $ref: '#/components/schemas/Sorting'
-        endpointId:
-          $ref: '#/components/schemas/Sorting'
-        projectId:
-          $ref: '#/components/schemas/Sorting'
-    RequestPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/RequestPopulateFields'
-    RequestPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/RequestPopulateField'
-    RequestPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/RequestPopulateEnum'
-        match:
-          type: object
-    RequestPopulateEnum:
-      type: string
-      enum:
-        - endpoint
-        - project
-    RequestDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestDistinctFields'
-    RequestDistinctFields:
-      type: string
-      enum:
-        - uuid
-        - endpointId
-        - projectId
-    RequestCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Request'
-    RequestGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Request'
-    RequestFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Request'
-    RequestSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Request'
-    RequestPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Request'
-    RequestUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Request'
-    RequestArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Request'
-    Request:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - endpointId
-            - projectId
-            - uuid
-            - path
-            - payload
-            - payloadSize
-          properties:
-            path:
-              type: string
-            uuid:
-              $ref: '#/components/schemas/Uuid'
-            endpointId:
-              $ref: '#/components/schemas/ObjectID'
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            payload:
-              type: string
-            payloadSize:
-              type: number
-            endpoint:
-              $ref: '#/components/schemas/Endpoint'
-            project:
-              $ref: '#/components/schemas/Project'
-    ResponseCreate:
-      type: object
-      required:
-        - projectId
-        - payload
-        - payloadSize
-        - time
-        - status
-        - uuid
-        - path
-      properties:
-        path:
-          type: string
-        requestId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-        time:
-          type: number
-        status:
-          $ref: '#/components/schemas/ResponseStatus'
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        error:
-          type: string
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-    ResponsePatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        path:
-          type: string
-        requestId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-        time:
-          type: number
-        status:
-          $ref: '#/components/schemas/ResponseStatus'
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        error:
-          type: string
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-    ResponseSearchRequestBody:
-      $ref: '#/components/schemas/ResponseSearch'
-    ResponseUpdate:
-      type: object
-      required:
-        - projectId
-        - payload
-        - payloadSize
-        - time
-        - status
-        - uuid
-        - path
-      properties:
-        path:
-          type: string
-        requestId:
-          $ref: '#/components/schemas/ObjectID'
-        projectId:
-          $ref: '#/components/schemas/ObjectID'
-        payload:
-          type: string
-        payloadSize:
-          type: number
-        time:
-          type: number
-        status:
-          $ref: '#/components/schemas/ResponseStatus'
-        uuid:
-          $ref: '#/components/schemas/Uuid'
-        error:
-          type: string
-        endpointId:
-          $ref: '#/components/schemas/ObjectID'
-    ResponseSearch:
-      allOf:
-        - $ref: '#/components/schemas/ResponsePaginationQuery'
-        - $ref: '#/components/schemas/ResponseConditionQuery'
-        - $ref: '#/components/schemas/ResponsePopulateRequestBody'
-        - $ref: '#/components/schemas/ResponseDistinctQuery'
-    ResponseConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        projectId:
-          $ref: '#/components/schemas/SearchStringCondition'
-        status:
-          $ref: '#/components/schemas/SearchStringCondition'
-        endpointId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    ResponseConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ResponseConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/ResponseConditionFields'
-    ResponsePaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/ResponsePagination'
-    ResponsePagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/ResponseSort'
-    ResponseSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        projectId:
-          $ref: '#/components/schemas/Sorting'
-        status:
-          $ref: '#/components/schemas/Sorting'
-        endpointId:
-          $ref: '#/components/schemas/Sorting'
-    ResponsePopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/ResponsePopulateFields'
-    ResponsePopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/ResponsePopulateField'
-    ResponsePopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/ResponsePopulateEnum'
-        match:
-          type: object
-    ResponsePopulateEnum:
-      type: string
-      enum:
-        - request
-        - project
-        - endpoint
-    ResponseDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResponseDistinctFields'
-    ResponseDistinctFields:
-      type: string
-      enum:
-        - projectId
-        - status
-        - endpointId
-    ResponseCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Response'
-    ResponseGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Response'
-    ResponseFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Response'
-    ResponseSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Response'
-    ResponsePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Response'
-    ResponseUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Response'
-    ResponseArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Response'
-    Response:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - requestId
-            - projectId
-            - payload
-            - payloadSize
-            - time
-            - status
-            - uuid
-            - endpointId
-            - path
-          properties:
-            path:
-              type: string
-            requestId:
-              $ref: '#/components/schemas/ObjectID'
-            projectId:
-              $ref: '#/components/schemas/ObjectID'
-            payload:
-              type: string
-            payloadSize:
-              type: number
-            time:
-              type: number
-            status:
-              $ref: '#/components/schemas/ResponseStatus'
-            uuid:
-              $ref: '#/components/schemas/Uuid'
-            error:
-              type: string
-            endpointId:
-              $ref: '#/components/schemas/ObjectID'
-            request:
-              $ref: '#/components/schemas/Request'
-            project:
-              $ref: '#/components/schemas/Project'
-            endpoint:
-              $ref: '#/components/schemas/Endpoint'
-    ResponseStatus:
-      type: number
-      enum:
-        - 100
-        - 101
-        - 102
-        - 200
-        - 201
-        - 202
-        - 203
-        - 204
-        - 205
-        - 206
-        - 207
-        - 208
-        - 226
-        - 300
-        - 301
-        - 302
-        - 303
-        - 304
-        - 305
-        - 306
-        - 307
-        - 308
-        - 400
-        - 401
-        - 402
-        - 403
-        - 404
-        - 405
-        - 406
-        - 407
-        - 408
-        - 409
-        - 410
-        - 411
-        - 412
-        - 413
-        - 414
-        - 415
-        - 416
-        - 417
-        - 418
-        - 421
-        - 422
-        - 423
-        - 424
-        - 426
-        - 428
-        - 429
-        - 431
-        - 451
-        - 500
-        - 501
-        - 502
-        - 503
-        - 504
-        - 505
-        - 506
-        - 507
-        - 508
-        - 510
-        - 511
-    UserCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
     UserCreate:
       type: object
       required:
         - email
         - password
-        - role
       properties:
         email:
           $ref: '#/components/schemas/Email'
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
         refreshTokens:
           type: array
           items:
@@ -3581,8 +1328,6 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: '#/components/schemas/UserRole'
     UserPatch:
       x-min-properties: 1
       type: object
@@ -3591,10 +1336,6 @@ components:
           $ref: '#/components/schemas/Email'
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
         refreshTokens:
           type: array
           items:
@@ -3616,8 +1357,6 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: '#/components/schemas/UserRole'
     UserSearchRequestBody:
       $ref: '#/components/schemas/UserSearch'
     UserUpdate:
@@ -3625,16 +1364,11 @@ components:
       required:
         - email
         - password
-        - role
       properties:
         email:
           $ref: '#/components/schemas/Email'
         password:
           type: string
-        projectIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
         refreshTokens:
           type: array
           items:
@@ -3663,13 +1397,10 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
-        role:
-          $ref: '#/components/schemas/UserRole'
     UserSearch:
       allOf:
         - $ref: '#/components/schemas/UserPaginationQuery'
         - $ref: '#/components/schemas/UserConditionQuery'
-        - $ref: '#/components/schemas/UserPopulateRequestBody'
     UserConditionFields:
       type: object
       x-min-properties: 1
@@ -3729,69 +1460,86 @@ components:
           $ref: '#/components/schemas/Sorting'
         refreshTokens.token:
           $ref: '#/components/schemas/Sorting'
-    UserPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/UserPopulateFields'
-    UserPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/UserPopulateField'
-    UserPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/UserPopulateEnum'
-        match:
-          type: object
-    UserPopulateEnum:
-      type: string
-      enum:
-        - projects
+    UserCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
     User:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
         - type: object
           required:
             - email
-            - role
+            - password
           properties:
             email:
               $ref: '#/components/schemas/Email'
             password:
               type: string
-            role:
-              $ref: '#/components/schemas/UserRole'
-            projectIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
             refreshTokens:
               type: array
               items:
                 $ref: '#/components/schemas/RefreshToken'
-            projects:
-              type: array
-              items:
-                $ref: '#/components/schemas/Project'
     JwtTokenPayload:
       type: object
       required:
         - userId
-        - role
       properties:
         userId:
           type: string
-        role:
-          $ref: '#/components/schemas/UserRole'
-    UserRole:
-      type: string
-      enum:
-        - admin
-        - member
     RefreshToken:
       type: object
       required:
@@ -3818,62 +1566,20 @@ components:
         exp:
           description: Expiration Time (timestamp in UTC)
           type: number
-    Province:
-      type: string
-      enum:
-        - Alberta
-        - BritishColumbia
-        - Manitoba
-        - NewBrunswick
-        - NewfoundlandAndLabrador
-        - NorthwestTerritories
-        - NovaScotia
-        - Nunavut
-        - Ontario
-        - PrinceEdwardIsland
-        - Quebec
-        - Saskatchewan
-        - Yukon
-    PaginationLimit:
-      type: number
-      minimum: -1
-      maximum: 2147483647
-      default: 10
-      format: int32
-    PaginationLimit1000:
-      type: number
-      minimum: 0
-      maximum: 1000
-      default: 10
-      format: int32
-    PaginationOffset:
-      type: number
-      minimum: 0
-      maximum: 2147483647
-      format: int32
-    PaginationPage:
-      type: number
-      minimum: 0
-      maximum: 2147483647
-      format: int32
-    Pagination:
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
       type: object
+      required:
+        - version
       properties:
-        limit:
-          $ref: '#/components/schemas/PaginationLimit'
-        offset:
-          $ref: '#/components/schemas/PaginationOffset'
-        page:
-          $ref: '#/components/schemas/PaginationPage'
-        sort:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Sorting'
-    Sorting:
-      type: string
-      enum:
-        - Ascending
-        - Descending
+        version:
+          type: string
     ManualString:
       type: object
       properties:
@@ -3994,6 +1700,160 @@ components:
       type: string
       enum:
         - Canada
+    PaginationLimit:
+      type: number
+      minimum: -1
+      maximum: 2147483647
+      default: 10
+      format: int32
+    PaginationLimit1000:
+      type: number
+      minimum: 0
+      maximum: 1000
+      default: 10
+      format: int32
+    PaginationOffset:
+      type: number
+      minimum: 0
+      maximum: 2147483647
+      format: int32
+    PaginationPage:
+      type: number
+      minimum: 0
+      maximum: 2147483647
+      format: int32
+    Pagination:
+      type: object
+      properties:
+        limit:
+          $ref: '#/components/schemas/PaginationLimit'
+        offset:
+          $ref: '#/components/schemas/PaginationOffset'
+        page:
+          $ref: '#/components/schemas/PaginationPage'
+        sort:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Sorting'
+    Sorting:
+      type: string
+      enum:
+        - Ascending
+        - Descending
+    Province:
+      type: string
+      enum:
+        - Alberta
+        - BritishColumbia
+        - Manitoba
+        - NewBrunswick
+        - NewfoundlandAndLabrador
+        - NorthwestTerritories
+        - NovaScotia
+        - Nunavut
+        - Ontario
+        - PrinceEdwardIsland
+        - Quebec
+        - Saskatchewan
+        - Yukon
+    SearchDateCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchDateOperation'
+    SearchNumberCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchNumberOperation'
+    SearchBooleanCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchBooleanOperation'
+    SearchStringCondition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchStringOperation'
+    SearchDateOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorAdvanced'
+        - type: object
+          required:
+            - values
+          properties:
+            values:
+              nullable: true
+              type: array
+              items:
+                type: string
+                format: date-time
+    SearchNumberOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorAdvanced'
+        - type: object
+          required:
+            - values
+          properties:
+            values:
+              nullable: true
+              type: array
+              items:
+                type: number
+    SearchBooleanOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorBasic'
+        - type: object
+          required:
+            - value
+          properties:
+            value:
+              nullable: true
+              type: boolean
+    SearchStringOperation:
+      allOf:
+        - $ref: '#/components/schemas/SearchOperatorBasic'
+        - type: object
+          required:
+            - values
+          properties:
+            isCaseSensitive:
+              type: boolean
+              default: false
+            isExactMatching:
+              type: boolean
+              default: false
+            isTranslatable:
+              type: boolean
+              default: false
+            values:
+              nullable: true
+              type: array
+              items:
+                type: string
+    SearchOperatorBasic:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/BasicOperator'
+    SearchOperatorAdvanced:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/AdvancedOperator'
+    BasicOperator:
+      type: string
+      default: Equal
+      enum:
+        - Equal
+        - Different
+    AdvancedOperator:
+      type: string
+      default: Equal
+      enum:
+        - Equal
+        - Different
+        - GreaterThan
+        - LesserThan
+        - GreaterThanEqual
+        - LesserThanEqual
     Percentage:
       type: number
       x-faker: datatype.number
@@ -4221,6 +2081,70 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SearchDateDistinct'
+    SearchNumberDistinctArr:
+      type: object
+      required:
+        - key
+        - count
+      properties:
+        key:
+          type: array
+          items:
+            type: number
+        count:
+          type: number
+    SearchStringDistinctArr:
+      type: object
+      required:
+        - key
+        - count
+      properties:
+        key:
+          type: array
+          items:
+            type: string
+        count:
+          type: number
+    SearchBooleanDistinctArr:
+      type: object
+      required:
+        - key
+        - count
+      properties:
+        key:
+          type: array
+          items:
+            type: boolean
+        count:
+          type: number
+    SearchDateDistinctArr:
+      type: object
+      required:
+        - key
+        - count
+      properties:
+        key:
+          type: array
+          items:
+            $ref: '#/components/schemas/DateTime'
+        count:
+          type: number
+    SearchNumberDistinctsArr:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchNumberDistinctArr'
+    SearchStringDistinctsArr:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchStringDistinctArr'
+    SearchBooleanDistinctsArr:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchBooleanDistinctArr'
+    SearchDateDistinctsArr:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchDateDistinctArr'
     ResultHandlerInterface:
       type: object
       description: >-
@@ -4235,104 +2159,6 @@ components:
           $ref: '#/components/schemas/ErrorData'
         pagination:
           $ref: '#/components/schemas/ResultHandlerPagination'
-    SearchDateCondition:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchDateOperation'
-    SearchNumberCondition:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchNumberOperation'
-    SearchBooleanCondition:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchBooleanOperation'
-    SearchStringCondition:
-      type: array
-      items:
-        $ref: '#/components/schemas/SearchStringOperation'
-    SearchDateOperation:
-      allOf:
-        - $ref: '#/components/schemas/SearchOperatorAdvanced'
-        - type: object
-          required:
-            - values
-          properties:
-            values:
-              nullable: true
-              type: array
-              items:
-                type: string
-                format: date-time
-    SearchNumberOperation:
-      allOf:
-        - $ref: '#/components/schemas/SearchOperatorAdvanced'
-        - type: object
-          required:
-            - values
-          properties:
-            values:
-              nullable: true
-              type: array
-              items:
-                type: number
-    SearchBooleanOperation:
-      allOf:
-        - $ref: '#/components/schemas/SearchOperatorBasic'
-        - type: object
-          required:
-            - value
-          properties:
-            value:
-              nullable: true
-              type: boolean
-    SearchStringOperation:
-      allOf:
-        - $ref: '#/components/schemas/SearchOperatorBasic'
-        - type: object
-          required:
-            - values
-          properties:
-            isCaseSensitive:
-              type: boolean
-              default: false
-            isExactMatching:
-              type: boolean
-              default: false
-            isTranslatable:
-              type: boolean
-              default: false
-            values:
-              nullable: true
-              type: array
-              items:
-                type: string
-    SearchOperatorBasic:
-      type: object
-      properties:
-        operator:
-          $ref: '#/components/schemas/BasicOperator'
-    SearchOperatorAdvanced:
-      type: object
-      properties:
-        operator:
-          $ref: '#/components/schemas/AdvancedOperator'
-    BasicOperator:
-      type: string
-      default: Equal
-      enum:
-        - Equal
-        - Different
-    AdvancedOperator:
-      type: string
-      default: Equal
-      enum:
-        - Equal
-        - Different
-        - GreaterThan
-        - LesserThan
-        - GreaterThanEqual
-        - LesserThanEqual
     ProtectedTranslatableText:
       type: object
       required:
@@ -4544,6 +2370,36 @@ components:
       type: string
       enum:
         - accessScopes
+    AccessModel:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - label
+            - accessScopeIds
+            - usage
+            - isAssignable
+          properties:
+            label:
+              $ref: '#/components/schemas/TranslatableText'
+            accessScopeIds:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectID'
+            usage:
+              $ref: '#/components/schemas/AccessModelUsage'
+            isAssignable:
+              type: boolean
+            accessScopes:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccessScope'
+    AccessModelUsage:
+      type: string
+      enum:
+        - User
+        - Dealer
+        - Both
     AccessModelCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -4601,36 +2457,6 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/AccessModel'
-    AccessModel:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - label
-            - accessScopeIds
-            - usage
-            - isAssignable
-          properties:
-            label:
-              $ref: '#/components/schemas/TranslatableText'
-            accessScopeIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
-            usage:
-              $ref: '#/components/schemas/AccessModelUsage'
-            isAssignable:
-              type: boolean
-            accessScopes:
-              type: array
-              items:
-                $ref: '#/components/schemas/AccessScope'
-    AccessModelUsage:
-      type: string
-      enum:
-        - User
-        - Dealer
-        - Both
     AccessScopeCreate:
       type: object
       required:
@@ -4843,6 +2669,63 @@ components:
               type: array
               items:
                 type: string
+    PropertyControlLinkCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/PropertyControlLink'
+    PropertyControlLinkArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/PropertyControlLink'
     PropertyControlLinkCreate:
       type: object
       required:
@@ -5029,63 +2912,6 @@ components:
       enum:
         - propertyControl
         - propertyControl_propertyControlOptions
-    PropertyControlLinkCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/PropertyControlLink'
     PropertyControlLink:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -5490,6 +3316,84 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/PropertyControlOption'
+    SecureLinkFindByTokenResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/SecureLink'
+    SecureLinkFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/SecureLink'
+    SecureLinkPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLink:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - source
+            - target
+          properties:
+            source:
+              type: string
+            target:
+              type: string
+            expirationDate:
+              $ref: '#/components/schemas/DateTime'
     SecureLinkCreate:
       type: object
       required:
@@ -5581,98 +3485,6 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
-    SecureLinkFindByTokenResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/SecureLink'
-    SecureLinkFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/SecureLink'
-    SecureLinkPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLink:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - source
-            - target
-          properties:
-            source:
-              type: string
-            target:
-              type: string
-            expirationDate:
-              $ref: '#/components/schemas/DateTime'
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
   responses:
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
@@ -5686,216 +3498,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RefreshResponse'
-    EndpointCreateResponse:
-      description: Returns a Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointCreateResponse'
-    EndpointGetAllResponse:
-      description: Returns an array of Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointGetAllResponse'
-    EndpointFindByIdResponse:
-      description: Returns a Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointFindByIdResponse'
-    EndpointSearchResponse:
-      description: Returns a paginated array of Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointSearchResponse'
-    EndpointPatchResponse:
-      description: Returns a modified Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointPatchResponse'
-    EndpointUpdateResponse:
-      description: Returns an updated Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointUpdateResponse'
-    EndpointArchiveResponse:
-      description: Returns a ResultHandler with the archived Endpoint
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointArchiveResponse'
-    ModuleCreateResponse:
-      description: Returns a Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleCreateResponse'
-    ModuleGetAllResponse:
-      description: Returns an array of Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleGetAllResponse'
-    ModuleFindByIdResponse:
-      description: Returns a Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleFindByIdResponse'
-    ModuleSearchResponse:
-      description: Returns a paginated array of Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleSearchResponse'
-    ModulePatchResponse:
-      description: Returns a modified Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModulePatchResponse'
-    ModuleUpdateResponse:
-      description: Returns an updated Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleUpdateResponse'
-    ModuleArchiveResponse:
-      description: Returns a ResultHandler with the archived Module
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleArchiveResponse'
-    ProjectCreateResponse:
-      description: Returns a Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectCreateResponse'
-    ProjectGetAllResponse:
-      description: Returns an array of Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectGetAllResponse'
-    ProjectFindByIdResponse:
-      description: Returns a Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectFindByIdResponse'
-    ProjectSearchResponse:
-      description: Returns a paginated array of Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectSearchResponse'
-    ProjectPatchResponse:
-      description: Returns a modified Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectPatchResponse'
-    ProjectUpdateResponse:
-      description: Returns an updated Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectUpdateResponse'
-    ProjectArchiveResponse:
-      description: Returns a ResultHandler with the archived Project
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectArchiveResponse'
-    RequestCreateResponse:
-      description: Returns a Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestCreateResponse'
-    RequestGetAllResponse:
-      description: Returns an array of Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestGetAllResponse'
-    RequestFindByIdResponse:
-      description: Returns a Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestFindByIdResponse'
-    RequestSearchResponse:
-      description: Returns a paginated array of Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestSearchResponse'
-    RequestPatchResponse:
-      description: Returns a modified Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestPatchResponse'
-    RequestUpdateResponse:
-      description: Returns an updated Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestUpdateResponse'
-    RequestArchiveResponse:
-      description: Returns a ResultHandler with the archived Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestArchiveResponse'
-    ResponseCreateResponse:
-      description: Returns a Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseCreateResponse'
-    ResponseGetAllResponse:
-      description: Returns an array of Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseGetAllResponse'
-    ResponseFindByIdResponse:
-      description: Returns a Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseFindByIdResponse'
-    ResponseSearchResponse:
-      description: Returns a paginated array of Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseSearchResponse'
-    ResponsePatchResponse:
-      description: Returns a modified Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponsePatchResponse'
-    ResponseUpdateResponse:
-      description: Returns an updated Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseUpdateResponse'
-    ResponseArchiveResponse:
-      description: Returns a ResultHandler with the archived Response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseArchiveResponse'
     UserCreateResponse:
       description: Returns a User
       content:
@@ -5938,6 +3540,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserArchiveResponse'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     SuccessResultResponse:
       description: Successful request (no content)
       content:
@@ -6202,12 +3810,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SecureLinkArchiveResponse'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
   requestBodies:
     LoginRequestBody:
       description: Body needed to login
@@ -6223,179 +3825,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RefreshTokenRequestBody'
-    EndpointCreateRequestBody:
-      description: Body needed to create a Endpoint
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointCreate'
-    EndpointSearchRequestBody:
-      description: Body needed to search Endpoints
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointSearchRequestBody'
-    EndpointPatchRequestBody:
-      description: Body needed to modify a Endpoint
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointPatch'
-    EndpointUpdateRequestBody:
-      description: Body needed to update a Endpoint
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointUpdate'
-    EndpointPopulateRequestBody:
-      description: Body needed populate fields in Endpoint
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EndpointPopulateRequestBody'
-    ModuleCreateRequestBody:
-      description: Body needed to create a Module
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleCreate'
-    ModuleSearchRequestBody:
-      description: Body needed to search Modules
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleSearchRequestBody'
-    ModulePatchRequestBody:
-      description: Body needed to modify a Module
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModulePatch'
-    ModuleUpdateRequestBody:
-      description: Body needed to update a Module
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModuleUpdate'
-    ModulePopulateRequestBody:
-      description: Body needed populate fields in Module
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ModulePopulateRequestBody'
-    ProjectCreateRequestBody:
-      description: Body needed to create a Project
-      required: true
-      content:
-        multipart/form-data:
-          schema:
-            type: object
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectCreate'
-    ProjectSearchRequestBody:
-      description: Body needed to search Projects
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectSearchRequestBody'
-    ProjectPatchRequestBody:
-      description: Body needed to modify a Project
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectPatch'
-    ProjectUpdateRequestBody:
-      description: Body needed to update a Project
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectUpdate'
-    ProjectPopulateRequestBody:
-      description: Body needed populate fields in Project
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProjectPopulateRequestBody'
-    RequestCreateRequestBody:
-      description: Body needed to create a Request
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestCreate'
-    RequestSearchRequestBody:
-      description: Body needed to search Requests
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestSearchRequestBody'
-    RequestPatchRequestBody:
-      description: Body needed to modify a Request
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestPatch'
-    RequestUpdateRequestBody:
-      description: Body needed to update a Request
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestUpdate'
-    RequestPopulateRequestBody:
-      description: Body needed populate fields in Request
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RequestPopulateRequestBody'
-    ResponseCreateRequestBody:
-      description: Body needed to create a Response
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseCreate'
-    ResponseSearchRequestBody:
-      description: Body needed to search Responses
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseSearchRequestBody'
-    ResponsePatchRequestBody:
-      description: Body needed to modify a Response
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponsePatch'
-    ResponseUpdateRequestBody:
-      description: Body needed to update a Response
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponseUpdate'
-    ResponsePopulateRequestBody:
-      description: Body needed populate fields in Response
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ResponsePopulateRequestBody'
     UserCreateRequestBody:
       description: Body needed to create a User
       required: true
@@ -6423,13 +3852,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserUpdate'
-    UserPopulateRequestBody:
-      description: Body needed populate fields in User
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserPopulateRequestBody'
     AccessModelCreateRequestBody:
       description: Body needed to create a AccessModel
       required: true
@@ -6587,111 +4009,6 @@ components:
           schema:
             $ref: '#/components/schemas/PropertyControlPopulateRequestBody'
   parameters:
-    EndpointId:
-      name: id
-      description: Endpoint's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsEndpointDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsEndpointArchived:
-      name: isArchived
-      description: Get archived Endpoint
-      in: query
-      required: false
-      schema:
-        type: boolean
-    ModuleId:
-      name: id
-      description: Module's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsModuleDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsModuleArchived:
-      name: isArchived
-      description: Get archived Module
-      in: query
-      required: false
-      schema:
-        type: boolean
-    ProjectId:
-      name: id
-      description: Project's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsProjectDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsProjectArchived:
-      name: isArchived
-      description: Get archived Project
-      in: query
-      required: false
-      schema:
-        type: boolean
-    RequestId:
-      name: id
-      description: Request's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsRequestDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsRequestArchived:
-      name: isArchived
-      description: Get archived Request
-      in: query
-      required: false
-      schema:
-        type: boolean
-    ResponseId:
-      name: id
-      description: Response's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsResponseDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsResponseArchived:
-      name: isArchived
-      description: Get archived Response
-      in: query
-      required: false
-      schema:
-        type: boolean
     UserId:
       name: id
       description: User's Id
