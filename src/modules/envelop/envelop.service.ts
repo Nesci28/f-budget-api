@@ -1,4 +1,3 @@
-import { Injectable } from "@nestjs/common";
 import {
   Envelop,
   EnvelopCreate,
@@ -7,6 +6,7 @@ import {
   EnvelopSearch,
   EnvelopUpdate,
 } from "@f-budget/f-budget-api-typescript-fetch";
+import { Injectable } from "@nestjs/common";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
 
@@ -15,9 +15,7 @@ import { EnvelopRepository } from "./envelop.repository";
 
 @Injectable()
 export class EnvelopService {
-  constructor(
-    private readonly envelopRepository: EnvelopRepository,
-  ) {}
+  constructor(private readonly envelopRepository: EnvelopRepository) {}
 
   public async create(
     envelop: EnvelopCreate,
@@ -27,16 +25,14 @@ export class EnvelopService {
     return res;
   }
 
-  public async createMany(
-    envelopBulk: EnvelopCreate[],
-  ): Promise<Envelop[]> {
+  public async createMany(envelopBulk: EnvelopCreate[]): Promise<Envelop[]> {
     const res = await this.envelopRepository.createMany(envelopBulk);
     return res;
   }
 
   public async search(
     searchParams: EnvelopSearch,
-  ): Promise<YestPaginateResult<Envelop>> {
+  ): Promise<YestPaginateResult<Envelop, never>> {
     const res = await this.envelopRepository.search(searchParams);
     return res;
   }
@@ -72,7 +68,11 @@ export class EnvelopService {
     isDryRun?: boolean,
   ): Promise<Envelop> {
     await this.checkIfAlreadyArchived(envelopId);
-    const res = await this.envelopRepository.update(envelopId, envelop, isDryRun);
+    const res = await this.envelopRepository.update(
+      envelopId,
+      envelop,
+      isDryRun,
+    );
     return res;
   }
 

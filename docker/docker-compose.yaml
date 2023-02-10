@@ -17,8 +17,6 @@ services:
       - ./.npmrc:/home/node/.npmrc
       - ../:/home/node/app
       - ~/.ssh/:/home/node/.ssh/
-    environment:
-      TZ: "America/Toronto"
     depends_on:
       f-budget-mongo:
         condition: service_healthy

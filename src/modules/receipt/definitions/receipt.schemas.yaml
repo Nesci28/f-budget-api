@@ -9,6 +9,7 @@ components:
             - envelopId
             - date
             - amount
+            - isFromRenew
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -30,6 +31,8 @@ components:
               type: number
             envelopBalanceTotal:
               type: number
+            isFromRenew:
+              type: boolean
             user:
               $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
             envelop:

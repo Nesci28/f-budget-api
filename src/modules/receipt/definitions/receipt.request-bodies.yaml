@@ -42,6 +42,7 @@ components:
         - envelopId
         - date
         - amount
+        - isFromRenew
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -63,6 +64,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptPatch:
       x-min-properties: 1
       type: object
@@ -87,6 +90,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptSearchRequestBody:
       $ref: "#/components/schemas/ReceiptSearch"
     ReceiptUpdate:
@@ -96,6 +101,7 @@ components:
         - envelopId
         - date
         - amount
+        - isFromRenew
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -117,6 +123,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptSearch:
       allOf:
         - $ref: "#/components/schemas/ReceiptPaginationQuery"

@@ -43,6 +43,7 @@ components:
         - amount
         - date
         - isBusinessDay
+        - description
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -54,6 +55,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewPatch:
       x-min-properties: 1
       type: object
@@ -68,6 +71,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewSearchRequestBody:
       $ref: "#/components/schemas/RenewSearch"
     RenewUpdate:
@@ -78,6 +83,7 @@ components:
         - amount
         - date
         - isBusinessDay
+        - description
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -89,6 +95,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewSearch:
       allOf:
         - $ref: "#/components/schemas/RenewPaginationQuery"

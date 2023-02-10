@@ -10,6 +10,7 @@ components:
             - amount
             - date
             - isBusinessDay
+            - description
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -21,6 +22,8 @@ components:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
             isBusinessDay:
               type: boolean
+            description:
+              type: string
             user:
               $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
             envelop:

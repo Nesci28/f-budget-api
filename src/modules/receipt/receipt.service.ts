@@ -48,12 +48,25 @@ export class ReceiptService {
     const diff =
       type === EnvelopType.Income ? Math.abs(amount) : Math.abs(amount) * -1;
 
-    await Promise.all([
+    const [envelopPatched, balancePatched] = await Promise.all([
       this.envelopPatch(envelop, diff),
       this.balancePatch(userId, diff),
     ]);
 
-    return res;
+    const {
+      balanceMonth: envelopBalanceMonth,
+      balanceTotal: envelopBalanceTotal,
+    } = envelopPatched;
+    const { balanceMonth, balanceTotal } = balancePatched;
+    const receiptPatch: ReceiptPatch = {
+      envelopBalanceMonth,
+      envelopBalanceTotal,
+      balanceMonth,
+      balanceTotal,
+    };
+    const receiptPatched = await this.patch(res.id, receiptPatch);
+
+    return receiptPatched;
   }
 
   public async createMany(receiptBulk: ReceiptCreate[]): Promise<Receipt[]> {
@@ -99,12 +112,29 @@ export class ReceiptService {
     if (amount !== undefined) {
       const diff = oldAmount - amount;
       if (diff) {
-        const envelop = await this.envelopService.getById(envelopId);
+        const [envelop, balance] = await Promise.all([
+          this.envelopService.getById(envelopId),
+          this.getBalanceByUserId(userId),
+        ]);
 
         await Promise.all([
           this.envelopPatch(envelop, diff),
           this.balancePatch(userId, diff),
         ]);
+
+        const {
+          balanceMonth: envelopBalanceMonth,
+          balanceTotal: envelopBalanceTotal,
+        } = envelop;
+        const { balanceMonth, balanceTotal } = balance;
+        // eslint-disable-next-line no-param-reassign
+        receipt.envelopBalanceMonth = (envelopBalanceMonth || 0) + diff;
+        // eslint-disable-next-line no-param-reassign
+        receipt.envelopBalanceTotal = (envelopBalanceTotal || 0) + diff;
+        // eslint-disable-next-line no-param-reassign
+        receipt.balanceMonth = (balanceMonth || 0) + diff;
+        // eslint-disable-next-line no-param-reassign
+        receipt.balanceTotal = (balanceTotal || 0) + diff;
       }
     }
 
@@ -124,12 +154,29 @@ export class ReceiptService {
 
     const diff = oldAmount - amount;
     if (diff) {
-      const envelop = await this.envelopService.getById(envelopId);
+      const [envelop, balance] = await Promise.all([
+        this.envelopService.getById(envelopId),
+        this.getBalanceByUserId(userId),
+      ]);
 
       await Promise.all([
         this.envelopPatch(envelop, diff),
         this.balancePatch(userId, diff),
       ]);
+
+      const {
+        balanceMonth: envelopBalanceMonth,
+        balanceTotal: envelopBalanceTotal,
+      } = envelop;
+      const { balanceMonth, balanceTotal } = balance;
+      // eslint-disable-next-line no-param-reassign
+      receipt.envelopBalanceMonth = (envelopBalanceMonth || 0) + diff;
+      // eslint-disable-next-line no-param-reassign
+      receipt.envelopBalanceTotal = (envelopBalanceTotal || 0) + diff;
+      // eslint-disable-next-line no-param-reassign
+      receipt.balanceMonth = (balanceMonth || 0) + diff;
+      // eslint-disable-next-line no-param-reassign
+      receipt.balanceTotal = (balanceTotal || 0) + diff;
     }
 
     const res = await this.receiptRepository.update(
@@ -187,6 +234,21 @@ export class ReceiptService {
   }
 
   private async balancePatch(userId: string, amount: number): Promise<Balance> {
+    const balance = await this.getBalanceByUserId(userId);
+    const { balanceMonth, balanceTotal, id: balanceId } = balance;
+    const balancePatch: BalancePatch = {
+      balanceMonth: (balanceMonth || 0) + amount,
+      balanceTotal: (balanceTotal || 0) + amount,
+    };
+    const balancePatched = await this.balanceService.patch(
+      balanceId,
+      balancePatch,
+    );
+
+    return balancePatched;
+  }
+
+  private async getBalanceByUserId(userId: string): Promise<Balance> {
     const balanceSearch: BalanceSearch = {
       pagination: {
         limit: 1,
@@ -212,16 +274,7 @@ export class ReceiptService {
       throw new ResultHandlerException(ReceiptErrors.balanceError);
     }
     const [balance] = balanceSearchApi.value;
-    const { balanceMonth, balanceTotal, id: balanceId } = balance;
-    const balancePatch: BalancePatch = {
-      balanceMonth: (balanceMonth || 0) + amount,
-      balanceTotal: (balanceTotal || 0) + amount,
-    };
-    const balancePatched = await this.balanceService.patch(
-      balanceId,
-      balancePatch,
-    );
 
-    return balancePatched;
+    return balance;
   }
 }

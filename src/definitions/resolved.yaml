@@ -1108,26 +1108,6 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /healthcheck:
-    get:
-      tags:
-        - Healthcheck
-      operationId: getHealthcheck
-      summary: Healthcheck
-      description: Returns a ResultHandler with the version number of the current build
-      responses:
-        '200':
-          $ref: '#/components/responses/HealthcheckResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '406':
-          $ref: '#/components/responses/NotAcceptableResultResponse'
   /access-scope:
     post:
       tags:
@@ -2070,6 +2050,26 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
+  /healthcheck:
+    get:
+      tags:
+        - Healthcheck
+      operationId: getHealthcheck
+      summary: Healthcheck
+      description: Returns a ResultHandler with the version number of the current build
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthcheckResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResultResponse'
 components:
   securitySchemes:
     admin:
@@ -2370,173 +2370,6 @@ components:
       properties:
         userId:
           $ref: '#/components/schemas/SearchStringDistincts'
-    Balance:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - userId
-          properties:
-            userId:
-              $ref: '#/components/schemas/ObjectID'
-            balanceMonth:
-              default: 0
-              type: number
-            balanceTotal:
-              default: 0
-              type: number
-            user:
-              $ref: '#/components/schemas/User'
-    EnvelopCreate:
-      type: object
-      required:
-        - userId
-        - type
-        - budget
-      properties:
-        userId:
-          $ref: '#/components/schemas/ObjectID'
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        type:
-          $ref: '#/components/schemas/EnvelopType'
-    EnvelopPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/ObjectID'
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        type:
-          $ref: '#/components/schemas/EnvelopType'
-    EnvelopSearchRequestBody:
-      $ref: '#/components/schemas/EnvelopSearch'
-    EnvelopUpdate:
-      type: object
-      required:
-        - userId
-        - type
-        - budget
-      properties:
-        userId:
-          $ref: '#/components/schemas/ObjectID'
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        type:
-          $ref: '#/components/schemas/EnvelopType'
-    EnvelopSearch:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopPaginationQuery'
-        - $ref: '#/components/schemas/EnvelopConditionQuery'
-        - $ref: '#/components/schemas/EnvelopPopulateRequestBody'
-        - $ref: '#/components/schemas/EnvelopDistinctQuery'
-    EnvelopConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        userId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    EnvelopConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EnvelopConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EnvelopConditionFields'
-    EnvelopPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/EnvelopPagination'
-    EnvelopPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/EnvelopSort'
-    EnvelopSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        userId:
-          $ref: '#/components/schemas/Sorting'
-    EnvelopPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/EnvelopPopulateFields'
-    EnvelopPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/EnvelopPopulateField'
-    EnvelopPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/EnvelopPopulateEnum'
-        match:
-          type: object
-    EnvelopPopulateEnum:
-      type: string
-      enum:
-        - user
-    EnvelopDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvelopDistinctFields'
-    EnvelopDistinctFields:
-      type: string
-      enum:
-        - userId
     EnvelopCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2631,6 +2464,23 @@ components:
       enum:
         - Income
         - Outcome
+    Balance:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            balanceMonth:
+              default: 0
+              type: number
+            balanceTotal:
+              default: 0
+              type: number
+            user:
+              $ref: '#/components/schemas/User'
     ReceiptCreate:
       type: object
       required:
@@ -2638,6 +2488,7 @@ components:
         - envelopId
         - date
         - amount
+        - isFromRenew
       properties:
         userId:
           $ref: '#/components/schemas/ObjectID'
@@ -2659,6 +2510,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptPatch:
       x-min-properties: 1
       type: object
@@ -2683,6 +2536,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptSearchRequestBody:
       $ref: '#/components/schemas/ReceiptSearch'
     ReceiptUpdate:
@@ -2692,6 +2547,7 @@ components:
         - envelopId
         - date
         - amount
+        - isFromRenew
       properties:
         userId:
           $ref: '#/components/schemas/ObjectID'
@@ -2713,6 +2569,8 @@ components:
           type: number
         envelopBalanceTotal:
           type: number
+        isFromRenew:
+          type: boolean
     ReceiptSearch:
       allOf:
         - $ref: '#/components/schemas/ReceiptPaginationQuery'
@@ -2890,6 +2748,7 @@ components:
             - envelopId
             - date
             - amount
+            - isFromRenew
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
@@ -2911,10 +2770,162 @@ components:
               type: number
             envelopBalanceTotal:
               type: number
+            isFromRenew:
+              type: boolean
             user:
               $ref: '#/components/schemas/User'
             envelop:
               $ref: '#/components/schemas/Envelop'
+    EnvelopCreate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        userId:
+          $ref: '#/components/schemas/ObjectID'
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: '#/components/schemas/EnvelopType'
+    EnvelopPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/ObjectID'
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: '#/components/schemas/EnvelopType'
+    EnvelopSearchRequestBody:
+      $ref: '#/components/schemas/EnvelopSearch'
+    EnvelopUpdate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        userId:
+          $ref: '#/components/schemas/ObjectID'
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: '#/components/schemas/EnvelopType'
+    EnvelopSearch:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopPaginationQuery'
+        - $ref: '#/components/schemas/EnvelopConditionQuery'
+        - $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+        - $ref: '#/components/schemas/EnvelopDistinctQuery'
+    EnvelopConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    EnvelopConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+    EnvelopPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/EnvelopPagination'
+    EnvelopPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/EnvelopSort'
+    EnvelopSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    EnvelopPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/EnvelopPopulateFields'
+    EnvelopPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvelopPopulateField'
+    EnvelopPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/EnvelopPopulateEnum'
+        match:
+          type: object
+    EnvelopPopulateEnum:
+      type: string
+      enum:
+        - user
+    EnvelopDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvelopDistinctFields'
+    EnvelopDistinctFields:
+      type: string
+      enum:
+        - userId
     RenewCreate:
       type: object
       required:
@@ -2923,6 +2934,7 @@ components:
         - amount
         - date
         - isBusinessDay
+        - description
       properties:
         userId:
           $ref: '#/components/schemas/ObjectID'
@@ -2934,6 +2946,8 @@ components:
           $ref: '#/components/schemas/DateTime'
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewPatch:
       x-min-properties: 1
       type: object
@@ -2948,6 +2962,8 @@ components:
           $ref: '#/components/schemas/DateTime'
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewSearchRequestBody:
       $ref: '#/components/schemas/RenewSearch'
     RenewUpdate:
@@ -2958,6 +2974,7 @@ components:
         - amount
         - date
         - isBusinessDay
+        - description
       properties:
         userId:
           $ref: '#/components/schemas/ObjectID'
@@ -2969,6 +2986,8 @@ components:
           $ref: '#/components/schemas/DateTime'
         isBusinessDay:
           type: boolean
+        description:
+          type: string
     RenewSearch:
       allOf:
         - $ref: '#/components/schemas/RenewPaginationQuery'
@@ -3152,6 +3171,7 @@ components:
             - amount
             - date
             - isBusinessDay
+            - description
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
@@ -3163,6 +3183,8 @@ components:
               $ref: '#/components/schemas/DateTime'
             isBusinessDay:
               type: boolean
+            description:
+              type: string
             user:
               $ref: '#/components/schemas/User'
             envelop:
@@ -4291,20 +4313,6 @@ components:
           type: array
           items:
             type: string
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
     AccessModelCreate:
       type: object
       required:
@@ -5566,6 +5574,20 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
   responses:
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
@@ -5873,12 +5895,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
     AccessModelCreateResponse:
       description: Returns a AccessModel
       content:
@@ -6101,6 +6117,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SecureLinkArchiveResponse'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
   requestBodies:
     LoginRequestBody:
       description: Body needed to login
@@ -6150,40 +6172,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BalancePopulateRequestBody'
-    EnvelopCreateRequestBody:
-      description: Body needed to create a Envelop
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnvelopCreate'
-    EnvelopSearchRequestBody:
-      description: Body needed to search Envelops
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnvelopSearchRequestBody'
-    EnvelopPatchRequestBody:
-      description: Body needed to modify a Envelop
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnvelopPatch'
-    EnvelopUpdateRequestBody:
-      description: Body needed to update a Envelop
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnvelopUpdate'
-    EnvelopPopulateRequestBody:
-      description: Body needed populate fields in Envelop
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/EnvelopPopulateRequestBody'
     ReceiptCreateRequestBody:
       description: Body needed to create a Receipt
       required: true
@@ -6218,6 +6206,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ReceiptPopulateRequestBody'
+    EnvelopCreateRequestBody:
+      description: Body needed to create a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopCreate'
+    EnvelopSearchRequestBody:
+      description: Body needed to search Envelops
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopSearchRequestBody'
+    EnvelopPatchRequestBody:
+      description: Body needed to modify a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopPatch'
+    EnvelopUpdateRequestBody:
+      description: Body needed to update a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopUpdate'
+    EnvelopPopulateRequestBody:
+      description: Body needed populate fields in Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopPopulateRequestBody'
     RenewCreateRequestBody:
       description: Body needed to create a Renew
       required: true

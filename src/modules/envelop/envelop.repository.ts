@@ -1,14 +1,14 @@
-
-import { Injectable, Logger } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
 import {
   Envelop,
   EnvelopCreate,
-  EnvelopPatch,EnvelopPopulateField,
+  EnvelopPatch,
+  EnvelopPopulateField,
   EnvelopSearch,
   EnvelopUpdate,
 } from "@f-budget/f-budget-api-typescript-fetch";
-import { BaseRepository, Projection, PropertyControlOptionRepository, YestPaginateResult } from "@yest/mongoose";
+import { Injectable, Logger } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { BaseRepository, Projection, YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
 import { Model } from "mongoose";
 
@@ -68,7 +68,7 @@ export class EnvelopRepository extends BaseRepository<EnvelopModels> {
   public async search(
     searchParams: EnvelopSearch,
     projection?: Projection,
-  ): Promise<YestPaginateResult<Envelop>> {
+  ): Promise<YestPaginateResult<Envelop, never>> {
     try {
       const res = await super.search(searchParams, projection);
       return res;
@@ -107,10 +107,7 @@ export class EnvelopRepository extends BaseRepository<EnvelopModels> {
     }
   }
 
-  public async patch(
-    modelId: string,
-    model: EnvelopPatch,
-  ): Promise<Envelop> {
+  public async patch(modelId: string, model: EnvelopPatch): Promise<Envelop> {
     try {
       const res = await super.patch(modelId, model);
       return res;

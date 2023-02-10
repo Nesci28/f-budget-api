@@ -39,7 +39,11 @@ export class DateUtil {
     return time;
   }
 
-  public static isBusinessDay(date: Date): boolean {}
+  public static isBusinessDay(date: Date): boolean {
+    const now = moment(date).day();
+    const isBusinessDay = now === 0 || now === 6;
+    return isBusinessDay;
+  }
 
   public static listOfDates(dateStart: Date, dateEnd: Date): Date[] {
     const dateStartMoment = moment(dateStart).startOf("day");

@@ -55,6 +55,12 @@ export class MongoRenew extends MongoBase implements Renew {
   })
   public isBusinessDay: boolean;
 
+  @Prop({
+    type: String,
+    required: true,
+  })
+  public description: string;
+
   public user?: User;
 
   public envelop?: Envelop;
