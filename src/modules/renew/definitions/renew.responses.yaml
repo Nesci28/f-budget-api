@@ -1,0 +1,113 @@
+components:
+  responses:
+    RenewCreateResponse:
+      description: Returns a Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewCreateResponse"
+    RenewGetAllResponse:
+      description: Returns an array of Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewGetAllResponse"
+    RenewFindByIdResponse:
+      description: Returns a Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewFindByIdResponse"
+    RenewSearchResponse:
+      description: Returns a paginated array of Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewSearchResponse"
+    RenewPatchResponse:
+      description: Returns a modified Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewPatchResponse"
+    RenewUpdateResponse:
+      description: Returns an updated Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewUpdateResponse"
+    RenewArchiveResponse:
+      description: Returns a ResultHandler with the archived Renew
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewArchiveResponse"
+  schemas:
+    RenewCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./renew.schemas.yaml#/components/schemas/Renew
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/RenewSearchDistincts"
+    RenewPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./renew.schemas.yaml#/components/schemas/Renew
+    RenewSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts

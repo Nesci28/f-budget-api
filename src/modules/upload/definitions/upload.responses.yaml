@@ -1,0 +1,111 @@
+components:
+  responses:
+    UploadCreateResponse:
+      description: Returns a Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadCreateResponse"
+    UploadGetAllResponse:
+      description: Returns an array of Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadGetAllResponse"
+    UploadFindByIdResponse:
+      description: Returns a Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadFindByIdResponse"
+    UploadSearchResponse:
+      description: Returns a paginated array of Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadSearchResponse"
+    UploadPatchResponse:
+      description: Returns a modified Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadPatchResponse"
+    UploadUpdateResponse:
+      description: Returns an updated Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadUpdateResponse"
+    UploadArchiveResponse:
+      description: Returns a ResultHandler with the archived Upload
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadArchiveResponse"
+  schemas:
+    UploadCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./upload.schemas.yaml#/components/schemas/Upload
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/UploadSearchDistincts"
+    UploadPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./upload.schemas.yaml#/components/schemas/Upload
+    UploadSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts

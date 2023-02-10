@@ -1,0 +1,177 @@
+paths:
+  /upload:
+    post:
+      tags:
+        - Upload
+      operationId: uploadCreate
+      summary: Creates a new Upload
+      description: Creates a new Upload
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadCreateRequestBody"
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadDryRun"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /upload-all:
+    post:
+      tags:
+        - Upload
+      operationId: uploadGetAll
+      summary: Get all Upload
+      description: Get all Upload
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadArchived"
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /upload-search:
+    post:
+      tags:
+        - Upload
+      operationId: uploadSearch
+      summary: Search Upload
+      description: Search Upload
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadSearchRequestBody"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /upload/{id}:
+    post:
+      tags:
+        - Upload
+      operationId: uploadGetById
+      summary: Get by Id a Upload
+      description: Get by Id a Upload
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Upload
+      operationId: uploadPatch
+      summary: Patch a Upload
+      description: Patch a Upload
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPatchRequestBody"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Upload
+      operationId: uploadUpdate
+      summary: Update a Upload
+      description: Update a Upload
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Upload
+      operationId: uploadArchive
+      summary: Archive a Upload
+      description: Archive a Upload
+      parameters:
+        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./upload.responses.yaml#/components/responses/UploadArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

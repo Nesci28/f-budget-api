@@ -1,0 +1,23 @@
+components:
+  parameters:
+    EnvelopId:
+      name: id
+      description: Envelop's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsEnvelopDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsEnvelopArchived:
+      name: isArchived
+      description: Get archived Envelop
+      in: query
+      required: false
+      schema:
+        type: boolean

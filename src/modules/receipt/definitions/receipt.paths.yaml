@@ -1,0 +1,177 @@
+paths:
+  /receipt:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptCreate
+      summary: Creates a new Receipt
+      description: Creates a new Receipt
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptCreateRequestBody"
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/IsReceiptDryRun"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /receipt-all:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptGetAll
+      summary: Get all Receipt
+      description: Get all Receipt
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/IsReceiptArchived"
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /receipt-search:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptSearch
+      summary: Search Receipt
+      description: Search Receipt
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptSearchRequestBody"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /receipt/{id}:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptGetById
+      summary: Get by Id a Receipt
+      description: Get by Id a Receipt
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/ReceiptId"
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Receipt
+      operationId: receiptPatch
+      summary: Patch a Receipt
+      description: Patch a Receipt
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/ReceiptId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptPatchRequestBody"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Receipt
+      operationId: receiptUpdate
+      summary: Update a Receipt
+      description: Update a Receipt
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/ReceiptId"
+        - $ref: "./receipt.parameters.yaml#/components/parameters/IsReceiptDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./receipt.request-bodies.yaml#/components/requestBodies/ReceiptUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Receipt
+      operationId: receiptArchive
+      summary: Archive a Receipt
+      description: Archive a Receipt
+      parameters:
+        - $ref: "./receipt.parameters.yaml#/components/parameters/ReceiptId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./receipt.responses.yaml#/components/responses/ReceiptArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

@@ -1,0 +1,196 @@
+components:
+  requestBodies:
+    RenewCreateRequestBody:
+      description: Body needed to create a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewCreate"
+    RenewSearchRequestBody:
+      description: Body needed to search Renews
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewSearchRequestBody"
+    RenewPatchRequestBody:
+      description: Body needed to modify a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewPatch"
+    RenewUpdateRequestBody:
+      description: Body needed to update a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewUpdate"
+    RenewPopulateRequestBody:
+      description: Body needed populate fields in Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RenewPopulateRequestBody"
+  schemas:
+    RenewCreate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - amount
+        - date
+        - isBusinessDay
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        amount:
+          type: number
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        isBusinessDay:
+          type: boolean
+    RenewPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        amount:
+          type: number
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        isBusinessDay:
+          type: boolean
+    RenewSearchRequestBody:
+      $ref: "#/components/schemas/RenewSearch"
+    RenewUpdate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - amount
+        - date
+        - isBusinessDay
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        amount:
+          type: number
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        isBusinessDay:
+          type: boolean
+    RenewSearch:
+      allOf:
+        - $ref: "#/components/schemas/RenewPaginationQuery"
+        - $ref: "#/components/schemas/RenewConditionQuery"
+        - $ref: "#/components/schemas/RenewPopulateRequestBody"
+        - $ref: "#/components/schemas/RenewDistinctQuery"
+    RenewConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+    RenewConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/RenewConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/RenewConditionFields"
+    RenewPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/RenewPagination"
+    RenewPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/RenewSort"
+    RenewSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    RenewPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/RenewPopulateFields"
+    RenewPopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/RenewPopulateField"
+    RenewPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/RenewPopulateEnum"
+        match:
+          type: object
+    RenewPopulateEnum:
+      type: string
+      enum:
+        - user
+        - envelop
+    RenewDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/RenewDistinctFields"
+    RenewDistinctFields:
+      type: string
+      enum:
+        - userId
+        - envelopId
+        - date

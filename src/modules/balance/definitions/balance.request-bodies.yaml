@@ -1,0 +1,171 @@
+components:
+  requestBodies:
+    BalanceCreateRequestBody:
+      description: Body needed to create a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceCreate"
+    BalanceSearchRequestBody:
+      description: Body needed to search Balances
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceSearchRequestBody"
+    BalancePatchRequestBody:
+      description: Body needed to modify a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalancePatch"
+    BalanceUpdateRequestBody:
+      description: Body needed to update a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceUpdate"
+    BalancePopulateRequestBody:
+      description: Body needed populate fields in Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalancePopulateRequestBody"
+  schemas:
+    BalanceCreate:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+    BalancePatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+    BalanceSearchRequestBody:
+      $ref: "#/components/schemas/BalanceSearch"
+    BalanceUpdate:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+    BalanceSearch:
+      allOf:
+        - $ref: "#/components/schemas/BalancePaginationQuery"
+        - $ref: "#/components/schemas/BalanceConditionQuery"
+        - $ref: "#/components/schemas/BalancePopulateRequestBody"
+        - $ref: "#/components/schemas/BalanceDistinctQuery"
+    BalanceConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+    BalanceConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/BalanceConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/BalanceConditionFields"
+    BalancePaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/BalancePagination"
+    BalancePagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/BalanceSort"
+    BalanceSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    BalancePopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/BalancePopulateFields"
+    BalancePopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/BalancePopulateField"
+    BalancePopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/BalancePopulateEnum"
+        match:
+          type: object
+    BalancePopulateEnum:
+      type: string
+      enum:
+        - user
+    BalanceDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/BalanceDistinctFields"
+    BalanceDistinctFields:
+      type: string
+      enum:
+        - userId

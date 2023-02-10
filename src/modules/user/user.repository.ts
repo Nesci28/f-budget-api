@@ -52,7 +52,7 @@ export class UserRepository extends BaseRepository<UserModels> {
     searchParams: UserSearch,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     projection?: Projection,
-  ): Promise<YestPaginateResult<User, never>> {
+  ): Promise<YestPaginateResult<User, never, never>> {
     const searchParamsCloned = cloneDeep(searchParams);
 
     // No populate and no Distincts
@@ -91,7 +91,7 @@ export class UserRepository extends BaseRepository<UserModels> {
   public async search(
     searchParams: UserSearch,
     projection?: Projection,
-  ): Promise<YestPaginateResult<User, never>> {
+  ): Promise<YestPaginateResult<User, never, never>> {
     try {
       const res = await super.search(searchParams, projection);
       return res;

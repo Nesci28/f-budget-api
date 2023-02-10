@@ -1,0 +1,36 @@
+components:
+  schemas:
+    Receipt:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - userId
+            - envelopId
+            - date
+            - amount
+          properties:
+            userId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            envelopId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            date:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+            amount:
+              type: number
+            description:
+              type: string
+            scan:
+              type: string
+            balanceMonth:
+              type: number
+            balanceTotal:
+              type: number
+            envelopBalanceMonth:
+              type: number
+            envelopBalanceTotal:
+              type: number
+            user:
+              $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
+            envelop:
+              $ref: ../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop

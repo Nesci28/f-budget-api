@@ -1,0 +1,27 @@
+components:
+  schemas:
+    Renew:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - userId
+            - envelopId
+            - amount
+            - date
+            - isBusinessDay
+          properties:
+            userId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            envelopId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            amount:
+              type: number
+            date:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+            isBusinessDay:
+              type: boolean
+            user:
+              $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
+            envelop:
+              $ref: ../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop

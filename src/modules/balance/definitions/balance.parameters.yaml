@@ -1,0 +1,23 @@
+components:
+  parameters:
+    BalanceId:
+      name: id
+      description: Balance's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsBalanceDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsBalanceArchived:
+      name: isArchived
+      description: Get archived Balance
+      in: query
+      required: false
+      schema:
+        type: boolean

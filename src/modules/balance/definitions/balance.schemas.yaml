@@ -1,0 +1,19 @@
+components:
+  schemas:
+    Balance:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - userId
+          properties:
+            userId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            balanceMonth:
+              default: 0
+              type: number
+            balanceTotal:
+              default: 0
+              type: number
+            user:
+              $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User

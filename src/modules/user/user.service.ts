@@ -1,4 +1,5 @@
 import {
+  BalanceCreate,
   User,
   UserCreate,
   UserPatch,
@@ -11,7 +12,9 @@ import { BasicOperator } from "@yest/contract";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
 
+import { Transactionnal } from "../../decorators/transactionnal.decorator";
 import { AuthErrors } from "../auth/auth.errors";
+import { BalanceService } from "../balance/balance.service";
 import { UserErrors } from "./user.errors";
 import { UserRepository } from "./user.repository";
 
@@ -20,6 +23,7 @@ export class UserService implements OnApplicationBootstrap {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly configService: ConfigService,
+    private readonly balanceService: BalanceService,
   ) {}
 
   public async onApplicationBootstrap(): Promise<void> {
@@ -33,7 +37,7 @@ export class UserService implements OnApplicationBootstrap {
         email: defaultEmail,
         password: defaultPassword,
       };
-      await this.userRepository.create(userCreate);
+      await this.create(userCreate);
     }
   }
 
@@ -44,8 +48,15 @@ export class UserService implements OnApplicationBootstrap {
     return res;
   }
 
+  @Transactionnal("MongoUser")
   public async create(user: UserCreate, isDryRun?: boolean): Promise<User> {
     const res = await this.userRepository.create(user, isDryRun);
+
+    const balanceCreate: BalanceCreate = {
+      userId: res.id,
+    };
+    await this.balanceService.create(balanceCreate);
+
     return res;
   }
 

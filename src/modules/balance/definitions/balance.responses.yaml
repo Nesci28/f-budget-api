@@ -1,0 +1,111 @@
+components:
+  responses:
+    BalanceCreateResponse:
+      description: Returns a Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceCreateResponse"
+    BalanceGetAllResponse:
+      description: Returns an array of Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceGetAllResponse"
+    BalanceFindByIdResponse:
+      description: Returns a Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceFindByIdResponse"
+    BalanceSearchResponse:
+      description: Returns a paginated array of Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceSearchResponse"
+    BalancePatchResponse:
+      description: Returns a modified Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalancePatchResponse"
+    BalanceUpdateResponse:
+      description: Returns an updated Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceUpdateResponse"
+    BalanceArchiveResponse:
+      description: Returns a ResultHandler with the archived Balance
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BalanceArchiveResponse"
+  schemas:
+    BalanceCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./balance.schemas.yaml#/components/schemas/Balance
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/BalanceSearchDistincts"
+    BalancePatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./balance.schemas.yaml#/components/schemas/Balance
+    BalanceSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts

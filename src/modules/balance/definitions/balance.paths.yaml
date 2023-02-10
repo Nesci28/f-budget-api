@@ -1,0 +1,177 @@
+paths:
+  /balance:
+    post:
+      tags:
+        - Balance
+      operationId: balanceCreate
+      summary: Creates a new Balance
+      description: Creates a new Balance
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalanceCreateRequestBody"
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/IsBalanceDryRun"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /balance-all:
+    post:
+      tags:
+        - Balance
+      operationId: balanceGetAll
+      summary: Get all Balance
+      description: Get all Balance
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/IsBalanceArchived"
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalancePopulateRequestBody"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /balance-search:
+    post:
+      tags:
+        - Balance
+      operationId: balanceSearch
+      summary: Search Balance
+      description: Search Balance
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalanceSearchRequestBody"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /balance/{id}:
+    post:
+      tags:
+        - Balance
+      operationId: balanceGetById
+      summary: Get by Id a Balance
+      description: Get by Id a Balance
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/BalanceId"
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalancePopulateRequestBody"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Balance
+      operationId: balancePatch
+      summary: Patch a Balance
+      description: Patch a Balance
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/BalanceId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalancePatchRequestBody"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalancePatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Balance
+      operationId: balanceUpdate
+      summary: Update a Balance
+      description: Update a Balance
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/BalanceId"
+        - $ref: "./balance.parameters.yaml#/components/parameters/IsBalanceDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./balance.request-bodies.yaml#/components/requestBodies/BalanceUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Balance
+      operationId: balanceArchive
+      summary: Archive a Balance
+      description: Archive a Balance
+      parameters:
+        - $ref: "./balance.parameters.yaml#/components/parameters/BalanceId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./balance.responses.yaml#/components/responses/BalanceArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

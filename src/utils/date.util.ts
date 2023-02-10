@@ -39,6 +39,23 @@ export class DateUtil {
     return time;
   }
 
+  public static isBusinessDay(date: Date): boolean {}
+
+  public static listOfDates(dateStart: Date, dateEnd: Date): Date[] {
+    const dateStartMoment = moment(dateStart).startOf("day");
+    const dateEndMoment = moment(dateEnd).startOf("day");
+    const diffDays = dateEndMoment.diff(dateStartMoment, "days");
+
+    const listOfDates: Date[] = [];
+    for (let i = 0; i < diffDays; i += 1) {
+      const newDateMoment = dateStartMoment.clone().add(i, "days");
+      const newDate = newDateMoment.toDate();
+      listOfDates.push(newDate);
+    }
+
+    return listOfDates;
+  }
+
   public static getTimezoneOffset(timezone: string): number {
     const timezoneOffset = moment.tz(timezone).utcOffset();
     return timezoneOffset;

@@ -56,6 +56,886 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
+  /balance:
+    post:
+      tags:
+        - Balance
+      operationId: balanceCreate
+      summary: Creates a new Balance
+      description: Creates a new Balance
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BalanceCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsBalanceDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /balance-all:
+    post:
+      tags:
+        - Balance
+      operationId: balanceGetAll
+      summary: Get all Balance
+      description: Get all Balance
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsBalanceArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/BalancePopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /balance-search:
+    post:
+      tags:
+        - Balance
+      operationId: balanceSearch
+      summary: Search Balance
+      description: Search Balance
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BalanceSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /balance/{id}:
+    post:
+      tags:
+        - Balance
+      operationId: balanceGetById
+      summary: Get by Id a Balance
+      description: Get by Id a Balance
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/BalanceId'
+      requestBody:
+        $ref: '#/components/requestBodies/BalancePopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Balance
+      operationId: balancePatch
+      summary: Patch a Balance
+      description: Patch a Balance
+      parameters:
+        - $ref: '#/components/parameters/BalanceId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BalancePatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalancePatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Balance
+      operationId: balanceUpdate
+      summary: Update a Balance
+      description: Update a Balance
+      parameters:
+        - $ref: '#/components/parameters/BalanceId'
+        - $ref: '#/components/parameters/IsBalanceDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/BalanceUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Balance
+      operationId: balanceArchive
+      summary: Archive a Balance
+      description: Archive a Balance
+      parameters:
+        - $ref: '#/components/parameters/BalanceId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/BalanceArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /envelop:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopCreate
+      summary: Creates a new Envelop
+      description: Creates a new Envelop
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsEnvelopDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /envelop-all:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopGetAll
+      summary: Get all Envelop
+      description: Get all Envelop
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsEnvelopArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /envelop-search:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopSearch
+      summary: Search Envelop
+      description: Search Envelop
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /envelop/{id}:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopGetById
+      summary: Get by Id a Envelop
+      description: Get by Id a Envelop
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/EnvelopId'
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Envelop
+      operationId: envelopPatch
+      summary: Patch a Envelop
+      description: Patch a Envelop
+      parameters:
+        - $ref: '#/components/parameters/EnvelopId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Envelop
+      operationId: envelopUpdate
+      summary: Update a Envelop
+      description: Update a Envelop
+      parameters:
+        - $ref: '#/components/parameters/EnvelopId'
+        - $ref: '#/components/parameters/IsEnvelopDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/EnvelopUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Envelop
+      operationId: envelopArchive
+      summary: Archive a Envelop
+      description: Archive a Envelop
+      parameters:
+        - $ref: '#/components/parameters/EnvelopId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/EnvelopArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /receipt:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptCreate
+      summary: Creates a new Receipt
+      description: Creates a new Receipt
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsReceiptDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /receipt-all:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptGetAll
+      summary: Get all Receipt
+      description: Get all Receipt
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsReceiptArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /receipt-search:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptSearch
+      summary: Search Receipt
+      description: Search Receipt
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /receipt/{id}:
+    post:
+      tags:
+        - Receipt
+      operationId: receiptGetById
+      summary: Get by Id a Receipt
+      description: Get by Id a Receipt
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/ReceiptId'
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Receipt
+      operationId: receiptPatch
+      summary: Patch a Receipt
+      description: Patch a Receipt
+      parameters:
+        - $ref: '#/components/parameters/ReceiptId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Receipt
+      operationId: receiptUpdate
+      summary: Update a Receipt
+      description: Update a Receipt
+      parameters:
+        - $ref: '#/components/parameters/ReceiptId'
+        - $ref: '#/components/parameters/IsReceiptDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/ReceiptUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Receipt
+      operationId: receiptArchive
+      summary: Archive a Receipt
+      description: Archive a Receipt
+      parameters:
+        - $ref: '#/components/parameters/ReceiptId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ReceiptArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /renew:
+    post:
+      tags:
+        - Renew
+      operationId: renewCreate
+      summary: Creates a new Renew
+      description: Creates a new Renew
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/RenewCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsRenewDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /renew-all:
+    post:
+      tags:
+        - Renew
+      operationId: renewGetAll
+      summary: Get all Renew
+      description: Get all Renew
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsRenewArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/RenewPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /renew-search:
+    post:
+      tags:
+        - Renew
+      operationId: renewSearch
+      summary: Search Renew
+      description: Search Renew
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/RenewSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /renew/{id}:
+    post:
+      tags:
+        - Renew
+      operationId: renewGetById
+      summary: Get by Id a Renew
+      description: Get by Id a Renew
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/RenewId'
+      requestBody:
+        $ref: '#/components/requestBodies/RenewPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Renew
+      operationId: renewPatch
+      summary: Patch a Renew
+      description: Patch a Renew
+      parameters:
+        - $ref: '#/components/parameters/RenewId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/RenewPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Renew
+      operationId: renewUpdate
+      summary: Update a Renew
+      description: Update a Renew
+      parameters:
+        - $ref: '#/components/parameters/RenewId'
+        - $ref: '#/components/parameters/IsRenewDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/RenewUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Renew
+      operationId: renewArchive
+      summary: Archive a Renew
+      description: Archive a Renew
+      parameters:
+        - $ref: '#/components/parameters/RenewId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/RenewArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /upload:
+    post:
+      tags:
+        - Upload
+      operationId: uploadCreate
+      summary: Creates a new Upload
+      description: Creates a new Upload
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UploadCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsUploadDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /upload-all:
+    post:
+      tags:
+        - Upload
+      operationId: uploadGetAll
+      summary: Get all Upload
+      description: Get all Upload
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsUploadArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /upload-search:
+    post:
+      tags:
+        - Upload
+      operationId: uploadSearch
+      summary: Search Upload
+      description: Search Upload
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UploadSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /upload/{id}:
+    post:
+      tags:
+        - Upload
+      operationId: uploadGetById
+      summary: Get by Id a Upload
+      description: Get by Id a Upload
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/UploadId'
+      requestBody:
+        $ref: '#/components/requestBodies/UploadPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Upload
+      operationId: uploadPatch
+      summary: Patch a Upload
+      description: Patch a Upload
+      parameters:
+        - $ref: '#/components/parameters/UploadId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UploadPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Upload
+      operationId: uploadUpdate
+      summary: Update a Upload
+      description: Update a Upload
+      parameters:
+        - $ref: '#/components/parameters/UploadId'
+        - $ref: '#/components/parameters/IsUploadDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/UploadUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Upload
+      operationId: uploadArchive
+      summary: Archive a Upload
+      description: Archive a Upload
+      parameters:
+        - $ref: '#/components/parameters/UploadId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
   /user:
     post:
       tags:
@@ -1290,6 +2170,1255 @@ components:
         exp:
           description: Expiration time
           type: number
+    BalanceCreate:
+      type: object
+      required:
+        - userId
+      properties:
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    BalancePatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    BalanceSearchRequestBody:
+      $ref: '#/components/schemas/BalanceSearch'
+    BalanceUpdate:
+      type: object
+      required:
+        - userId
+      properties:
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    BalanceSearch:
+      allOf:
+        - $ref: '#/components/schemas/BalancePaginationQuery'
+        - $ref: '#/components/schemas/BalanceConditionQuery'
+        - $ref: '#/components/schemas/BalancePopulateRequestBody'
+        - $ref: '#/components/schemas/BalanceDistinctQuery'
+    BalanceConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    BalanceConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/BalanceConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/BalanceConditionFields'
+    BalancePaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/BalancePagination'
+    BalancePagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/BalanceSort'
+    BalanceSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    BalancePopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/BalancePopulateFields'
+    BalancePopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/BalancePopulateField'
+    BalancePopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/BalancePopulateEnum'
+        match:
+          type: object
+    BalancePopulateEnum:
+      type: string
+      enum:
+        - user
+    BalanceDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceDistinctFields'
+    BalanceDistinctFields:
+      type: string
+      enum:
+        - userId
+    BalanceCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+    BalanceFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/BalanceSearchDistincts'
+    BalancePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Balance:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            balanceMonth:
+              default: 0
+              type: number
+            balanceTotal:
+              default: 0
+              type: number
+            user:
+              $ref: '#/components/schemas/User'
+    EnvelopCreate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopSearchRequestBody:
+      $ref: '#/components/schemas/EnvelopSearch'
+    EnvelopUpdate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopSearch:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopPaginationQuery'
+        - $ref: '#/components/schemas/EnvelopConditionQuery'
+        - $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+        - $ref: '#/components/schemas/EnvelopDistinctQuery'
+    EnvelopConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    EnvelopConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+    EnvelopPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/EnvelopPagination'
+    EnvelopPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/EnvelopSort'
+    EnvelopSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    EnvelopPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/EnvelopPopulateFields'
+    EnvelopPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvelopPopulateField'
+    EnvelopPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/EnvelopPopulateEnum'
+        match:
+          type: object
+    EnvelopPopulateEnum:
+      type: string
+      enum:
+        - user
+    EnvelopDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvelopDistinctFields'
+    EnvelopDistinctFields:
+      type: string
+      enum:
+        - userId
+    EnvelopCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Envelop'
+    EnvelopGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Envelop'
+    EnvelopFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Envelop'
+    EnvelopSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Envelop'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/EnvelopSearchDistincts'
+    EnvelopPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Envelop'
+    EnvelopUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Envelop'
+    EnvelopArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Envelop'
+    EnvelopSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Envelop:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+            - type
+            - budget
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            type:
+              $ref: '#/components/schemas/EnvelopType'
+            budget:
+              type: number
+            balanceMonth:
+              default: 0
+              type: number
+            balanceTotal:
+              default: 0
+              type: number
+            user:
+              $ref: '#/components/schemas/User'
+    EnvelopType:
+      type: string
+      enum:
+        - Income
+        - Outcome
+    ReceiptCreate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - date
+        - amount
+      properties:
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    ReceiptPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    ReceiptSearchRequestBody:
+      $ref: '#/components/schemas/ReceiptSearch'
+    ReceiptUpdate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - date
+        - amount
+      properties:
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    ReceiptSearch:
+      allOf:
+        - $ref: '#/components/schemas/ReceiptPaginationQuery'
+        - $ref: '#/components/schemas/ReceiptConditionQuery'
+        - $ref: '#/components/schemas/ReceiptPopulateRequestBody'
+        - $ref: '#/components/schemas/ReceiptDistinctQuery'
+    ReceiptConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    ReceiptConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ReceiptConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/ReceiptConditionFields'
+    ReceiptPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ReceiptPagination'
+    ReceiptPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/ReceiptSort'
+    ReceiptSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+        envelopId:
+          $ref: '#/components/schemas/Sorting'
+    ReceiptPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/ReceiptPopulateFields'
+    ReceiptPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReceiptPopulateField'
+    ReceiptPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/ReceiptPopulateEnum'
+        match:
+          type: object
+    ReceiptPopulateEnum:
+      type: string
+      enum:
+        - user
+        - envelop
+    ReceiptDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptDistinctFields'
+    ReceiptDistinctFields:
+      type: string
+      enum:
+        - userId
+        - envelopId
+    ReceiptCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+    ReceiptFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/ReceiptSearchDistincts'
+    ReceiptPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Receipt:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+            - envelopId
+            - date
+            - amount
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            envelopId:
+              $ref: '#/components/schemas/ObjectID'
+            date:
+              $ref: '#/components/schemas/DateTime'
+            amount:
+              type: number
+            description:
+              type: string
+            scan:
+              type: string
+            balanceMonth:
+              type: number
+            balanceTotal:
+              type: number
+            envelopBalanceMonth:
+              type: number
+            envelopBalanceTotal:
+              type: number
+            user:
+              $ref: '#/components/schemas/User'
+            envelop:
+              $ref: '#/components/schemas/Envelop'
+    RenewCreate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - amount
+        - date
+        - isBusinessDay
+      properties:
+        amount:
+          type: number
+        isBusinessDay:
+          type: boolean
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    RenewPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        amount:
+          type: number
+        isBusinessDay:
+          type: boolean
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    RenewSearchRequestBody:
+      $ref: '#/components/schemas/RenewSearch'
+    RenewUpdate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - amount
+        - date
+        - isBusinessDay
+      properties:
+        amount:
+          type: number
+        isBusinessDay:
+          type: boolean
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        envelopId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        date:
+          type: string
+          format: date-time
+          x-faker: date.future
+          maxLength: 24
+    RenewSearch:
+      allOf:
+        - $ref: '#/components/schemas/RenewPaginationQuery'
+        - $ref: '#/components/schemas/RenewConditionQuery'
+        - $ref: '#/components/schemas/RenewPopulateRequestBody'
+        - $ref: '#/components/schemas/RenewDistinctQuery'
+    RenewConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        date:
+          $ref: '#/components/schemas/SearchDateCondition'
+    RenewConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/RenewConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/RenewConditionFields'
+    RenewPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/RenewPagination'
+    RenewPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/RenewSort'
+    RenewSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+        envelopId:
+          $ref: '#/components/schemas/Sorting'
+        date:
+          $ref: '#/components/schemas/Sorting'
+    RenewPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/RenewPopulateFields'
+    RenewPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/RenewPopulateField'
+    RenewPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/RenewPopulateEnum'
+        match:
+          type: object
+    RenewPopulateEnum:
+      type: string
+      enum:
+        - user
+        - envelop
+    RenewDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/RenewDistinctFields'
+    RenewDistinctFields:
+      type: string
+      enum:
+        - userId
+        - envelopId
+        - date
+    RenewCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Renew'
+    RenewGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Renew'
+    RenewFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Renew'
+    RenewSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Renew'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/RenewSearchDistincts'
+    RenewPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Renew'
+    RenewUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Renew'
+    RenewArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Renew'
+    RenewSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Renew:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+            - envelopId
+            - amount
+            - date
+            - isBusinessDay
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            envelopId:
+              $ref: '#/components/schemas/ObjectID'
+            amount:
+              type: number
+            date:
+              $ref: '#/components/schemas/DateTime'
+            isBusinessDay:
+              type: boolean
+            user:
+              $ref: '#/components/schemas/User'
+            envelop:
+              $ref: '#/components/schemas/Envelop'
+    UploadCreate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    UploadPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    UploadSearchRequestBody:
+      $ref: '#/components/schemas/UploadSearch'
+    UploadUpdate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    UploadSearch:
+      allOf:
+        - $ref: '#/components/schemas/UploadPaginationQuery'
+        - $ref: '#/components/schemas/UploadConditionQuery'
+        - $ref: '#/components/schemas/UploadPopulateRequestBody'
+        - $ref: '#/components/schemas/UploadDistinctQuery'
+    UploadConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    UploadConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/UploadConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/UploadConditionFields'
+    UploadPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/UploadPagination'
+    UploadPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/UploadSort'
+    UploadSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    UploadPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/UploadPopulateFields'
+    UploadPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/UploadPopulateField'
+    UploadPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/UploadPopulateEnum'
+        match:
+          type: object
+    UploadPopulateEnum:
+      type: string
+      enum:
+        - user
+    UploadDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadDistinctFields'
+    UploadDistinctFields:
+      type: string
+      enum:
+        - userId
+    UploadCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Upload'
+    UploadFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Upload'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/UploadSearchDistincts'
+    UploadPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Upload:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+            - filename
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            filename:
+              type: string
+            user:
+              $ref: '#/components/schemas/User'
     UserCreate:
       type: object
       required:
@@ -1584,20 +3713,6 @@ components:
         exp:
           description: Expiration Time (timestamp in UTC)
           type: number
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
     ManualString:
       type: object
       properties:
@@ -2242,6 +4357,20 @@ components:
           type: array
           items:
             type: string
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
     AccessModelCreate:
       type: object
       required:
@@ -3780,6 +5909,216 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RefreshResponse'
+    BalanceCreateResponse:
+      description: Returns a Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceCreateResponse'
+    BalanceGetAllResponse:
+      description: Returns an array of Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceGetAllResponse'
+    BalanceFindByIdResponse:
+      description: Returns a Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceFindByIdResponse'
+    BalanceSearchResponse:
+      description: Returns a paginated array of Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceSearchResponse'
+    BalancePatchResponse:
+      description: Returns a modified Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalancePatchResponse'
+    BalanceUpdateResponse:
+      description: Returns an updated Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceUpdateResponse'
+    BalanceArchiveResponse:
+      description: Returns a ResultHandler with the archived Balance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceArchiveResponse'
+    EnvelopCreateResponse:
+      description: Returns a Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopCreateResponse'
+    EnvelopGetAllResponse:
+      description: Returns an array of Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopGetAllResponse'
+    EnvelopFindByIdResponse:
+      description: Returns a Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopFindByIdResponse'
+    EnvelopSearchResponse:
+      description: Returns a paginated array of Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopSearchResponse'
+    EnvelopPatchResponse:
+      description: Returns a modified Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopPatchResponse'
+    EnvelopUpdateResponse:
+      description: Returns an updated Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopUpdateResponse'
+    EnvelopArchiveResponse:
+      description: Returns a ResultHandler with the archived Envelop
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopArchiveResponse'
+    ReceiptCreateResponse:
+      description: Returns a Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptCreateResponse'
+    ReceiptGetAllResponse:
+      description: Returns an array of Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptGetAllResponse'
+    ReceiptFindByIdResponse:
+      description: Returns a Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptFindByIdResponse'
+    ReceiptSearchResponse:
+      description: Returns a paginated array of Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptSearchResponse'
+    ReceiptPatchResponse:
+      description: Returns a modified Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptPatchResponse'
+    ReceiptUpdateResponse:
+      description: Returns an updated Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptUpdateResponse'
+    ReceiptArchiveResponse:
+      description: Returns a ResultHandler with the archived Receipt
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptArchiveResponse'
+    RenewCreateResponse:
+      description: Returns a Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewCreateResponse'
+    RenewGetAllResponse:
+      description: Returns an array of Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewGetAllResponse'
+    RenewFindByIdResponse:
+      description: Returns a Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewFindByIdResponse'
+    RenewSearchResponse:
+      description: Returns a paginated array of Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewSearchResponse'
+    RenewPatchResponse:
+      description: Returns a modified Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewPatchResponse'
+    RenewUpdateResponse:
+      description: Returns an updated Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewUpdateResponse'
+    RenewArchiveResponse:
+      description: Returns a ResultHandler with the archived Renew
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewArchiveResponse'
+    UploadCreateResponse:
+      description: Returns a Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadCreateResponse'
+    UploadGetAllResponse:
+      description: Returns an array of Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadGetAllResponse'
+    UploadFindByIdResponse:
+      description: Returns a Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadFindByIdResponse'
+    UploadSearchResponse:
+      description: Returns a paginated array of Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadSearchResponse'
+    UploadPatchResponse:
+      description: Returns a modified Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadPatchResponse'
+    UploadUpdateResponse:
+      description: Returns an updated Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadUpdateResponse'
+    UploadArchiveResponse:
+      description: Returns a ResultHandler with the archived Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadArchiveResponse'
     UserCreateResponse:
       description: Returns a User
       content:
@@ -3822,12 +6161,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserArchiveResponse'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
     SuccessResultResponse:
       description: Successful request (no content)
       content:
@@ -3870,6 +6203,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     AccessModelCreateResponse:
       description: Returns a AccessModel
       content:
@@ -4107,6 +6446,176 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RefreshTokenRequestBody'
+    BalanceCreateRequestBody:
+      description: Body needed to create a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceCreate'
+    BalanceSearchRequestBody:
+      description: Body needed to search Balances
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceSearchRequestBody'
+    BalancePatchRequestBody:
+      description: Body needed to modify a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalancePatch'
+    BalanceUpdateRequestBody:
+      description: Body needed to update a Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalanceUpdate'
+    BalancePopulateRequestBody:
+      description: Body needed populate fields in Balance
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BalancePopulateRequestBody'
+    EnvelopCreateRequestBody:
+      description: Body needed to create a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopCreate'
+    EnvelopSearchRequestBody:
+      description: Body needed to search Envelops
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopSearchRequestBody'
+    EnvelopPatchRequestBody:
+      description: Body needed to modify a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopPatch'
+    EnvelopUpdateRequestBody:
+      description: Body needed to update a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopUpdate'
+    EnvelopPopulateRequestBody:
+      description: Body needed populate fields in Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+    ReceiptCreateRequestBody:
+      description: Body needed to create a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptCreate'
+    ReceiptSearchRequestBody:
+      description: Body needed to search Receipts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptSearchRequestBody'
+    ReceiptPatchRequestBody:
+      description: Body needed to modify a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptPatch'
+    ReceiptUpdateRequestBody:
+      description: Body needed to update a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptUpdate'
+    ReceiptPopulateRequestBody:
+      description: Body needed populate fields in Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptPopulateRequestBody'
+    RenewCreateRequestBody:
+      description: Body needed to create a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewCreate'
+    RenewSearchRequestBody:
+      description: Body needed to search Renews
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewSearchRequestBody'
+    RenewPatchRequestBody:
+      description: Body needed to modify a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewPatch'
+    RenewUpdateRequestBody:
+      description: Body needed to update a Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewUpdate'
+    RenewPopulateRequestBody:
+      description: Body needed populate fields in Renew
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RenewPopulateRequestBody'
+    UploadCreateRequestBody:
+      description: Body needed to create a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadCreate'
+    UploadSearchRequestBody:
+      description: Body needed to search Uploads
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadSearchRequestBody'
+    UploadPatchRequestBody:
+      description: Body needed to modify a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadPatch'
+    UploadUpdateRequestBody:
+      description: Body needed to update a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadUpdate'
+    UploadPopulateRequestBody:
+      description: Body needed populate fields in Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadPopulateRequestBody'
     UserCreateRequestBody:
       description: Body needed to create a User
       required: true
@@ -4291,6 +6800,111 @@ components:
           schema:
             $ref: '#/components/schemas/PropertyControlPopulateRequestBody'
   parameters:
+    BalanceId:
+      name: id
+      description: Balance's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsBalanceDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsBalanceArchived:
+      name: isArchived
+      description: Get archived Balance
+      in: query
+      required: false
+      schema:
+        type: boolean
+    EnvelopId:
+      name: id
+      description: Envelop's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsEnvelopDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsEnvelopArchived:
+      name: isArchived
+      description: Get archived Envelop
+      in: query
+      required: false
+      schema:
+        type: boolean
+    ReceiptId:
+      name: id
+      description: Receipt's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsReceiptDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsReceiptArchived:
+      name: isArchived
+      description: Get archived Receipt
+      in: query
+      required: false
+      schema:
+        type: boolean
+    RenewId:
+      name: id
+      description: Renew's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsRenewDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsRenewArchived:
+      name: isArchived
+      description: Get archived Renew
+      in: query
+      required: false
+      schema:
+        type: boolean
+    UploadId:
+      name: id
+      description: Upload's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsUploadDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsUploadArchived:
+      name: isArchived
+      description: Get archived Upload
+      in: query
+      required: false
+      schema:
+        type: boolean
     UserId:
       name: id
       description: User's Id

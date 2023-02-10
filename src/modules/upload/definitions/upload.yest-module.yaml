@@ -1,0 +1,19 @@
+configs:
+  moduleName: User
+  connectionName: f-budget
+components:
+  schemas:
+    Upload:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        userId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        filename:
+          type: string
+        user:
+          x-localField: userId
+          $ref: "../../user/definitions/user.schemas.yaml#/components/schemas/User"

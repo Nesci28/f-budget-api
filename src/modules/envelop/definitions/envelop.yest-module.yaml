@@ -1,0 +1,34 @@
+configs:
+  moduleName: User
+  connectionName: f-budget
+components:
+  schemas:
+    Envelop:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        userId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        type:
+          $ref: "#/components/schemas/EnvelopType"
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        user:
+          x-localField: userId
+          $ref: "../../user/definitions/user.schemas.yaml#/components/schemas/User"
+
+    EnvelopType:
+      type: string
+      enum:
+        - Income
+        - Outcome

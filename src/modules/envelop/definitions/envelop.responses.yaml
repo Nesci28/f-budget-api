@@ -1,0 +1,111 @@
+components:
+  responses:
+    EnvelopCreateResponse:
+      description: Returns a Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopCreateResponse"
+    EnvelopGetAllResponse:
+      description: Returns an array of Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopGetAllResponse"
+    EnvelopFindByIdResponse:
+      description: Returns a Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopFindByIdResponse"
+    EnvelopSearchResponse:
+      description: Returns a paginated array of Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopSearchResponse"
+    EnvelopPatchResponse:
+      description: Returns a modified Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopPatchResponse"
+    EnvelopUpdateResponse:
+      description: Returns an updated Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopUpdateResponse"
+    EnvelopArchiveResponse:
+      description: Returns a ResultHandler with the archived Envelop
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopArchiveResponse"
+  schemas:
+    EnvelopCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/EnvelopSearchDistincts"
+    EnvelopPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./envelop.schemas.yaml#/components/schemas/Envelop
+    EnvelopSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts

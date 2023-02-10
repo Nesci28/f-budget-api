@@ -1,0 +1,22 @@
+configs:
+  moduleName: User
+  connectionName: f-budget
+components:
+  schemas:
+    Balance:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        user:
+          x-localField: userId
+          $ref: "../../user/definitions/user.schemas.yaml#/components/schemas/User"

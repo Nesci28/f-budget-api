@@ -1,0 +1,177 @@
+paths:
+  /envelop:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopCreate
+      summary: Creates a new Envelop
+      description: Creates a new Envelop
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopCreateRequestBody"
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/IsEnvelopDryRun"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /envelop-all:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopGetAll
+      summary: Get all Envelop
+      description: Get all Envelop
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/IsEnvelopArchived"
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /envelop-search:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopSearch
+      summary: Search Envelop
+      description: Search Envelop
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopSearchRequestBody"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /envelop/{id}:
+    post:
+      tags:
+        - Envelop
+      operationId: envelopGetById
+      summary: Get by Id a Envelop
+      description: Get by Id a Envelop
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/EnvelopId"
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Envelop
+      operationId: envelopPatch
+      summary: Patch a Envelop
+      description: Patch a Envelop
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/EnvelopId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopPatchRequestBody"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Envelop
+      operationId: envelopUpdate
+      summary: Update a Envelop
+      description: Update a Envelop
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/EnvelopId"
+        - $ref: "./envelop.parameters.yaml#/components/parameters/IsEnvelopDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./envelop.request-bodies.yaml#/components/requestBodies/EnvelopUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Envelop
+      operationId: envelopArchive
+      summary: Archive a Envelop
+      description: Archive a Envelop
+      parameters:
+        - $ref: "./envelop.parameters.yaml#/components/parameters/EnvelopId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./envelop.responses.yaml#/components/responses/EnvelopArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

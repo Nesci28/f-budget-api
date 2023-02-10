@@ -1,0 +1,113 @@
+components:
+  responses:
+    ReceiptCreateResponse:
+      description: Returns a Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptCreateResponse"
+    ReceiptGetAllResponse:
+      description: Returns an array of Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptGetAllResponse"
+    ReceiptFindByIdResponse:
+      description: Returns a Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptFindByIdResponse"
+    ReceiptSearchResponse:
+      description: Returns a paginated array of Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptSearchResponse"
+    ReceiptPatchResponse:
+      description: Returns a modified Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptPatchResponse"
+    ReceiptUpdateResponse:
+      description: Returns an updated Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptUpdateResponse"
+    ReceiptArchiveResponse:
+      description: Returns a ResultHandler with the archived Receipt
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptArchiveResponse"
+  schemas:
+    ReceiptCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/ReceiptSearchDistincts"
+    ReceiptPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./receipt.schemas.yaml#/components/schemas/Receipt
+    ReceiptSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts

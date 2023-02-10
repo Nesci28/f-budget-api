@@ -1,0 +1,219 @@
+components:
+  requestBodies:
+    ReceiptCreateRequestBody:
+      description: Body needed to create a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptCreate"
+    ReceiptSearchRequestBody:
+      description: Body needed to search Receipts
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptSearchRequestBody"
+    ReceiptPatchRequestBody:
+      description: Body needed to modify a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptPatch"
+    ReceiptUpdateRequestBody:
+      description: Body needed to update a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptUpdate"
+    ReceiptPopulateRequestBody:
+      description: Body needed populate fields in Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ReceiptPopulateRequestBody"
+  schemas:
+    ReceiptCreate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - date
+        - amount
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+    ReceiptPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+    ReceiptSearchRequestBody:
+      $ref: "#/components/schemas/ReceiptSearch"
+    ReceiptUpdate:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - date
+        - amount
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        amount:
+          type: number
+        description:
+          type: string
+        scan:
+          type: string
+        balanceMonth:
+          type: number
+        balanceTotal:
+          type: number
+        envelopBalanceMonth:
+          type: number
+        envelopBalanceTotal:
+          type: number
+    ReceiptSearch:
+      allOf:
+        - $ref: "#/components/schemas/ReceiptPaginationQuery"
+        - $ref: "#/components/schemas/ReceiptConditionQuery"
+        - $ref: "#/components/schemas/ReceiptPopulateRequestBody"
+        - $ref: "#/components/schemas/ReceiptDistinctQuery"
+    ReceiptConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+    ReceiptConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ReceiptConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/ReceiptConditionFields"
+    ReceiptPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/ReceiptPagination"
+    ReceiptPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/ReceiptSort"
+    ReceiptSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        envelopId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    ReceiptPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/ReceiptPopulateFields"
+    ReceiptPopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/ReceiptPopulateField"
+    ReceiptPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/ReceiptPopulateEnum"
+        match:
+          type: object
+    ReceiptPopulateEnum:
+      type: string
+      enum:
+        - user
+        - envelop
+    ReceiptDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReceiptDistinctFields"
+    ReceiptDistinctFields:
+      type: string
+      enum:
+        - userId
+        - envelopId

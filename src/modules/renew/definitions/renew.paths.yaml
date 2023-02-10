@@ -1,0 +1,177 @@
+paths:
+  /renew:
+    post:
+      tags:
+        - Renew
+      operationId: renewCreate
+      summary: Creates a new Renew
+      description: Creates a new Renew
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewCreateRequestBody"
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/IsRenewDryRun"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewCreateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /renew-all:
+    post:
+      tags:
+        - Renew
+      operationId: renewGetAll
+      summary: Get all Renew
+      description: Get all Renew
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/IsRenewArchived"
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewGetAllResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /renew-search:
+    post:
+      tags:
+        - Renew
+      operationId: renewSearch
+      summary: Search Renew
+      description: Search Renew
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewSearchRequestBody"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewSearchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+  /renew/{id}:
+    post:
+      tags:
+        - Renew
+      operationId: renewGetById
+      summary: Get by Id a Renew
+      description: Get by Id a Renew
+      security:
+        - E2E: []
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/RenewId"
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewPopulateRequestBody"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewFindByIdResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    patch:
+      tags:
+        - Renew
+      operationId: renewPatch
+      summary: Patch a Renew
+      description: Patch a Renew
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/RenewId"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewPatchRequestBody"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewPatchResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    put:
+      tags:
+        - Renew
+      operationId: renewUpdate
+      summary: Update a Renew
+      description: Update a Renew
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/RenewId"
+        - $ref: "./renew.parameters.yaml#/components/parameters/IsRenewDryRun"
+      security:
+        - E2E: []
+      requestBody:
+        $ref: "./renew.request-bodies.yaml#/components/requestBodies/RenewUpdateRequestBody"
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewUpdateResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
+    delete:
+      tags:
+        - Renew
+      operationId: renewArchive
+      summary: Archive a Renew
+      description: Archive a Renew
+      parameters:
+        - $ref: "./renew.parameters.yaml#/components/parameters/RenewId"
+      security:
+        - E2E: []
+      responses:
+        200:
+          $ref: "./renew.responses.yaml#/components/responses/RenewArchiveResponse"
+        400:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
+        401:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingTokenResultResponse"
+        403:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/MissingPermissionResultResponse"
+        404:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
+        500:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"

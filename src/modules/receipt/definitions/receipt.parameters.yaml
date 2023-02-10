@@ -1,0 +1,23 @@
+components:
+  parameters:
+    ReceiptId:
+      name: id
+      description: Receipt's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsReceiptDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsReceiptArchived:
+      name: isArchived
+      description: Get archived Receipt
+      in: query
+      required: false
+      schema:
+        type: boolean

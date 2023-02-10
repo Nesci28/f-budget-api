@@ -1,0 +1,33 @@
+configs:
+  moduleName: User
+  connectionName: f-budget
+components:
+  schemas:
+    Renew:
+      type: object
+      required:
+        - userId
+        - envelopId
+        - amount
+        - date
+        - isBusinessDay
+      properties:
+        userId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        envelopId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        amount:
+          type: number
+        date:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime"
+        isBusinessDay:
+          type: boolean
+        user:
+          x-localField: userId
+          $ref: "../../user/definitions/user.schemas.yaml#/components/schemas/User"
+        envelop:
+          x-localField: envelopId
+          $ref: "../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop"

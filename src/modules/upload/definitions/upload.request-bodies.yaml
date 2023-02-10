@@ -1,0 +1,161 @@
+components:
+  requestBodies:
+    UploadCreateRequestBody:
+      description: Body needed to create a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadCreate"
+    UploadSearchRequestBody:
+      description: Body needed to search Uploads
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadSearchRequestBody"
+    UploadPatchRequestBody:
+      description: Body needed to modify a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadPatch"
+    UploadUpdateRequestBody:
+      description: Body needed to update a Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadUpdate"
+    UploadPopulateRequestBody:
+      description: Body needed populate fields in Upload
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UploadPopulateRequestBody"
+  schemas:
+    UploadCreate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        filename:
+          type: string
+    UploadPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        filename:
+          type: string
+    UploadSearchRequestBody:
+      $ref: "#/components/schemas/UploadSearch"
+    UploadUpdate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        filename:
+          type: string
+    UploadSearch:
+      allOf:
+        - $ref: "#/components/schemas/UploadPaginationQuery"
+        - $ref: "#/components/schemas/UploadConditionQuery"
+        - $ref: "#/components/schemas/UploadPopulateRequestBody"
+        - $ref: "#/components/schemas/UploadDistinctQuery"
+    UploadConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+    UploadConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/UploadConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/UploadConditionFields"
+    UploadPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/UploadPagination"
+    UploadPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/UploadSort"
+    UploadSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    UploadPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/UploadPopulateFields"
+    UploadPopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/UploadPopulateField"
+    UploadPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/UploadPopulateEnum"
+        match:
+          type: object
+    UploadPopulateEnum:
+      type: string
+      enum:
+        - user
+    UploadDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/UploadDistinctFields"
+    UploadDistinctFields:
+      type: string
+      enum:
+        - userId

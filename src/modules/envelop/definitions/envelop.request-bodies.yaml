@@ -1,0 +1,187 @@
+components:
+  requestBodies:
+    EnvelopCreateRequestBody:
+      description: Body needed to create a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopCreate"
+    EnvelopSearchRequestBody:
+      description: Body needed to search Envelops
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopSearchRequestBody"
+    EnvelopPatchRequestBody:
+      description: Body needed to modify a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopPatch"
+    EnvelopUpdateRequestBody:
+      description: Body needed to update a Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopUpdate"
+    EnvelopPopulateRequestBody:
+      description: Body needed populate fields in Envelop
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/EnvelopPopulateRequestBody"
+  schemas:
+    EnvelopCreate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+    EnvelopPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+    EnvelopSearchRequestBody:
+      $ref: "#/components/schemas/EnvelopSearch"
+    EnvelopUpdate:
+      type: object
+      required:
+        - userId
+        - type
+        - budget
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        type:
+          $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+    EnvelopSearch:
+      allOf:
+        - $ref: "#/components/schemas/EnvelopPaginationQuery"
+        - $ref: "#/components/schemas/EnvelopConditionQuery"
+        - $ref: "#/components/schemas/EnvelopPopulateRequestBody"
+        - $ref: "#/components/schemas/EnvelopDistinctQuery"
+    EnvelopConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+    EnvelopConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/EnvelopConditionFields"
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: "#/components/schemas/EnvelopConditionFields"
+    EnvelopPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: "#/components/schemas/EnvelopPagination"
+    EnvelopPagination:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
+        - type: object
+          properties:
+            sort:
+              $ref: "#/components/schemas/EnvelopSort"
+    EnvelopSort:
+      type: object
+      properties:
+        id:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        updatedAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        createdAt:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        archived:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+    EnvelopPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: "#/components/schemas/EnvelopPopulateFields"
+    EnvelopPopulateFields:
+      type: array
+      items:
+        $ref: "#/components/schemas/EnvelopPopulateField"
+    EnvelopPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: "#/components/schemas/EnvelopPopulateEnum"
+        match:
+          type: object
+    EnvelopPopulateEnum:
+      type: string
+      enum:
+        - user
+    EnvelopDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: "#/components/schemas/EnvelopDistinctFields"
+    EnvelopDistinctFields:
+      type: string
+      enum:
+        - userId

@@ -1,0 +1,23 @@
+components:
+  parameters:
+    RenewId:
+      name: id
+      description: Renew's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsRenewDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsRenewArchived:
+      name: isArchived
+      description: Get archived Renew
+      in: query
+      required: false
+      schema:
+        type: boolean
