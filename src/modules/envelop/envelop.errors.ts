@@ -8,8 +8,14 @@ export const EnvelopErrors = {
     httpCode: StatusCodes.NOT_FOUND,
     message: {
       translation: [
-        { language: SupportedLanguage.Fr, text: "L'objet Envelop est introuvable." },
-        { language: SupportedLanguage.En, text: "Envelop object was not found." },
+        {
+          language: SupportedLanguage.Fr,
+          text: "L'objet Envelop est introuvable.",
+        },
+        {
+          language: SupportedLanguage.En,
+          text: "Envelop object was not found.",
+        },
       ],
     },
   },
@@ -22,7 +28,10 @@ export const EnvelopErrors = {
           language: SupportedLanguage.Fr,
           text: "Le base de donnée n'a pas été en mesure de traiter la demande.",
         },
-        { language: SupportedLanguage.En, text: "Database server was unable to respond." },
+        {
+          language: SupportedLanguage.En,
+          text: "Database server was unable to respond.",
+        },
       ],
     },
   },

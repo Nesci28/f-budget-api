@@ -14,7 +14,7 @@ import {
 } from "@f-budget/f-budget-api-typescript-fetch";
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 
 import { RenewService } from "./renew.service";
 
@@ -22,7 +22,7 @@ import { RenewService } from "./renew.service";
 export class RenewController {
   constructor(private readonly renewService: RenewService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewCreate(
     @Body() renew: RenewCreate,
     @Query()
@@ -35,7 +35,7 @@ export class RenewController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewSearch(
     @Body() body: RenewSearch,
   ): Promise<RenewSearchResponse> {
@@ -44,7 +44,7 @@ export class RenewController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewGetById(
     @Param() params: { id: string },
     @Body() body: RenewPopulateRequestBody,
@@ -55,7 +55,7 @@ export class RenewController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: RenewPopulateRequestBody,
@@ -66,7 +66,7 @@ export class RenewController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewPatch(
     @Param() params: { id: string },
     @Body() renew: RenewPatch,
@@ -76,7 +76,7 @@ export class RenewController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewUpdate(
     @Param() params: { id: string },
     @Body() renew: RenewUpdate,
@@ -91,7 +91,7 @@ export class RenewController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async renewArchive(
     @Param() params: { id: string },
   ): Promise<RenewArchiveResponse> {

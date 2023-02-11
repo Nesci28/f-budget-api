@@ -147,6 +147,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
         envelopId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
     ReceiptConditionQuery:
       type: object
       x-min-required:
@@ -190,6 +192,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         envelopId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     ReceiptPopulateRequestBody:
       type: object
       properties:
@@ -225,3 +229,4 @@ components:
       enum:
         - userId
         - envelopId
+        - date

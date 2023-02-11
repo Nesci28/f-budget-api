@@ -12,7 +12,9 @@ export function envelopGetAllTest(): void {
   });
 
   it("should return an array of Envelops", async () => {
-    const results = await ctx.envelopConnector.envelopGetAll({ envelopPopulateRequestBody: {} });
+    const results = await ctx.envelopConnector.envelopGetAll({
+      envelopPopulateRequestBody: {},
+    });
 
     expect(results.isSuccess).toEqual(true);
     expect(results.value?.length).toEqual(20);

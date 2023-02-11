@@ -7,12 +7,15 @@ components:
       type: object
       required:
         - userId
+        - name
         - type
         - budget
       properties:
         userId:
           x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        name:
+          type: string
         type:
           $ref: "#/components/schemas/EnvelopType"
         budget:

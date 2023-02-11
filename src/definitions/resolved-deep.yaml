@@ -1108,6 +1108,26 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
+  /healthcheck:
+    get:
+      tags:
+        - Healthcheck
+      operationId: getHealthcheck
+      summary: Healthcheck
+      description: Returns a ResultHandler with the version number of the current build
+      responses:
+        '200':
+          $ref: '#/components/responses/HealthcheckResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResultResponse'
   /access-scope:
     post:
       tags:
@@ -2050,26 +2070,6 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
-  /healthcheck:
-    get:
-      tags:
-        - Healthcheck
-      operationId: getHealthcheck
-      summary: Healthcheck
-      description: Returns a ResultHandler with the version number of the current build
-      responses:
-        '200':
-          $ref: '#/components/responses/HealthcheckResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '406':
-          $ref: '#/components/responses/NotAcceptableResultResponse'
 components:
   securitySchemes:
     admin:
@@ -2373,6 +2373,193 @@ components:
       properties:
         userId:
           $ref: '#/components/schemas/SearchStringDistincts'
+    Balance:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            balanceMonth:
+              default: 0
+              type: number
+            balanceTotal:
+              default: 0
+              type: number
+            user:
+              $ref: '#/components/schemas/User'
+    EnvelopCreate:
+      type: object
+      required:
+        - userId
+        - name
+        - type
+        - budget
+      properties:
+        name:
+          type: string
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        name:
+          type: string
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopSearchRequestBody:
+      $ref: '#/components/schemas/EnvelopSearch'
+    EnvelopUpdate:
+      type: object
+      required:
+        - userId
+        - name
+        - type
+        - budget
+      properties:
+        name:
+          type: string
+        budget:
+          type: number
+        balanceMonth:
+          default: 0
+          type: number
+        balanceTotal:
+          default: 0
+          type: number
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+        type:
+          type: string
+          enum:
+            - Income
+            - Outcome
+    EnvelopSearch:
+      allOf:
+        - $ref: '#/components/schemas/EnvelopPaginationQuery'
+        - $ref: '#/components/schemas/EnvelopConditionQuery'
+        - $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+        - $ref: '#/components/schemas/EnvelopDistinctQuery'
+    EnvelopConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    EnvelopConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/EnvelopConditionFields'
+    EnvelopPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/EnvelopPagination'
+    EnvelopPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/EnvelopSort'
+    EnvelopSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    EnvelopPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/EnvelopPopulateFields'
+    EnvelopPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvelopPopulateField'
+    EnvelopPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/EnvelopPopulateEnum'
+        match:
+          type: object
+    EnvelopPopulateEnum:
+      type: string
+      enum:
+        - user
+    EnvelopDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnvelopDistinctFields'
+    EnvelopDistinctFields:
+      type: string
+      enum:
+        - userId
     EnvelopCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2445,11 +2632,14 @@ components:
         - type: object
           required:
             - userId
+            - name
             - type
             - budget
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
+            name:
+              type: string
             type:
               $ref: '#/components/schemas/EnvelopType'
             budget:
@@ -2467,23 +2657,6 @@ components:
       enum:
         - Income
         - Outcome
-    Balance:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - userId
-          properties:
-            userId:
-              $ref: '#/components/schemas/ObjectID'
-            balanceMonth:
-              default: 0
-              type: number
-            balanceTotal:
-              default: 0
-              type: number
-            user:
-              $ref: '#/components/schemas/User'
     ReceiptCreate:
       type: object
       required:
@@ -2611,6 +2784,8 @@ components:
           $ref: '#/components/schemas/SearchStringCondition'
         envelopId:
           $ref: '#/components/schemas/SearchStringCondition'
+        date:
+          $ref: '#/components/schemas/SearchDateCondition'
     ReceiptConditionQuery:
       type: object
       x-min-required:
@@ -2654,6 +2829,8 @@ components:
           $ref: '#/components/schemas/Sorting'
         envelopId:
           $ref: '#/components/schemas/Sorting'
+        date:
+          $ref: '#/components/schemas/Sorting'
     ReceiptPopulateRequestBody:
       type: object
       properties:
@@ -2689,6 +2866,7 @@ components:
       enum:
         - userId
         - envelopId
+        - date
     ReceiptCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2794,168 +2972,6 @@ components:
               $ref: '#/components/schemas/User'
             envelop:
               $ref: '#/components/schemas/Envelop'
-    EnvelopCreate:
-      type: object
-      required:
-        - userId
-        - type
-        - budget
-      properties:
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-        type:
-          type: string
-          enum:
-            - Income
-            - Outcome
-    EnvelopPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-        type:
-          type: string
-          enum:
-            - Income
-            - Outcome
-    EnvelopSearchRequestBody:
-      $ref: '#/components/schemas/EnvelopSearch'
-    EnvelopUpdate:
-      type: object
-      required:
-        - userId
-        - type
-        - budget
-      properties:
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-        type:
-          type: string
-          enum:
-            - Income
-            - Outcome
-    EnvelopSearch:
-      allOf:
-        - $ref: '#/components/schemas/EnvelopPaginationQuery'
-        - $ref: '#/components/schemas/EnvelopConditionQuery'
-        - $ref: '#/components/schemas/EnvelopPopulateRequestBody'
-        - $ref: '#/components/schemas/EnvelopDistinctQuery'
-    EnvelopConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        userId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    EnvelopConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EnvelopConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/EnvelopConditionFields'
-    EnvelopPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/EnvelopPagination'
-    EnvelopPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/EnvelopSort'
-    EnvelopSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        userId:
-          $ref: '#/components/schemas/Sorting'
-    EnvelopPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/EnvelopPopulateFields'
-    EnvelopPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/EnvelopPopulateField'
-    EnvelopPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/EnvelopPopulateEnum'
-        match:
-          type: object
-    EnvelopPopulateEnum:
-      type: string
-      enum:
-        - user
-    EnvelopDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/EnvelopDistinctFields'
-    EnvelopDistinctFields:
-      type: string
-      enum:
-        - userId
     RenewCreate:
       type: object
       required:
@@ -3234,6 +3250,72 @@ components:
               $ref: '#/components/schemas/User'
             envelop:
               $ref: '#/components/schemas/Envelop'
+    UploadCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Upload'
+    UploadFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Upload'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/UploadSearchDistincts'
+    UploadPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    UploadSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     UploadCreate:
       type: object
       required:
@@ -3361,72 +3443,6 @@ components:
       type: string
       enum:
         - userId
-    UploadCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Upload'
-    UploadFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Upload'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/UploadSearchDistincts'
-    UploadPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     Upload:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -3440,6 +3456,63 @@ components:
             filename:
               type: string
             user:
+              $ref: '#/components/schemas/User'
+    UserCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
               $ref: '#/components/schemas/User'
     UserCreate:
       type: object
@@ -3629,63 +3702,6 @@ components:
           $ref: '#/components/schemas/Sorting'
         refreshTokens.token:
           $ref: '#/components/schemas/Sorting'
-    UserCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
     User:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -4379,6 +4395,20 @@ components:
           type: array
           items:
             type: string
+    HealthcheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Healthcheck'
+    Healthcheck:
+      type: object
+      required:
+        - version
+      properties:
+        version:
+          type: string
     AccessModelCreate:
       type: object
       required:
@@ -5904,20 +5934,6 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
-    HealthcheckResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Healthcheck'
-    Healthcheck:
-      type: object
-      required:
-        - version
-      properties:
-        version:
-          type: string
   responses:
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
@@ -6225,6 +6241,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResultHandlerInterface'
+    HealthcheckResponse:
+      description: Returns a ResultHandler with the latest build version number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HealthcheckResponse'
     AccessModelCreateResponse:
       description: Returns a AccessModel
       content:
@@ -6447,12 +6469,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SecureLinkArchiveResponse'
-    HealthcheckResponse:
-      description: Returns a ResultHandler with the latest build version number
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HealthcheckResponse'
   requestBodies:
     LoginRequestBody:
       description: Body needed to login
@@ -6502,40 +6518,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/BalancePopulateRequestBody'
-    ReceiptCreateRequestBody:
-      description: Body needed to create a Receipt
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReceiptCreate'
-    ReceiptSearchRequestBody:
-      description: Body needed to search Receipts
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReceiptSearchRequestBody'
-    ReceiptPatchRequestBody:
-      description: Body needed to modify a Receipt
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReceiptPatch'
-    ReceiptUpdateRequestBody:
-      description: Body needed to update a Receipt
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReceiptUpdate'
-    ReceiptPopulateRequestBody:
-      description: Body needed populate fields in Receipt
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ReceiptPopulateRequestBody'
     EnvelopCreateRequestBody:
       description: Body needed to create a Envelop
       required: true
@@ -6570,6 +6552,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+    ReceiptCreateRequestBody:
+      description: Body needed to create a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptCreate'
+    ReceiptSearchRequestBody:
+      description: Body needed to search Receipts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptSearchRequestBody'
+    ReceiptPatchRequestBody:
+      description: Body needed to modify a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptPatch'
+    ReceiptUpdateRequestBody:
+      description: Body needed to update a Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptUpdate'
+    ReceiptPopulateRequestBody:
+      description: Body needed populate fields in Receipt
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ReceiptPopulateRequestBody'
     RenewCreateRequestBody:
       description: Body needed to create a Renew
       required: true

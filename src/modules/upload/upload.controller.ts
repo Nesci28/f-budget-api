@@ -22,7 +22,7 @@ import { UploadService } from "./upload.service";
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadCreate(
     @Body() upload: UploadCreate,
     @Query()
@@ -35,7 +35,7 @@ export class UploadController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadSearch(
     @Body() body: UploadSearch,
   ): Promise<UploadSearchResponse> {
@@ -44,7 +44,7 @@ export class UploadController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadGetById(
     @Param() params: { id: string },
     @Body() body: UploadPopulateRequestBody,
@@ -55,7 +55,7 @@ export class UploadController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: UploadPopulateRequestBody,
@@ -66,7 +66,7 @@ export class UploadController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadPatch(
     @Param() params: { id: string },
     @Body() upload: UploadPatch,
@@ -76,7 +76,7 @@ export class UploadController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadUpdate(
     @Param() params: { id: string },
     @Body() upload: UploadUpdate,
@@ -91,7 +91,7 @@ export class UploadController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async uploadArchive(
     @Param() params: { id: string },
   ): Promise<UploadArchiveResponse> {

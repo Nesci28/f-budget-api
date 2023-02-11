@@ -14,7 +14,7 @@ import {
 } from "@f-budget/f-budget-api-typescript-fetch";
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 
 import { ReceiptService } from "./receipt.service";
 
@@ -22,7 +22,7 @@ import { ReceiptService } from "./receipt.service";
 export class ReceiptController {
   constructor(private readonly receiptService: ReceiptService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptCreate(
     @Body() receipt: ReceiptCreate,
     @Query()
@@ -35,7 +35,7 @@ export class ReceiptController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptSearch(
     @Body() body: ReceiptSearch,
   ): Promise<ReceiptSearchResponse> {
@@ -44,7 +44,7 @@ export class ReceiptController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptGetById(
     @Param() params: { id: string },
     @Body() body: ReceiptPopulateRequestBody,
@@ -55,7 +55,7 @@ export class ReceiptController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: ReceiptPopulateRequestBody,
@@ -66,7 +66,7 @@ export class ReceiptController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptPatch(
     @Param() params: { id: string },
     @Body() receipt: ReceiptPatch,
@@ -76,7 +76,7 @@ export class ReceiptController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptUpdate(
     @Param() params: { id: string },
     @Body() receipt: ReceiptUpdate,
@@ -91,7 +91,7 @@ export class ReceiptController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async receiptArchive(
     @Param() params: { id: string },
   ): Promise<ReceiptArchiveResponse> {

@@ -1,7 +1,7 @@
 import { Envelop } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
-import { EnvelopErrors } from "../../../../../src/modules/envelop/envelop.errors";
+import { EnvelopErrors } from "../../envelop.errors";
 import { EnvelopContext } from "../envelop.e2e-spec";
 
 export function envelopUpdateTest(): void {
@@ -24,7 +24,10 @@ export function envelopUpdateTest(): void {
 
     expect(result.isSuccess).toEqual(true);
     expect(result.value!.id).toEqual(envelop.id);
-    const res = ctx.testHandler.traverseObjects(ctx.envelopUpdate, result.value!);
+    const res = ctx.testHandler.traverseObjects(
+      ctx.envelopUpdate,
+      result.value!,
+    );
     const fail = res.find((x) => {
       return !x.result;
     });
@@ -38,8 +41,13 @@ export function envelopUpdateTest(): void {
       isDryRun: true,
     });
 
-    const checkFindResult = await ctx.envelopRepository.getById(result.value!.id);
-    const checkRes = ctx.testHandler.traverseObjects(ctx.envelopUpdate, checkFindResult);
+    const checkFindResult = await ctx.envelopRepository.getById(
+      result.value!.id,
+    );
+    const checkRes = ctx.testHandler.traverseObjects(
+      ctx.envelopUpdate,
+      checkFindResult,
+    );
     expect(
       checkRes.some((x) => {
         return !x.result;
@@ -48,7 +56,10 @@ export function envelopUpdateTest(): void {
 
     expect(result.isSuccess).toEqual(true);
     expect(result.value!.id).toEqual(envelop.id);
-    const res = ctx.testHandler.traverseObjects(ctx.envelopUpdate, result.value!);
+    const res = ctx.testHandler.traverseObjects(
+      ctx.envelopUpdate,
+      result.value!,
+    );
     const fail = res.find((x) => {
       return !x.result;
     });

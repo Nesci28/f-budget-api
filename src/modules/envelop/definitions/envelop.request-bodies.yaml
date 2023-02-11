@@ -39,11 +39,14 @@ components:
       type: object
       required:
         - userId
+        - name
         - type
         - budget
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        name:
+          type: string
         budget:
           type: number
         balanceMonth:
@@ -60,6 +63,8 @@ components:
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        name:
+          type: string
         budget:
           type: number
         balanceMonth:
@@ -76,11 +81,14 @@ components:
       type: object
       required:
         - userId
+        - name
         - type
         - budget
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+        name:
+          type: string
         budget:
           type: number
         balanceMonth:

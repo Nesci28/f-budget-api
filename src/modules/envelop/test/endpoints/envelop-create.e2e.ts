@@ -1,5 +1,3 @@
-import { EnvelopCreate } from "@f-budget/f-budget-api-typescript-fetch";
-
 import { EnvelopContext } from "../envelop.e2e-spec";
 
 export function envelopCreateTest(): void {
@@ -15,7 +13,10 @@ export function envelopCreateTest(): void {
     });
 
     expect(result.isSuccess).toEqual(true);
-    const res = ctx.testHandler.traverseObjects(ctx.envelopCreate, result.value!);
+    const res = ctx.testHandler.traverseObjects(
+      ctx.envelopCreate,
+      result.value!,
+    );
     const fail = res.find((x) => {
       return !x.result;
     });
@@ -30,13 +31,16 @@ export function envelopCreateTest(): void {
 
     const checkFindResult = await ctx.envelopConnector.envelopGetById({
       id: result.value!.id,
-envelopPopulateRequestBody: {}
+      envelopPopulateRequestBody: {},
     });
     expect(checkFindResult.isSuccess).toEqual(false);
     expect(checkFindResult.error?.httpCode).toEqual(404);
 
     expect(result.isSuccess).toEqual(true);
-    const res = ctx.testHandler.traverseObjects(ctx.envelopCreate, result.value!);
+    const res = ctx.testHandler.traverseObjects(
+      ctx.envelopCreate,
+      result.value!,
+    );
     const fail = res.find((x) => {
       return !x.result;
     });

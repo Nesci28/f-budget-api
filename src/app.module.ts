@@ -21,6 +21,11 @@ import { configs } from "./constants/configs.constant";
 import { LocalStrategy } from "./guards/local.strategy";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
+import { BalanceModule } from "./modules/balance/balance.module";
+import { EnvelopModule } from "./modules/envelop/envelop.module";
+import { ReceiptModule } from "./modules/receipt/receipt.module";
+import { RenewModule } from "./modules/renew/renew.module";
+import { UploadModule } from "./modules/upload/upload.module";
 import { UserModule } from "./modules/user/user.module";
 
 const configModule = ConfigModule.forRoot({
@@ -95,7 +100,15 @@ export const appImports = [
   }),
 ];
 
-const moduleImports = [AuthModule, UserModule];
+const moduleImports = [
+  AuthModule,
+  BalanceModule,
+  EnvelopModule,
+  ReceiptModule,
+  RenewModule,
+  UploadModule,
+  UserModule,
+];
 
 const appProviders = [
   LocalStrategy,

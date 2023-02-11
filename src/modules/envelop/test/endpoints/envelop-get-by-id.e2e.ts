@@ -1,8 +1,8 @@
 import { Envelop } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
+import { EnvelopErrors } from "../../envelop.errors";
 import { EnvelopContext } from "../envelop.e2e-spec";
-import { EnvelopErrors } from "../../../../../src/modules/envelop/envelop.errors";
 
 export function envelopGetByIdTest(): void {
   let ctx: EnvelopContext;
@@ -17,7 +17,10 @@ export function envelopGetByIdTest(): void {
   });
 
   it("should return a specific Envelop", async () => {
-    const results = await ctx.envelopConnector.envelopGetById({ id: envelops[0].id, envelopPopulateRequestBody: {} });
+    const results = await ctx.envelopConnector.envelopGetById({
+      id: envelops[0].id,
+      envelopPopulateRequestBody: {},
+    });
 
     expect(results.isSuccess).toEqual(true);
     expect(results.value?.id).toEqual(envelops[0].id);
@@ -26,7 +29,10 @@ export function envelopGetByIdTest(): void {
   it("should return not found when using an invalid Envelop id", async () => {
     const fakeEnvelopId = "61d88c918c8a0daafeafe31d";
 
-    const results = await ctx.envelopConnector.envelopGetById({ id: fakeEnvelopId, envelopPopulateRequestBody: {} });
+    const results = await ctx.envelopConnector.envelopGetById({
+      id: fakeEnvelopId,
+      envelopPopulateRequestBody: {},
+    });
 
     expect(results.isSuccess).toEqual(false);
     expect(results.error?.httpCode).toEqual(StatusCodes.NOT_FOUND);

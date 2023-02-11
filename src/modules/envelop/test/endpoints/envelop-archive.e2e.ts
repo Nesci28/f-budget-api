@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 
-import { EnvelopErrors } from "../../../../../src/modules/envelop/envelop.errors";
+import { EnvelopErrors } from "../../envelop.errors";
 import { EnvelopContext } from "../envelop.e2e-spec";
 
 export function envelopArchiveTest(): void {
@@ -13,7 +13,9 @@ export function envelopArchiveTest(): void {
   it("should archive the specified Envelop", async () => {
     const envelop = await ctx.envelopRepository.create(ctx.envelopCreate);
 
-    const result = await ctx.envelopConnector.envelopArchive({ id: envelop.id });
+    const result = await ctx.envelopConnector.envelopArchive({
+      id: envelop.id,
+    });
 
     expect(result.isSuccess).toEqual(true);
   });
@@ -21,7 +23,9 @@ export function envelopArchiveTest(): void {
   it("should return not found when using an invalid Envelop id", async () => {
     const fakeEnvelopId = "61d88c918c8a0daafeafe31d";
 
-    const result = await ctx.envelopConnector.envelopArchive({ id: fakeEnvelopId });
+    const result = await ctx.envelopConnector.envelopArchive({
+      id: fakeEnvelopId,
+    });
 
     expect(result.isSuccess).toEqual(false);
     expect(result.error?.httpCode).toEqual(StatusCodes.NOT_FOUND);
@@ -32,7 +36,9 @@ export function envelopArchiveTest(): void {
     const envelop = await ctx.envelopRepository.create(ctx.envelopCreate);
     await ctx.envelopRepository.archive(envelop.id);
 
-    const result = await ctx.envelopConnector.envelopArchive({ id: envelop.id });
+    const result = await ctx.envelopConnector.envelopArchive({
+      id: envelop.id,
+    });
 
     expect(result.isSuccess).toEqual(false);
     expect(result.error?.httpCode).toEqual(StatusCodes.BAD_REQUEST);

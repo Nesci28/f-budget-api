@@ -43,6 +43,7 @@ export class MongoReceipt extends MongoBase implements Receipt {
       return new Date().toISOString();
     },
     required: true,
+    index: true,
   })
   public date: Date;
 

@@ -1,4 +1,3 @@
-import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import {
   EnvelopArchiveResponse,
   EnvelopCreate,
@@ -13,8 +12,9 @@ import {
   EnvelopUpdate,
   EnvelopUpdateResponse,
 } from "@f-budget/f-budget-api-typescript-fetch";
+import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 
 import { EnvelopService } from "./envelop.service";
 
@@ -22,10 +22,11 @@ import { EnvelopService } from "./envelop.service";
 export class EnvelopController {
   constructor(private readonly envelopService: EnvelopService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopCreate(
     @Body() envelop: EnvelopCreate,
-    @Query() query: {
+    @Query()
+    query: {
       isDryRun?: boolean;
     },
   ): Promise<EnvelopCreateResponse> {
@@ -34,7 +35,7 @@ export class EnvelopController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopSearch(
     @Body() body: EnvelopSearch,
   ): Promise<EnvelopSearchResponse> {
@@ -43,29 +44,29 @@ export class EnvelopController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopGetById(
     @Param() params: { id: string },
-@Body() body: EnvelopPopulateRequestBody
+    @Body() body: EnvelopPopulateRequestBody,
   ): Promise<EnvelopFindByIdResponse> {
     const { id: envelopId } = params;
-const { populate } = body;
+    const { populate } = body;
     const res = await this.envelopService.getById(envelopId, populate);
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopGetAll(
     @Query() query: { isArchived?: boolean },
-@Body() body: EnvelopPopulateRequestBody
+    @Body() body: EnvelopPopulateRequestBody,
   ): Promise<EnvelopGetAllResponse> {
     const { isArchived } = query;
-const { populate } = body;
+    const { populate } = body;
     const res = await this.envelopService.getAll(isArchived, populate);
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopPatch(
     @Param() params: { id: string },
     @Body() envelop: EnvelopPatch,
@@ -75,11 +76,12 @@ const { populate } = body;
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopUpdate(
     @Param() params: { id: string },
     @Body() envelop: EnvelopUpdate,
-    @Query() query: {
+    @Query()
+    query: {
       isDryRun?: boolean;
     },
   ): Promise<EnvelopUpdateResponse> {
@@ -89,7 +91,7 @@ const { populate } = body;
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async envelopArchive(
     @Param() params: { id: string },
   ): Promise<EnvelopArchiveResponse> {

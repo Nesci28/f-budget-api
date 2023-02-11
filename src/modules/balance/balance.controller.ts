@@ -14,7 +14,7 @@ import {
 } from "@f-budget/f-budget-api-typescript-fetch";
 import { Body, Controller, Param, Query, UseGuards } from "@nestjs/common";
 import { ResultHandler } from "@yest/result-handler";
-import { JwtTokenGuard, ScopesGuard } from "@yest/security";
+import { JwtTokenGuard } from "@yest/security";
 
 import { BalanceService } from "./balance.service";
 
@@ -22,7 +22,7 @@ import { BalanceService } from "./balance.service";
 export class BalanceController {
   constructor(private readonly balanceService: BalanceService) {}
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceCreate(
     @Body() balance: BalanceCreate,
     @Query()
@@ -35,7 +35,7 @@ export class BalanceController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceSearch(
     @Body() body: BalanceSearch,
   ): Promise<BalanceSearchResponse> {
@@ -44,7 +44,7 @@ export class BalanceController {
     return ResultHandler.ok(value, pagination, distincts);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceGetById(
     @Param() params: { id: string },
     @Body() body: BalancePopulateRequestBody,
@@ -55,7 +55,7 @@ export class BalanceController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceGetAll(
     @Query() query: { isArchived?: boolean },
     @Body() body: BalancePopulateRequestBody,
@@ -66,7 +66,7 @@ export class BalanceController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balancePatch(
     @Param() params: { id: string },
     @Body() balance: BalancePatch,
@@ -76,7 +76,7 @@ export class BalanceController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceUpdate(
     @Param() params: { id: string },
     @Body() balance: BalanceUpdate,
@@ -91,7 +91,7 @@ export class BalanceController {
     return ResultHandler.ok(res);
   }
 
-  @UseGuards(JwtTokenGuard, ScopesGuard)
+  @UseGuards(JwtTokenGuard)
   public async balanceArchive(
     @Param() params: { id: string },
   ): Promise<BalanceArchiveResponse> {

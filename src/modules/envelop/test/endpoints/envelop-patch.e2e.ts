@@ -1,7 +1,7 @@
 import { Envelop } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
-import { EnvelopErrors } from "../../../../../src/modules/envelop/envelop.errors";
+import { EnvelopErrors } from "../../envelop.errors";
 import { EnvelopContext } from "../envelop.e2e-spec";
 
 export function envelopPatchTest(): void {
@@ -24,7 +24,10 @@ export function envelopPatchTest(): void {
 
     expect(result.isSuccess).toEqual(true);
     expect(result.value!.id).toEqual(envelop.id);
-    const res = ctx.testHandler.traverseObjects(ctx.envelopPatch, result.value!);
+    const res = ctx.testHandler.traverseObjects(
+      ctx.envelopPatch,
+      result.value!,
+    );
     const fail = res.find((x) => {
       return !x.result;
     });

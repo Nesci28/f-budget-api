@@ -19,6 +19,7 @@ components:
           x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
         date:
+          x-index: true
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime"
         amount:
           type: number
