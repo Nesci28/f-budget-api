@@ -1,20 +1,20 @@
 /* eslint-disable no-use-before-define */
-import { Upload, User } from "@f-budget/f-budget-api-typescript-fetch";
+import { Picture, User } from "@f-budget/f-budget-api-typescript-fetch";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, getRefModel, MongoBase, MongoUtil } from "@yest/mongoose";
 import { connections, Types } from "mongoose";
 
-export type UploadDocument = MongoUpload & Document<MongoUpload>;
+export type PictureDocument = MongoPicture & Document<MongoPicture>;
 
 @Schema({
-  collection: "mongoupload",
+  collection: "mongopicture",
   timestamps: true,
   toObject: {
     virtuals: true,
     getters: true,
   },
 })
-export class MongoUpload extends MongoBase implements Upload {
+export class MongoPicture extends MongoBase implements Picture {
   @Prop({
     type: Types.ObjectId,
     set: MongoUtil.setterObjectId,
@@ -33,9 +33,9 @@ export class MongoUpload extends MongoBase implements Upload {
   public user?: User;
 }
 
-const schema = SchemaFactory.createForClass(MongoUpload);
-schema.pre("save", MongoUpload.preSave);
-schema.pre("insertMany", MongoUpload.preInsertMany);
+const schema = SchemaFactory.createForClass(MongoPicture);
+schema.pre("save", MongoPicture.preSave);
+schema.pre("insertMany", MongoPicture.preInsertMany);
 
 schema.virtual("user", {
   ref: () => {
@@ -50,4 +50,4 @@ schema.virtual("user", {
   get: MongoUtil.getterUnsetPopulate,
 });
 
-export const MongoUploadSchema = schema;
+export const MongoPictureSchema = schema;

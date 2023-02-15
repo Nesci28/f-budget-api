@@ -28,13 +28,25 @@ export class MongoBalance extends MongoBase implements Balance {
     type: Number,
     default: 0,
   })
-  public balanceMonth?: number;
+  public incomeMonth?: number;
 
   @Prop({
     type: Number,
     default: 0,
   })
-  public balanceTotal?: number;
+  public incomeTotal?: number;
+
+  @Prop({
+    type: Number,
+    default: 0,
+  })
+  public outcomeMonth?: number;
+
+  @Prop({
+    type: Number,
+    default: 0,
+  })
+  public outcomeTotal?: number;
 
   public user?: User;
 }

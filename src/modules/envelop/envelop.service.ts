@@ -21,6 +21,11 @@ export class EnvelopService {
     envelop: EnvelopCreate,
     isDryRun?: boolean,
   ): Promise<Envelop> {
+    // eslint-disable-next-line no-param-reassign
+    envelop.incomeMonth = envelop.budget;
+    // eslint-disable-next-line no-param-reassign
+    envelop.incomeTotal = envelop.budget;
+
     const res = await this.envelopRepository.create(envelop, isDryRun);
     return res;
   }

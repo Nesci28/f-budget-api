@@ -9,7 +9,6 @@ components:
         - userId
         - name
         - type
-        - budget
       properties:
         userId:
           x-index: true
@@ -17,13 +16,20 @@ components:
         name:
           type: string
         type:
+          x-index: true
           $ref: "#/components/schemas/EnvelopType"
         budget:
           type: number
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         user:

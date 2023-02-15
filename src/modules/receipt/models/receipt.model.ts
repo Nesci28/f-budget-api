@@ -2,6 +2,7 @@
 import {
   Envelop,
   Receipt,
+  Renew,
   User,
 } from "@f-budget/f-budget-api-typescript-fetch";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
@@ -66,32 +67,55 @@ export class MongoReceipt extends MongoBase implements Receipt {
   @Prop({
     type: Number,
   })
-  public balanceMonth?: number;
+  public incomeMonth?: number;
 
   @Prop({
     type: Number,
   })
-  public balanceTotal?: number;
+  public incomeTotal?: number;
 
   @Prop({
     type: Number,
   })
-  public envelopBalanceMonth?: number;
+  public outcomeMonth?: number;
 
   @Prop({
     type: Number,
   })
-  public envelopBalanceTotal?: number;
+  public outcomeTotal?: number;
 
   @Prop({
-    type: Boolean,
-    required: true,
+    type: Number,
   })
-  public isFromRenew: boolean;
+  public envelopIncomeMonth?: number;
+
+  @Prop({
+    type: Number,
+  })
+  public envelopIncomeTotal?: number;
+
+  @Prop({
+    type: Number,
+  })
+  public envelopOutcomeMonth?: number;
+
+  @Prop({
+    type: Number,
+  })
+  public envelopOutcomeTotal?: number;
+
+  @Prop({
+    type: Types.ObjectId,
+    set: MongoUtil.setterObjectId,
+    get: MongoUtil.getterObjectId,
+  })
+  public renewId?: string;
 
   public user?: User;
 
   public envelop?: Envelop;
+
+  public renew?: Renew;
 }
 
 const schema = SchemaFactory.createForClass(MongoReceipt);
@@ -117,6 +141,19 @@ schema.virtual("envelop", {
     return model;
   },
   localField: "envelopId",
+  foreignField: "id",
+  autopopulate: false,
+  justOne: true,
+
+  get: MongoUtil.getterUnsetPopulate,
+});
+
+schema.virtual("renew", {
+  ref: () => {
+    const model = getRefModel(connections, "MongoRenew");
+    return model;
+  },
+  localField: "renewId",
   foreignField: "id",
   autopopulate: false,
   justOne: true,

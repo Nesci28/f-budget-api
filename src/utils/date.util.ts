@@ -39,6 +39,29 @@ export class DateUtil {
     return time;
   }
 
+  public static isWeekNumberEven(date: Date): boolean {
+    const weekNumber = moment(date).isoWeek();
+    const isEven = weekNumber % 2 === 0;
+    return isEven;
+  }
+
+  public static getWeekDay(date: Date): number {
+    const weekDay = moment(date).day();
+    return weekDay;
+  }
+
+  public static getMonthDay(date: Date): number {
+    const now = moment(date);
+    const monthDay = now.date();
+    return monthDay;
+  }
+
+  public static isMonday(date: Date): boolean {
+    const now = moment(date).day();
+    const isMonday = now === 1;
+    return isMonday;
+  }
+
   public static isBusinessDay(date: Date): boolean {
     const now = moment(date).day();
     const isBusinessDay = now === 0 || now === 6;

@@ -54,15 +54,22 @@ export class ReceiptService {
     ]);
 
     const {
-      balanceMonth: envelopBalanceMonth,
-      balanceTotal: envelopBalanceTotal,
+      incomeMonth: envelopIncomeMonth,
+      incomeTotal: envelopIncomeTotal,
+      outcomeMonth: envelopOutcomeMonth,
+      outcomeTotal: envelopOutcomeTotal,
     } = envelopPatched;
-    const { balanceMonth, balanceTotal } = balancePatched;
+    const { incomeMonth, incomeTotal, outcomeMonth, outcomeTotal } =
+      balancePatched;
     const receiptPatch: ReceiptPatch = {
-      envelopBalanceMonth,
-      envelopBalanceTotal,
-      balanceMonth,
-      balanceTotal,
+      envelopIncomeMonth,
+      envelopIncomeTotal,
+      envelopOutcomeMonth,
+      envelopOutcomeTotal,
+      incomeMonth,
+      incomeTotal,
+      outcomeMonth,
+      outcomeTotal,
     };
     const receiptPatched = await this.patch(res.id, receiptPatch);
 
@@ -112,29 +119,41 @@ export class ReceiptService {
     if (amount !== undefined) {
       const diff = oldAmount - amount;
       if (diff) {
-        const [envelop, balance] = await Promise.all([
+        const [envelop] = await Promise.all([
           this.envelopService.getById(envelopId),
           this.getBalanceByUserId(userId),
         ]);
 
-        await Promise.all([
+        const [envelopPatched, balancePatched] = await Promise.all([
           this.envelopPatch(envelop, diff),
           this.balancePatch(userId, diff),
         ]);
 
         const {
-          balanceMonth: envelopBalanceMonth,
-          balanceTotal: envelopBalanceTotal,
-        } = envelop;
-        const { balanceMonth, balanceTotal } = balance;
+          incomeMonth: envelopIncomeMonth,
+          incomeTotal: envelopIncomeTotal,
+          outcomeMonth: envelopOutcomeMonth,
+          outcomeTotal: envelopOutcomeTotal,
+        } = envelopPatched;
+        const { incomeMonth, incomeTotal, outcomeMonth, outcomeTotal } =
+          balancePatched;
+
         // eslint-disable-next-line no-param-reassign
-        receipt.envelopBalanceMonth = (envelopBalanceMonth || 0) + diff;
+        receipt.envelopIncomeMonth = envelopIncomeMonth || 0;
         // eslint-disable-next-line no-param-reassign
-        receipt.envelopBalanceTotal = (envelopBalanceTotal || 0) + diff;
+        receipt.envelopIncomeTotal = envelopIncomeTotal || 0;
         // eslint-disable-next-line no-param-reassign
-        receipt.balanceMonth = (balanceMonth || 0) + diff;
+        receipt.envelopOutcomeMonth = envelopOutcomeMonth || 0;
         // eslint-disable-next-line no-param-reassign
-        receipt.balanceTotal = (balanceTotal || 0) + diff;
+        receipt.envelopOutcomeTotal = envelopOutcomeTotal || 0;
+        // eslint-disable-next-line no-param-reassign
+        receipt.incomeMonth = incomeMonth || 0;
+        // eslint-disable-next-line no-param-reassign
+        receipt.incomeTotal = incomeTotal || 0;
+        // eslint-disable-next-line no-param-reassign
+        receipt.outcomeMonth = outcomeMonth || 0;
+        // eslint-disable-next-line no-param-reassign
+        receipt.outcomeTotal = outcomeTotal || 0;
       }
     }
 
@@ -154,29 +173,41 @@ export class ReceiptService {
 
     const diff = oldAmount - amount;
     if (diff) {
-      const [envelop, balance] = await Promise.all([
+      const [envelop] = await Promise.all([
         this.envelopService.getById(envelopId),
         this.getBalanceByUserId(userId),
       ]);
 
-      await Promise.all([
+      const [envelopPatched, balancePatched] = await Promise.all([
         this.envelopPatch(envelop, diff),
         this.balancePatch(userId, diff),
       ]);
 
       const {
-        balanceMonth: envelopBalanceMonth,
-        balanceTotal: envelopBalanceTotal,
-      } = envelop;
-      const { balanceMonth, balanceTotal } = balance;
+        incomeMonth: envelopIncomeMonth,
+        incomeTotal: envelopIncomeTotal,
+        outcomeMonth: envelopOutcomeMonth,
+        outcomeTotal: envelopOutcomeTotal,
+      } = envelopPatched;
+      const { incomeMonth, incomeTotal, outcomeMonth, outcomeTotal } =
+        balancePatched;
+
       // eslint-disable-next-line no-param-reassign
-      receipt.envelopBalanceMonth = (envelopBalanceMonth || 0) + diff;
+      receipt.envelopIncomeMonth = envelopIncomeMonth || 0;
       // eslint-disable-next-line no-param-reassign
-      receipt.envelopBalanceTotal = (envelopBalanceTotal || 0) + diff;
+      receipt.envelopIncomeTotal = envelopIncomeTotal || 0;
       // eslint-disable-next-line no-param-reassign
-      receipt.balanceMonth = (balanceMonth || 0) + diff;
+      receipt.envelopOutcomeMonth = envelopOutcomeMonth || 0;
       // eslint-disable-next-line no-param-reassign
-      receipt.balanceTotal = (balanceTotal || 0) + diff;
+      receipt.envelopOutcomeTotal = envelopOutcomeTotal || 0;
+      // eslint-disable-next-line no-param-reassign
+      receipt.incomeMonth = incomeMonth || 0;
+      // eslint-disable-next-line no-param-reassign
+      receipt.incomeTotal = incomeTotal || 0;
+      // eslint-disable-next-line no-param-reassign
+      receipt.outcomeMonth = outcomeMonth || 0;
+      // eslint-disable-next-line no-param-reassign
+      receipt.outcomeTotal = outcomeTotal || 0;
     }
 
     const res = await this.receiptRepository.update(
@@ -220,11 +251,26 @@ export class ReceiptService {
     envelop: Envelop,
     amount: number,
   ): Promise<Envelop> {
-    const { balanceMonth, balanceTotal, id: envelopId } = envelop;
-    const envelopPatch: EnvelopPatch = {
-      balanceMonth: (balanceMonth || 0) + amount,
-      balanceTotal: (balanceTotal || 0) + amount,
-    };
+    const {
+      incomeMonth,
+      incomeTotal,
+      outcomeMonth,
+      outcomeTotal,
+      id: envelopId,
+    } = envelop;
+
+    const envelopPatch: EnvelopPatch = {};
+
+    if (amount > 0) {
+      envelopPatch.incomeMonth = (incomeMonth || 0) + amount;
+      envelopPatch.incomeTotal = (incomeTotal || 0) + amount;
+    }
+
+    if (amount < 0) {
+      envelopPatch.outcomeMonth = (outcomeMonth || 0) + Math.abs(amount);
+      envelopPatch.outcomeTotal = (outcomeTotal || 0) + Math.abs(amount);
+    }
+
     const envelopPatched = await this.envelopService.patch(
       envelopId,
       envelopPatch,
@@ -235,10 +281,28 @@ export class ReceiptService {
 
   private async balancePatch(userId: string, amount: number): Promise<Balance> {
     const balance = await this.getBalanceByUserId(userId);
-    const { balanceMonth, balanceTotal, id: balanceId } = balance;
+    const {
+      incomeMonth,
+      incomeTotal,
+      outcomeMonth,
+      outcomeTotal,
+      id: balanceId,
+    } = balance;
+
+    const newIncomeMonth =
+      amount > 0 ? (incomeMonth || 0) + amount : incomeMonth || 0;
+    const newIncomeTotal =
+      amount > 0 ? (incomeTotal || 0) + amount : incomeTotal || 0;
+    const newOutcomeMonth =
+      amount < 0 ? (outcomeMonth || 0) + Math.abs(amount) : outcomeMonth || 0;
+    const newOutcomeTotal =
+      amount < 0 ? (outcomeTotal || 0) + Math.abs(amount) : outcomeTotal || 0;
+
     const balancePatch: BalancePatch = {
-      balanceMonth: (balanceMonth || 0) + amount,
-      balanceTotal: (balanceTotal || 0) + amount,
+      incomeMonth: newIncomeMonth,
+      incomeTotal: newIncomeTotal,
+      outcomeMonth: newOutcomeMonth,
+      outcomeTotal: newOutcomeTotal,
     };
     const balancePatched = await this.balanceService.patch(
       balanceId,

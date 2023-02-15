@@ -1,22 +1,22 @@
 components:
   parameters:
-    UploadId:
+    PictureId:
       name: id
-      description: Upload's Id
+      description: Picture's Id
       in: path
       required: true
       schema:
         $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
-    IsUploadDryRun:
+    IsPictureDryRun:
         name: isDryRun
         description: Should this request be ran as a dry run (no save)
         in: query
         required: false
         schema:
           type: boolean
-    IsUploadArchived:
+    IsPictureArchived:
       name: isArchived
-      description: Get archived Upload
+      description: Get archived Picture
       in: query
       required: false
       schema:

@@ -23,9 +23,9 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { BalanceModule } from "./modules/balance/balance.module";
 import { EnvelopModule } from "./modules/envelop/envelop.module";
+import { PictureModule } from "./modules/picture/picture.module";
 import { ReceiptModule } from "./modules/receipt/receipt.module";
 import { RenewModule } from "./modules/renew/renew.module";
-import { UploadModule } from "./modules/upload/upload.module";
 import { UserModule } from "./modules/user/user.module";
 
 const configModule = ConfigModule.forRoot({
@@ -106,7 +106,7 @@ const moduleImports = [
   EnvelopModule,
   ReceiptModule,
   RenewModule,
-  UploadModule,
+  PictureModule,
   UserModule,
 ];
 

@@ -37,25 +37,35 @@ export class MongoEnvelop extends MongoBase implements Envelop {
   @Prop({
     type: String,
     required: true,
+    index: true,
     enum: ["Income", "Outcome"],
   })
   public type: EnvelopType;
 
   @Prop({
     type: Number,
-    required: true,
   })
-  public budget: number;
+  public budget?: number;
 
   @Prop({
     type: Number,
   })
-  public balanceMonth?: number;
+  public incomeMonth?: number;
 
   @Prop({
     type: Number,
   })
-  public balanceTotal?: number;
+  public incomeTotal?: number;
+
+  @Prop({
+    type: Number,
+  })
+  public outcomeMonth?: number;
+
+  @Prop({
+    type: Number,
+  })
+  public outcomeTotal?: number;
 
   public user?: User;
 }

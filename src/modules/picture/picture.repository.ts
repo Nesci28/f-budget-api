@@ -1,10 +1,10 @@
 import {
-  Upload,
-  UploadCreate,
-  UploadPatch,
-  UploadPopulateField,
-  UploadSearch,
-  UploadUpdate,
+  Picture,
+  PictureCreate,
+  PicturePatch,
+  PicturePopulateField,
+  PictureSearch,
+  PictureUpdate,
 } from "@f-budget/f-budget-api-typescript-fetch";
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
@@ -12,35 +12,35 @@ import { BaseRepository, Projection, YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
 import { Model } from "mongoose";
 
-import { UploadDocument } from "./models/upload.model";
-import { UploadErrors } from "./upload.errors";
+import { PictureDocument } from "./models/picture.model";
+import { PictureErrors } from "./picture.errors";
 
-export type UploadModels = {
-  model: Upload;
-  modelCreate: UploadCreate;
-  modelUpdate: UploadUpdate;
-  modelPatch: UploadPatch;
-  modelSearch: UploadSearch;
-  modelPopulate: Array<UploadPopulateField>;
-  modelDocument: UploadDocument;
+export type PictureModels = {
+  model: Picture;
+  modelCreate: PictureCreate;
+  modelUpdate: PictureUpdate;
+  modelPatch: PicturePatch;
+  modelSearch: PictureSearch;
+  modelPopulate: Array<PicturePopulateField>;
+  modelDocument: PictureDocument;
   modelSearchDistincts: never;
 };
 
 @Injectable()
-export class UploadRepository extends BaseRepository<UploadModels> {
-  private logger = new Logger(UploadRepository.name);
+export class PictureRepository extends BaseRepository<PictureModels> {
+  private logger = new Logger(PictureRepository.name);
 
   constructor(
-    @InjectModel("MongoUpload", "f-budget")
-    public readonly uploadModel: Model<UploadDocument>,
+    @InjectModel("MongoPicture", "f-budget")
+    public readonly pictureModel: Model<PictureDocument>,
   ) {
-    super(uploadModel, UploadErrors);
+    super(pictureModel, PictureErrors);
   }
 
   public async create(
-    model: UploadCreate,
+    model: PictureCreate,
     isDryRun?: boolean,
-  ): Promise<Upload> {
+  ): Promise<Picture> {
     try {
       const res = await super.create(model, isDryRun);
       return res;
@@ -52,9 +52,9 @@ export class UploadRepository extends BaseRepository<UploadModels> {
   }
 
   public async createMany(
-    modelBulk: UploadCreate[],
+    modelBulk: PictureCreate[],
     isDryRun?: boolean,
-  ): Promise<Upload[]> {
+  ): Promise<Picture[]> {
     try {
       const res = await super.createMany(modelBulk, isDryRun);
       return res;
@@ -66,9 +66,9 @@ export class UploadRepository extends BaseRepository<UploadModels> {
   }
 
   public async search(
-    searchParams: UploadSearch,
+    searchParams: PictureSearch,
     projection?: Projection,
-  ): Promise<YestPaginateResult<Upload, never>> {
+  ): Promise<YestPaginateResult<Picture, never>> {
     try {
       const res = await super.search(searchParams, projection);
       return res;
@@ -81,8 +81,8 @@ export class UploadRepository extends BaseRepository<UploadModels> {
 
   public async getAll(
     isArchived?: boolean,
-    populate?: UploadPopulateField[],
-  ): Promise<Upload[]> {
+    populate?: PicturePopulateField[],
+  ): Promise<Picture[]> {
     try {
       const res = await super.getAll(isArchived, populate);
       return res;
@@ -95,8 +95,8 @@ export class UploadRepository extends BaseRepository<UploadModels> {
 
   public async getById(
     modelId: string,
-    populate?: UploadPopulateField[],
-  ): Promise<Upload> {
+    populate?: PicturePopulateField[],
+  ): Promise<Picture> {
     try {
       const res = await super.getById(modelId, populate);
       return res;
@@ -107,7 +107,7 @@ export class UploadRepository extends BaseRepository<UploadModels> {
     }
   }
 
-  public async patch(modelId: string, model: UploadPatch): Promise<Upload> {
+  public async patch(modelId: string, model: PicturePatch): Promise<Picture> {
     try {
       const res = await super.patch(modelId, model);
       return res;
@@ -120,9 +120,9 @@ export class UploadRepository extends BaseRepository<UploadModels> {
 
   public async update(
     modelId: string,
-    model: UploadUpdate,
+    model: PictureUpdate,
     isDryRun?: boolean,
-  ): Promise<Upload> {
+  ): Promise<Picture> {
     try {
       const res = await super.update(modelId, model, isDryRun);
       return res;
@@ -133,7 +133,7 @@ export class UploadRepository extends BaseRepository<UploadModels> {
     }
   }
 
-  public async archive(modelId: string): Promise<Upload> {
+  public async archive(modelId: string): Promise<Picture> {
     try {
       const res = await super.archive(modelId);
       return res;

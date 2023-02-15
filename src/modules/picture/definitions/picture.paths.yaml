@@ -1,20 +1,20 @@
 paths:
-  /upload:
+  /picture:
     post:
       tags:
-        - Upload
-      operationId: uploadCreate
-      summary: Creates a new Upload
-      description: Creates a new Upload
+        - Picture
+      operationId: pictureCreate
+      summary: Creates a new Picture
+      description: Creates a new Picture
       security:
         - E2E: []
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadCreateRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PictureCreateRequestBody"
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadDryRun"
+        - $ref: "./picture.parameters.yaml#/components/parameters/IsPictureDryRun"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadCreateResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureCreateResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -25,22 +25,22 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
         500:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
-  /upload-all:
+  /picture-all:
     post:
       tags:
-        - Upload
-      operationId: uploadGetAll
-      summary: Get all Upload
-      description: Get all Upload
+        - Picture
+      operationId: pictureGetAll
+      summary: Get all Picture
+      description: Get all Picture
       security:
         - E2E: []
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadArchived"
+        - $ref: "./picture.parameters.yaml#/components/parameters/IsPictureArchived"
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPopulateRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PicturePopulateRequestBody"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadGetAllResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureGetAllResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -51,20 +51,20 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
         500:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
-  /upload-search:
+  /picture-search:
     post:
       tags:
-        - Upload
-      operationId: uploadSearch
-      summary: Search Upload
-      description: Search Upload
+        - Picture
+      operationId: pictureSearch
+      summary: Search Picture
+      description: Search Picture
       security:
         - E2E: []
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadSearchRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PictureSearchRequestBody"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadSearchResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureSearchResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -75,22 +75,22 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/NotFoundResultResponse"
         500:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
-  /upload/{id}:
+  /picture/{id}:
     post:
       tags:
-        - Upload
-      operationId: uploadGetById
-      summary: Get by Id a Upload
-      description: Get by Id a Upload
+        - Picture
+      operationId: pictureGetById
+      summary: Get by Id a Picture
+      description: Get by Id a Picture
       security:
         - E2E: []
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+        - $ref: "./picture.parameters.yaml#/components/parameters/PictureId"
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPopulateRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PicturePopulateRequestBody"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadFindByIdResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureFindByIdResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -103,19 +103,19 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
     patch:
       tags:
-        - Upload
-      operationId: uploadPatch
-      summary: Patch a Upload
-      description: Patch a Upload
+        - Picture
+      operationId: picturePatch
+      summary: Patch a Picture
+      description: Patch a Picture
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+        - $ref: "./picture.parameters.yaml#/components/parameters/PictureId"
       security:
         - E2E: []
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadPatchRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PicturePatchRequestBody"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadPatchResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PicturePatchResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -128,20 +128,20 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
     put:
       tags:
-        - Upload
-      operationId: uploadUpdate
-      summary: Update a Upload
-      description: Update a Upload
+        - Picture
+      operationId: pictureUpdate
+      summary: Update a Picture
+      description: Update a Picture
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
-        - $ref: "./upload.parameters.yaml#/components/parameters/IsUploadDryRun"
+        - $ref: "./picture.parameters.yaml#/components/parameters/PictureId"
+        - $ref: "./picture.parameters.yaml#/components/parameters/IsPictureDryRun"
       security:
         - E2E: []
       requestBody:
-        $ref: "./upload.request-bodies.yaml#/components/requestBodies/UploadUpdateRequestBody"
+        $ref: "./picture.request-bodies.yaml#/components/requestBodies/PictureUpdateRequestBody"
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadUpdateResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureUpdateResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:
@@ -154,17 +154,17 @@ paths:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/InternalErrorResultResponse"
     delete:
       tags:
-        - Upload
-      operationId: uploadArchive
-      summary: Archive a Upload
-      description: Archive a Upload
+        - Picture
+      operationId: pictureArchive
+      summary: Archive a Picture
+      description: Archive a Picture
       parameters:
-        - $ref: "./upload.parameters.yaml#/components/parameters/UploadId"
+        - $ref: "./picture.parameters.yaml#/components/parameters/PictureId"
       security:
         - E2E: []
       responses:
         200:
-          $ref: "./upload.responses.yaml#/components/responses/UploadArchiveResponse"
+          $ref: "./picture.responses.yaml#/components/responses/PictureArchiveResponse"
         400:
           $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/responses/BadRequestResultResponse"
         401:

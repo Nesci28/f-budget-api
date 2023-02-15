@@ -9,7 +9,6 @@ components:
             - envelopId
             - date
             - amount
-            - isFromRenew
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -23,17 +22,27 @@ components:
               type: string
             scan:
               type: string
-            balanceMonth:
+            incomeMonth:
               type: number
-            balanceTotal:
+            incomeTotal:
               type: number
-            envelopBalanceMonth:
+            outcomeMonth:
               type: number
-            envelopBalanceTotal:
+            outcomeTotal:
               type: number
-            isFromRenew:
-              type: boolean
+            envelopIncomeMonth:
+              type: number
+            envelopIncomeTotal:
+              type: number
+            envelopOutcomeMonth:
+              type: number
+            envelopOutcomeTotal:
+              type: number
+            renewId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
             user:
               $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
             envelop:
               $ref: ../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop
+            renew:
+              $ref: ../../renew/definitions/renew.schemas.yaml#/components/schemas/Renew

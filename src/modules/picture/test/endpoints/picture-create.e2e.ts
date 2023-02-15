@@ -1,20 +1,20 @@
-import { UploadContext } from "../upload.e2e-spec";
+import { PictureContext } from "../picture.e2e-spec";
 
-export function uploadCreateTest(): void {
-  let ctx: UploadContext;
+export function pictureCreateTest(): void {
+  let ctx: PictureContext;
 
   beforeAll(() => {
     ctx = this.ctx;
   });
 
-  it("should create a new Upload", async () => {
-    const result = await ctx.uploadConnector.uploadCreate({
-      uploadCreate: ctx.uploadCreate,
+  it("should create a new Picture", async () => {
+    const result = await ctx.pictureConnector.pictureCreate({
+      pictureCreate: ctx.pictureCreate,
     });
 
     expect(result.isSuccess).toEqual(true);
     const res = ctx.testHandler.traverseObjects(
-      ctx.uploadCreate,
+      ctx.pictureCreate,
       result.value!,
     );
     const fail = res.find((x) => {
@@ -23,22 +23,22 @@ export function uploadCreateTest(): void {
     expect(fail).toBeUndefined();
   });
 
-  it("should create a new Upload as dry-run (not saving)", async () => {
-    const result = await ctx.uploadConnector.uploadCreate({
-      uploadCreate: ctx.uploadCreate,
+  it("should create a new Picture as dry-run (not saving)", async () => {
+    const result = await ctx.pictureConnector.pictureCreate({
+      pictureCreate: ctx.pictureCreate,
       isDryRun: true,
     });
 
-    const checkFindResult = await ctx.uploadConnector.uploadGetById({
+    const checkFindResult = await ctx.pictureConnector.pictureGetById({
       id: result.value!.id,
-      uploadPopulateRequestBody: {},
+      picturePopulateRequestBody: {},
     });
     expect(checkFindResult.isSuccess).toEqual(false);
     expect(checkFindResult.error?.httpCode).toEqual(404);
 
     expect(result.isSuccess).toEqual(true);
     const res = ctx.testHandler.traverseObjects(
-      ctx.uploadCreate,
+      ctx.pictureCreate,
       result.value!,
     );
     const fail = res.find((x) => {

@@ -8,7 +8,6 @@ components:
             - userId
             - name
             - type
-            - budget
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -18,10 +17,16 @@ components:
               $ref: "#/components/schemas/EnvelopType"
             budget:
               type: number
-            balanceMonth:
+            incomeMonth:
               default: 0
               type: number
-            balanceTotal:
+            incomeTotal:
+              default: 0
+              type: number
+            outcomeMonth:
+              default: 0
+              type: number
+            outcomeTotal:
               default: 0
               type: number
             user:

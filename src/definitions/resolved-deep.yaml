@@ -408,6 +408,182 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
+  /picture:
+    post:
+      tags:
+        - Picture
+      operationId: pictureCreate
+      summary: Creates a new Picture
+      description: Creates a new Picture
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/PictureCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsPictureDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /picture-all:
+    post:
+      tags:
+        - Picture
+      operationId: pictureGetAll
+      summary: Get all Picture
+      description: Get all Picture
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/IsPictureArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/PicturePopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /picture-search:
+    post:
+      tags:
+        - Picture
+      operationId: pictureSearch
+      summary: Search Picture
+      description: Search Picture
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/PictureSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /picture/{id}:
+    post:
+      tags:
+        - Picture
+      operationId: pictureGetById
+      summary: Get by Id a Picture
+      description: Get by Id a Picture
+      security:
+        - E2E: []
+      parameters:
+        - $ref: '#/components/parameters/PictureId'
+      requestBody:
+        $ref: '#/components/requestBodies/PicturePopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - Picture
+      operationId: picturePatch
+      summary: Patch a Picture
+      description: Patch a Picture
+      parameters:
+        - $ref: '#/components/parameters/PictureId'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/PicturePatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/PicturePatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - Picture
+      operationId: pictureUpdate
+      summary: Update a Picture
+      description: Update a Picture
+      parameters:
+        - $ref: '#/components/parameters/PictureId'
+        - $ref: '#/components/parameters/IsPictureDryRun'
+      security:
+        - E2E: []
+      requestBody:
+        $ref: '#/components/requestBodies/PictureUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - Picture
+      operationId: pictureArchive
+      summary: Archive a Picture
+      description: Archive a Picture
+      parameters:
+        - $ref: '#/components/parameters/PictureId'
+      security:
+        - E2E: []
+      responses:
+        '200':
+          $ref: '#/components/responses/PictureArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
   /receipt:
     post:
       tags:
@@ -750,182 +926,6 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/RenewArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /upload:
-    post:
-      tags:
-        - Upload
-      operationId: uploadCreate
-      summary: Creates a new Upload
-      description: Creates a new Upload
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/UploadCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsUploadDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /upload-all:
-    post:
-      tags:
-        - Upload
-      operationId: uploadGetAll
-      summary: Get all Upload
-      description: Get all Upload
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/IsUploadArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/UploadPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /upload-search:
-    post:
-      tags:
-        - Upload
-      operationId: uploadSearch
-      summary: Search Upload
-      description: Search Upload
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/UploadSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /upload/{id}:
-    post:
-      tags:
-        - Upload
-      operationId: uploadGetById
-      summary: Get by Id a Upload
-      description: Get by Id a Upload
-      security:
-        - E2E: []
-      parameters:
-        - $ref: '#/components/parameters/UploadId'
-      requestBody:
-        $ref: '#/components/requestBodies/UploadPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - Upload
-      operationId: uploadPatch
-      summary: Patch a Upload
-      description: Patch a Upload
-      parameters:
-        - $ref: '#/components/parameters/UploadId'
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/UploadPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - Upload
-      operationId: uploadUpdate
-      summary: Update a Upload
-      description: Update a Upload
-      parameters:
-        - $ref: '#/components/parameters/UploadId'
-        - $ref: '#/components/parameters/IsUploadDryRun'
-      security:
-        - E2E: []
-      requestBody:
-        $ref: '#/components/requestBodies/UploadUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - Upload
-      operationId: uploadArchive
-      summary: Archive a Upload
-      description: Archive a Upload
-      parameters:
-        - $ref: '#/components/parameters/UploadId'
-      security:
-        - E2E: []
-      responses:
-        '200':
-          $ref: '#/components/responses/UploadArchiveResponse'
         '400':
           $ref: '#/components/responses/BadRequestResultResponse'
         '401':
@@ -2070,6 +2070,65 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '500':
           $ref: '#/components/responses/InternalErrorResultResponse'
+  /assets/{bucketname}/{filename}:
+    get:
+      tags:
+        - Minio
+      operationId: getFile
+      summary: Get a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+        - Minio
+      operationId: updateFile
+      summary: Update a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - Minio
+      operationId: deleteFile
+      summary: Delete a file from Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+        - $ref: '#/components/parameters/FileName'
+      responses:
+        '200':
+          description: Returns a file from Minio
+          content:
+            application/json:
+              schema:
+                type: object
+  /assets/{bucketname}:
+    post:
+      tags:
+        - Minio
+      operationId: uploadFile
+      summary: Upload a file to Minio
+      parameters:
+        - $ref: '#/components/parameters/BucketName'
+      requestBody:
+        $ref: '#/components/requestBodies/MinioRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/UploadResponse'
 components:
   securitySchemes:
     admin:
@@ -2090,6 +2149,8 @@ components:
           $ref: '#/components/schemas/Healthcheck'
         mongoose:
           $ref: '#/components/schemas/AccessModelCreate'
+        minio:
+          $ref: '#/components/schemas/Upload'
     SupportedLanguage:
       type: string
       enum:
@@ -2170,15 +2231,87 @@ components:
         exp:
           description: Expiration time
           type: number
+    BalanceCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+    BalanceFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/BalanceSearchDistincts'
+    BalancePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     BalanceCreate:
       type: object
       required:
         - userId
       properties:
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2188,10 +2321,16 @@ components:
       x-min-properties: 1
       type: object
       properties:
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2204,10 +2343,16 @@ components:
       required:
         - userId
       properties:
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2307,72 +2452,6 @@ components:
       type: string
       enum:
         - userId
-    BalanceCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Balance'
-    BalanceFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Balance'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/BalanceSearchDistincts'
-    BalancePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     Balance:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2382,10 +2461,16 @@ components:
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
-            balanceMonth:
+            incomeMonth:
               default: 0
               type: number
-            balanceTotal:
+            incomeTotal:
+              default: 0
+              type: number
+            outcomeMonth:
+              default: 0
+              type: number
+            outcomeTotal:
               default: 0
               type: number
             user:
@@ -2396,16 +2481,21 @@ components:
         - userId
         - name
         - type
-        - budget
       properties:
         name:
           type: string
         budget:
           type: number
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2424,10 +2514,16 @@ components:
           type: string
         budget:
           type: number
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2446,16 +2542,21 @@ components:
         - userId
         - name
         - type
-        - budget
       properties:
         name:
           type: string
         budget:
           type: number
-        balanceMonth:
+        incomeMonth:
           default: 0
           type: number
-        balanceTotal:
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
           default: 0
           type: number
         userId:
@@ -2485,6 +2586,8 @@ components:
         archived:
           $ref: '#/components/schemas/SearchBooleanCondition'
         userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        type:
           $ref: '#/components/schemas/SearchStringCondition'
     EnvelopConditionQuery:
       type: object
@@ -2527,6 +2630,8 @@ components:
           $ref: '#/components/schemas/Sorting'
         userId:
           $ref: '#/components/schemas/Sorting'
+        type:
+          $ref: '#/components/schemas/Sorting'
     EnvelopPopulateRequestBody:
       type: object
       properties:
@@ -2560,6 +2665,7 @@ components:
       type: string
       enum:
         - userId
+        - type
     EnvelopCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -2634,7 +2740,6 @@ components:
             - userId
             - name
             - type
-            - budget
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
@@ -2644,10 +2749,16 @@ components:
               $ref: '#/components/schemas/EnvelopType'
             budget:
               type: number
-            balanceMonth:
+            incomeMonth:
               default: 0
               type: number
-            balanceTotal:
+            incomeTotal:
+              default: 0
+              type: number
+            outcomeMonth:
+              default: 0
+              type: number
+            outcomeTotal:
               default: 0
               type: number
             user:
@@ -2657,6 +2768,281 @@ components:
       enum:
         - Income
         - Outcome
+    PictureCreate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    PicturePatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    PictureSearchRequestBody:
+      $ref: '#/components/schemas/PictureSearch'
+    PictureUpdate:
+      type: object
+      required:
+        - userId
+        - filename
+      properties:
+        filename:
+          type: string
+        userId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
+    PictureSearch:
+      allOf:
+        - $ref: '#/components/schemas/PicturePaginationQuery'
+        - $ref: '#/components/schemas/PictureConditionQuery'
+        - $ref: '#/components/schemas/PicturePopulateRequestBody'
+        - $ref: '#/components/schemas/PictureDistinctQuery'
+    PictureConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        userId:
+          $ref: '#/components/schemas/SearchStringCondition'
+    PictureConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/PictureConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/PictureConditionFields'
+    PicturePaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PicturePagination'
+    PicturePagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/PictureSort'
+    PictureSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        userId:
+          $ref: '#/components/schemas/Sorting'
+    PicturePopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/PicturePopulateFields'
+    PicturePopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/PicturePopulateField'
+    PicturePopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/PicturePopulateEnum'
+        match:
+          type: object
+    PicturePopulateEnum:
+      type: string
+      enum:
+        - user
+    PictureDistinctQuery:
+      type: object
+      properties:
+        distincts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PictureDistinctFields'
+    PictureDistinctFields:
+      type: string
+      enum:
+        - userId
+    PictureCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Picture'
+    PictureFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Picture'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/PictureSearchDistincts'
+    PicturePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+    Picture:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - userId
+            - filename
+          properties:
+            userId:
+              $ref: '#/components/schemas/ObjectID'
+            filename:
+              type: string
+            user:
+              $ref: '#/components/schemas/User'
+    ReceiptCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+    ReceiptFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/ReceiptSearchDistincts'
+    ReceiptPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     ReceiptCreate:
       type: object
       required:
@@ -2664,7 +3050,6 @@ components:
         - envelopId
         - date
         - amount
-        - isFromRenew
       properties:
         amount:
           type: number
@@ -2672,16 +3057,22 @@ components:
           type: string
         scan:
           type: string
-        balanceMonth:
+        incomeMonth:
           type: number
-        balanceTotal:
+        incomeTotal:
           type: number
-        envelopBalanceMonth:
+        outcomeMonth:
           type: number
-        envelopBalanceTotal:
+        outcomeTotal:
           type: number
-        isFromRenew:
-          type: boolean
+        envelopIncomeMonth:
+          type: number
+        envelopIncomeTotal:
+          type: number
+        envelopOutcomeMonth:
+          type: number
+        envelopOutcomeTotal:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
@@ -2693,6 +3084,9 @@ components:
           format: date-time
           x-faker: date.future
           maxLength: 24
+        renewId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
     ReceiptPatch:
       x-min-properties: 1
       type: object
@@ -2703,16 +3097,22 @@ components:
           type: string
         scan:
           type: string
-        balanceMonth:
+        incomeMonth:
           type: number
-        balanceTotal:
+        incomeTotal:
           type: number
-        envelopBalanceMonth:
+        outcomeMonth:
           type: number
-        envelopBalanceTotal:
+        outcomeTotal:
           type: number
-        isFromRenew:
-          type: boolean
+        envelopIncomeMonth:
+          type: number
+        envelopIncomeTotal:
+          type: number
+        envelopOutcomeMonth:
+          type: number
+        envelopOutcomeTotal:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
@@ -2724,6 +3124,9 @@ components:
           format: date-time
           x-faker: date.future
           maxLength: 24
+        renewId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
     ReceiptSearchRequestBody:
       $ref: '#/components/schemas/ReceiptSearch'
     ReceiptUpdate:
@@ -2733,7 +3136,6 @@ components:
         - envelopId
         - date
         - amount
-        - isFromRenew
       properties:
         amount:
           type: number
@@ -2741,16 +3143,22 @@ components:
           type: string
         scan:
           type: string
-        balanceMonth:
+        incomeMonth:
           type: number
-        balanceTotal:
+        incomeTotal:
           type: number
-        envelopBalanceMonth:
+        outcomeMonth:
           type: number
-        envelopBalanceTotal:
+        outcomeTotal:
           type: number
-        isFromRenew:
-          type: boolean
+        envelopIncomeMonth:
+          type: number
+        envelopIncomeTotal:
+          type: number
+        envelopOutcomeMonth:
+          type: number
+        envelopOutcomeTotal:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
@@ -2762,6 +3170,9 @@ components:
           format: date-time
           x-faker: date.future
           maxLength: 24
+        renewId:
+          type: string
+          pattern: ^[0-9a-f]{24}$
     ReceiptSearch:
       allOf:
         - $ref: '#/components/schemas/ReceiptPaginationQuery'
@@ -2854,6 +3265,7 @@ components:
       enum:
         - user
         - envelop
+        - renew
     ReceiptDistinctQuery:
       type: object
       properties:
@@ -2867,74 +3279,6 @@ components:
         - userId
         - envelopId
         - date
-    ReceiptCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Receipt'
-    ReceiptFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Receipt'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/ReceiptSearchDistincts'
-    ReceiptPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
-        envelopId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     Receipt:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2944,7 +3288,6 @@ components:
             - envelopId
             - date
             - amount
-            - isFromRenew
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
@@ -2958,68 +3301,111 @@ components:
               type: string
             scan:
               type: string
-            balanceMonth:
+            incomeMonth:
               type: number
-            balanceTotal:
+            incomeTotal:
               type: number
-            envelopBalanceMonth:
+            outcomeMonth:
               type: number
-            envelopBalanceTotal:
+            outcomeTotal:
               type: number
-            isFromRenew:
-              type: boolean
+            envelopIncomeMonth:
+              type: number
+            envelopIncomeTotal:
+              type: number
+            envelopOutcomeMonth:
+              type: number
+            envelopOutcomeTotal:
+              type: number
+            renewId:
+              $ref: '#/components/schemas/ObjectID'
             user:
               $ref: '#/components/schemas/User'
             envelop:
               $ref: '#/components/schemas/Envelop'
+            renew:
+              $ref: '#/components/schemas/Renew'
     RenewCreate:
       type: object
       required:
         - userId
         - envelopId
         - amount
-        - date
-        - isBusinessDay
         - description
+        - type
       properties:
         amount:
           type: number
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
         envelopId:
           type: string
           pattern: ^[0-9a-f]{24}$
-        date:
+        type:
+          type: string
+          enum:
+            - DayOfMonth
+            - DayOfWeek
+        startDate:
           type: string
           format: date-time
           x-faker: date.future
           maxLength: 24
+        frequence:
+          type: string
+          enum:
+            - EveryWeek
+            - Every2Weeks
+            - EveryMonth
+            - Every3Months
+            - EveryYear
     RenewPatch:
       x-min-properties: 1
       type: object
       properties:
         amount:
           type: number
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
         envelopId:
           type: string
           pattern: ^[0-9a-f]{24}$
-        date:
+        type:
+          type: string
+          enum:
+            - DayOfMonth
+            - DayOfWeek
+        startDate:
           type: string
           format: date-time
           x-faker: date.future
           maxLength: 24
+        frequence:
+          type: string
+          enum:
+            - EveryWeek
+            - Every2Weeks
+            - EveryMonth
+            - Every3Months
+            - EveryYear
     RenewSearchRequestBody:
       $ref: '#/components/schemas/RenewSearch'
     RenewUpdate:
@@ -3028,27 +3414,43 @@ components:
         - userId
         - envelopId
         - amount
-        - date
-        - isBusinessDay
         - description
+        - type
       properties:
         amount:
           type: number
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
         userId:
           type: string
           pattern: ^[0-9a-f]{24}$
         envelopId:
           type: string
           pattern: ^[0-9a-f]{24}$
-        date:
+        type:
+          type: string
+          enum:
+            - DayOfMonth
+            - DayOfWeek
+        startDate:
           type: string
           format: date-time
           x-faker: date.future
           maxLength: 24
+        frequence:
+          type: string
+          enum:
+            - EveryWeek
+            - Every2Weeks
+            - EveryMonth
+            - Every3Months
+            - EveryYear
     RenewSearch:
       allOf:
         - $ref: '#/components/schemas/RenewPaginationQuery'
@@ -3071,8 +3473,14 @@ components:
           $ref: '#/components/schemas/SearchStringCondition'
         envelopId:
           $ref: '#/components/schemas/SearchStringCondition'
-        date:
-          $ref: '#/components/schemas/SearchDateCondition'
+        type:
+          $ref: '#/components/schemas/SearchStringCondition'
+        dayOfMonth:
+          $ref: '#/components/schemas/SearchNumberCondition'
+        isBusinessDay:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        dayOfWeek:
+          $ref: '#/components/schemas/SearchNumberCondition'
     RenewConditionQuery:
       type: object
       x-min-required:
@@ -3116,7 +3524,13 @@ components:
           $ref: '#/components/schemas/Sorting'
         envelopId:
           $ref: '#/components/schemas/Sorting'
-        date:
+        type:
+          $ref: '#/components/schemas/Sorting'
+        dayOfMonth:
+          $ref: '#/components/schemas/Sorting'
+        isBusinessDay:
+          $ref: '#/components/schemas/Sorting'
+        dayOfWeek:
           $ref: '#/components/schemas/Sorting'
     RenewPopulateRequestBody:
       type: object
@@ -3153,7 +3567,10 @@ components:
       enum:
         - userId
         - envelopId
-        - date
+        - type
+        - dayOfMonth
+        - isBusinessDay
+        - dayOfWeek
     RenewCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -3230,9 +3647,8 @@ components:
             - userId
             - envelopId
             - amount
-            - date
-            - isBusinessDay
             - description
+            - type
           properties:
             userId:
               $ref: '#/components/schemas/ObjectID'
@@ -3240,280 +3656,37 @@ components:
               $ref: '#/components/schemas/ObjectID'
             amount:
               type: number
-            date:
-              $ref: '#/components/schemas/DateTime'
-            isBusinessDay:
-              type: boolean
             description:
               type: string
+            type:
+              $ref: '#/components/schemas/RenewType'
+            dayOfMonth:
+              type: number
+            isBusinessDay:
+              type: boolean
+            dayOfWeek:
+              type: number
+            frequence:
+              $ref: '#/components/schemas/RenewFrequence'
+            startDate:
+              $ref: '#/components/schemas/DateTime'
             user:
               $ref: '#/components/schemas/User'
             envelop:
               $ref: '#/components/schemas/Envelop'
-    UploadCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Upload'
-    UploadFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Upload'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/UploadSearchDistincts'
-    UploadPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Upload'
-    UploadSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
-    UploadCreate:
-      type: object
-      required:
-        - userId
-        - filename
-      properties:
-        filename:
-          type: string
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-    UploadPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        filename:
-          type: string
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-    UploadSearchRequestBody:
-      $ref: '#/components/schemas/UploadSearch'
-    UploadUpdate:
-      type: object
-      required:
-        - userId
-        - filename
-      properties:
-        filename:
-          type: string
-        userId:
-          type: string
-          pattern: ^[0-9a-f]{24}$
-    UploadSearch:
-      allOf:
-        - $ref: '#/components/schemas/UploadPaginationQuery'
-        - $ref: '#/components/schemas/UploadConditionQuery'
-        - $ref: '#/components/schemas/UploadPopulateRequestBody'
-        - $ref: '#/components/schemas/UploadDistinctQuery'
-    UploadConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        userId:
-          $ref: '#/components/schemas/SearchStringCondition'
-    UploadConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/UploadConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/UploadConditionFields'
-    UploadPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/UploadPagination'
-    UploadPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/UploadSort'
-    UploadSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        userId:
-          $ref: '#/components/schemas/Sorting'
-    UploadPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/UploadPopulateFields'
-    UploadPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/UploadPopulateField'
-    UploadPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/UploadPopulateEnum'
-        match:
-          type: object
-    UploadPopulateEnum:
+    RenewType:
       type: string
       enum:
-        - user
-    UploadDistinctQuery:
-      type: object
-      properties:
-        distincts:
-          type: array
-          items:
-            $ref: '#/components/schemas/UploadDistinctFields'
-    UploadDistinctFields:
+        - DayOfMonth
+        - DayOfWeek
+    RenewFrequence:
       type: string
       enum:
-        - userId
-    Upload:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - userId
-            - filename
-          properties:
-            userId:
-              $ref: '#/components/schemas/ObjectID'
-            filename:
-              type: string
-            user:
-              $ref: '#/components/schemas/User'
-    UserCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/User'
-    UserPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
-    UserArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/User'
+        - EveryWeek
+        - Every2Weeks
+        - EveryMonth
+        - Every3Months
+        - EveryYear
     UserCreate:
       type: object
       required:
@@ -3702,6 +3875,63 @@ components:
           $ref: '#/components/schemas/Sorting'
         refreshTokens.token:
           $ref: '#/components/schemas/Sorting'
+    UserCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/User'
+    UserPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
+    UserArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/User'
     User:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -5934,6 +6164,24 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+    UploadResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Upload'
+    Upload:
+      description: Informations of a given Upload.
+      type: object
+      required:
+        - bucketName
+        - fileName
+      properties:
+        bucketName:
+          type: string
+        fileName:
+          type: string
   responses:
     LoginResponse:
       description: Returns a JWT Token and a Refresh Token on a successfull login
@@ -6031,6 +6279,48 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/EnvelopArchiveResponse'
+    PictureCreateResponse:
+      description: Returns a Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureCreateResponse'
+    PictureGetAllResponse:
+      description: Returns an array of Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureGetAllResponse'
+    PictureFindByIdResponse:
+      description: Returns a Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureFindByIdResponse'
+    PictureSearchResponse:
+      description: Returns a paginated array of Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureSearchResponse'
+    PicturePatchResponse:
+      description: Returns a modified Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PicturePatchResponse'
+    PictureUpdateResponse:
+      description: Returns an updated Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureUpdateResponse'
+    PictureArchiveResponse:
+      description: Returns a ResultHandler with the archived Picture
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureArchiveResponse'
     ReceiptCreateResponse:
       description: Returns a Receipt
       content:
@@ -6115,48 +6405,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RenewArchiveResponse'
-    UploadCreateResponse:
-      description: Returns a Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadCreateResponse'
-    UploadGetAllResponse:
-      description: Returns an array of Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadGetAllResponse'
-    UploadFindByIdResponse:
-      description: Returns a Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadFindByIdResponse'
-    UploadSearchResponse:
-      description: Returns a paginated array of Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadSearchResponse'
-    UploadPatchResponse:
-      description: Returns a modified Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadPatchResponse'
-    UploadUpdateResponse:
-      description: Returns an updated Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadUpdateResponse'
-    UploadArchiveResponse:
-      description: Returns a ResultHandler with the archived Upload
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadArchiveResponse'
     UserCreateResponse:
       description: Returns a User
       content:
@@ -6469,6 +6717,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SecureLinkArchiveResponse'
+    UploadResponse:
+      description: Returns an Upload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadResponse'
   requestBodies:
     LoginRequestBody:
       description: Body needed to login
@@ -6552,6 +6806,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/EnvelopPopulateRequestBody'
+    PictureCreateRequestBody:
+      description: Body needed to create a Picture
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureCreate'
+    PictureSearchRequestBody:
+      description: Body needed to search Pictures
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureSearchRequestBody'
+    PicturePatchRequestBody:
+      description: Body needed to modify a Picture
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PicturePatch'
+    PictureUpdateRequestBody:
+      description: Body needed to update a Picture
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PictureUpdate'
+    PicturePopulateRequestBody:
+      description: Body needed populate fields in Picture
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PicturePopulateRequestBody'
     ReceiptCreateRequestBody:
       description: Body needed to create a Receipt
       required: true
@@ -6620,40 +6908,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/RenewPopulateRequestBody'
-    UploadCreateRequestBody:
-      description: Body needed to create a Upload
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadCreate'
-    UploadSearchRequestBody:
-      description: Body needed to search Uploads
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadSearchRequestBody'
-    UploadPatchRequestBody:
-      description: Body needed to modify a Upload
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadPatch'
-    UploadUpdateRequestBody:
-      description: Body needed to update a Upload
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadUpdate'
-    UploadPopulateRequestBody:
-      description: Body needed populate fields in Upload
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadPopulateRequestBody'
     UserCreateRequestBody:
       description: Body needed to create a User
       required: true
@@ -6837,6 +7091,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PropertyControlPopulateRequestBody'
+    MinioRequestBody:
+      content:
+        multipart/form-data:
+          schema:
+            description: Typed as any to prevent generation bug. Use model MinioQuery.
+            type: object
   parameters:
     BalanceId:
       name: id
@@ -6880,6 +7140,27 @@ components:
       required: false
       schema:
         type: boolean
+    PictureId:
+      name: id
+      description: Picture's Id
+      in: path
+      required: true
+      schema:
+        $ref: '#/components/schemas/ObjectID'
+    IsPictureDryRun:
+      name: isDryRun
+      description: Should this request be ran as a dry run (no save)
+      in: query
+      required: false
+      schema:
+        type: boolean
+    IsPictureArchived:
+      name: isArchived
+      description: Get archived Picture
+      in: query
+      required: false
+      schema:
+        type: boolean
     ReceiptId:
       name: id
       description: Receipt's Id
@@ -6918,27 +7199,6 @@ components:
     IsRenewArchived:
       name: isArchived
       description: Get archived Renew
-      in: query
-      required: false
-      schema:
-        type: boolean
-    UploadId:
-      name: id
-      description: Upload's Id
-      in: path
-      required: true
-      schema:
-        $ref: '#/components/schemas/ObjectID'
-    IsUploadDryRun:
-      name: isDryRun
-      description: Should this request be ran as a dry run (no save)
-      in: query
-      required: false
-      schema:
-        type: boolean
-    IsUploadArchived:
-      name: isArchived
-      description: Get archived Upload
       in: query
       required: false
       schema:
@@ -7080,6 +7340,20 @@ components:
       name: token
       description: SecureLink's Token
       in: path
+      required: true
+      schema:
+        type: string
+    BucketName:
+      name: bucketname
+      in: path
+      description: Bucket's Name
+      required: true
+      schema:
+        type: string
+    FileName:
+      name: filename
+      in: path
+      description: File's Name
       required: true
       schema:
         type: string

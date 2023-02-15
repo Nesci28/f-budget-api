@@ -3,7 +3,7 @@ configs:
   connectionName: f-budget
 components:
   schemas:
-    Upload:
+    Picture:
       type: object
       required:
         - userId

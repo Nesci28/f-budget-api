@@ -2,25 +2,25 @@
 import { SupportedLanguage } from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
-export const UploadErrors = {
+export const PictureErrors = {
   notFound: {
-    uuid: "088c5d64-67a4-46e1-aa57-5f8e8c0478c7",
+    uuid: "aeffb4cf-670a-43b0-8b63-ca404845044f",
     httpCode: StatusCodes.NOT_FOUND,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "L'objet Upload est introuvable.",
+          text: "L'objet Picture est introuvable.",
         },
         {
           language: SupportedLanguage.En,
-          text: "Upload object was not found.",
+          text: "Picture object was not found.",
         },
       ],
     },
   },
   dbNotResponsive: {
-    uuid: "5a00faba-3342-4bfa-893e-17b8f7a653e4",
+    uuid: "ad9b5b07-30f4-4eea-9041-830bb8da3955",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
@@ -36,145 +36,145 @@ export const UploadErrors = {
     },
   },
   alreadyArchived: {
-    uuid: "29ca2e98-d07b-4681-80b0-ebcadb99d14a",
+    uuid: "d97beb43-5f75-40fd-8451-4029660cd3db",
     httpCode: StatusCodes.BAD_REQUEST,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Impossible de modifier cet objet Upload. Il est archivé.'",
+          text: "Impossible de modifier cet objet Picture. Il est archivé.'",
         },
         {
           language: SupportedLanguage.En,
-          text: "Impossible to edit that Upload object. It is archived.",
+          text: "Impossible to edit that Picture object. It is archived.",
         },
       ],
     },
   },
   repoCreate: {
-    uuid: "2b7d3fe7-a0c1-44d1-b25f-906e67a21cce",
+    uuid: "66cc3f40-8437-4f81-b821-78310ae1d177",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la création de l'objet Upload.",
+          text: "Une erreur est survenue lors de la création de l'objet Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to create an Upload object.",
+          text: "An error occured while trying to create an Picture object.",
         },
       ],
     },
   },
   repoCreateMany: {
-    uuid: "0b05072d-9bb2-417c-8428-f26f899de5ac",
+    uuid: "b2f1e08d-6e04-40e8-8dbb-faffb98f8582",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la création de plusieurs objets Upload.",
+          text: "Une erreur est survenue lors de la création de plusieurs objets Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to create many Upload objects.",
+          text: "An error occured while trying to create many Picture objects.",
         },
       ],
     },
   },
   repoSearch: {
-    uuid: "f8bc3afb-d6a3-43d4-b843-f0189d40dc78",
+    uuid: "8cfc727b-433b-4798-ae50-92658d7fb52b",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la recherche d'objets Upload.",
+          text: "Une erreur est survenue lors de la recherche d'objets Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to search Upload objects.",
+          text: "An error occured while trying to search Picture objects.",
         },
       ],
     },
   },
   repoGetAll: {
-    uuid: "a45c6f26-b43b-4e2a-8d69-47885a98c6d9",
+    uuid: "24e4bf93-65d5-4494-aced-6e022a1a5077",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la demande de tous les objets Upload.",
+          text: "Une erreur est survenue lors de la demande de tous les objets Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to get all Upload objects.",
+          text: "An error occured while trying to get all Picture objects.",
         },
       ],
     },
   },
   repoGetById: {
-    uuid: "64fc4a92-b90b-4a68-b9a3-3db1ec3a1baf",
+    uuid: "6d627f12-e709-4995-b819-10b81a910c64",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la demande d'un objet Upload.",
+          text: "Une erreur est survenue lors de la demande d'un objet Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to get an Upload object.",
+          text: "An error occured while trying to get an Picture object.",
         },
       ],
     },
   },
   repoPatch: {
-    uuid: "aa353e11-a00b-47f6-898a-82686a96cd09",
+    uuid: "c66342d9-a249-4000-82b0-6564de5aae32",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la mise à jour partielle d'un objet Upload.",
+          text: "Une erreur est survenue lors de la mise à jour partielle d'un objet Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to patch an Upload object.",
+          text: "An error occured while trying to patch an Picture object.",
         },
       ],
     },
   },
   repoUpdate: {
-    uuid: "29bf9da1-c09c-487c-afcb-24a069de4631",
+    uuid: "7d20ff79-d0da-4596-a9f6-08afc7dae017",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de la mise à jour d'un objet Upload.",
+          text: "Une erreur est survenue lors de la mise à jour d'un objet Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to update an Upload object.",
+          text: "An error occured while trying to update an Picture object.",
         },
       ],
     },
   },
   repoArchive: {
-    uuid: "cb9747c9-8432-4109-987b-c8232e15bb7a",
+    uuid: "63a1f240-6fa0-4246-822d-72d127e09a7a",
     httpCode: StatusCodes.INTERNAL_SERVER_ERROR,
     message: {
       translation: [
         {
           language: SupportedLanguage.Fr,
-          text: "Une erreur est survenue lors de l'archivage d'un objet Upload.",
+          text: "Une erreur est survenue lors de l'archivage d'un objet Picture.",
         },
         {
           language: SupportedLanguage.En,
-          text: "An error occured while trying to archive an Upload object.",
+          text: "An error occured while trying to archive an Picture object.",
         },
       ],
     },

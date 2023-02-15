@@ -1,74 +1,56 @@
 components:
   responses:
-    UploadCreateResponse:
-      description: Returns a Upload
+    PictureCreateResponse:
+      description: Returns a Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadCreateResponse"
-    UploadGetAllResponse:
-      description: Returns an array of Upload
+            $ref: "#/components/schemas/PictureCreateResponse"
+    PictureGetAllResponse:
+      description: Returns an array of Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadGetAllResponse"
-    UploadFindByIdResponse:
-      description: Returns a Upload
+            $ref: "#/components/schemas/PictureGetAllResponse"
+    PictureFindByIdResponse:
+      description: Returns a Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadFindByIdResponse"
-    UploadSearchResponse:
-      description: Returns a paginated array of Upload
+            $ref: "#/components/schemas/PictureFindByIdResponse"
+    PictureSearchResponse:
+      description: Returns a paginated array of Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadSearchResponse"
-    UploadPatchResponse:
-      description: Returns a modified Upload
+            $ref: "#/components/schemas/PictureSearchResponse"
+    PicturePatchResponse:
+      description: Returns a modified Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadPatchResponse"
-    UploadUpdateResponse:
-      description: Returns an updated Upload
+            $ref: "#/components/schemas/PicturePatchResponse"
+    PictureUpdateResponse:
+      description: Returns an updated Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadUpdateResponse"
-    UploadArchiveResponse:
-      description: Returns a ResultHandler with the archived Upload
+            $ref: "#/components/schemas/PictureUpdateResponse"
+    PictureArchiveResponse:
+      description: Returns a ResultHandler with the archived Picture
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadArchiveResponse"
+            $ref: "#/components/schemas/PictureArchiveResponse"
   schemas:
-    UploadCreateResponse:
+    PictureCreateResponse:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
         - type: object
           properties:
             value:
-              $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadGetAllResponse:
-      allOf:
-        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadFindByIdResponse:
-      allOf:
-        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
-        - type: object
-          properties:
-            value:
-              $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadSearchResponse:
+              $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureGetAllResponse:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
         - type: object
@@ -78,33 +60,51 @@ components:
               minItems: 0
               maxItems: 1000
               items:
-                $ref: ./upload.schemas.yaml#/components/schemas/Upload
+                $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./picture.schemas.yaml#/components/schemas/Picture
         - type: object
           properties:
             distincts:
-              $ref: "#/components/schemas/UploadSearchDistincts"
-    UploadPatchResponse:
+              $ref: "#/components/schemas/PictureSearchDistincts"
+    PicturePatchResponse:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
         - type: object
           properties:
             value:
-              $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadUpdateResponse:
+              $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureUpdateResponse:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
         - type: object
           properties:
             value:
-              $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadArchiveResponse:
+              $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureArchiveResponse:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
         - type: object
           properties:
             value:
-              $ref: ./upload.schemas.yaml#/components/schemas/Upload
-    UploadSearchDistincts:
+              $ref: ./picture.schemas.yaml#/components/schemas/Picture
+    PictureSearchDistincts:
       type: object
       properties:
         userId:

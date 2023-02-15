@@ -1,41 +1,41 @@
 components:
   requestBodies:
-    UploadCreateRequestBody:
-      description: Body needed to create a Upload
+    PictureCreateRequestBody:
+      description: Body needed to create a Picture
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadCreate"
-    UploadSearchRequestBody:
-      description: Body needed to search Uploads
+            $ref: "#/components/schemas/PictureCreate"
+    PictureSearchRequestBody:
+      description: Body needed to search Pictures
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadSearchRequestBody"
-    UploadPatchRequestBody:
-      description: Body needed to modify a Upload
+            $ref: "#/components/schemas/PictureSearchRequestBody"
+    PicturePatchRequestBody:
+      description: Body needed to modify a Picture
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadPatch"
-    UploadUpdateRequestBody:
-      description: Body needed to update a Upload
+            $ref: "#/components/schemas/PicturePatch"
+    PictureUpdateRequestBody:
+      description: Body needed to update a Picture
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadUpdate"
-    UploadPopulateRequestBody:
-      description: Body needed populate fields in Upload
+            $ref: "#/components/schemas/PictureUpdate"
+    PicturePopulateRequestBody:
+      description: Body needed populate fields in Picture
       required: true
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UploadPopulateRequestBody"
+            $ref: "#/components/schemas/PicturePopulateRequestBody"
   schemas:
-    UploadCreate:
+    PictureCreate:
       type: object
       required:
         - userId
@@ -45,7 +45,7 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         filename:
           type: string
-    UploadPatch:
+    PicturePatch:
       x-min-properties: 1
       type: object
       properties:
@@ -53,9 +53,9 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         filename:
           type: string
-    UploadSearchRequestBody:
-      $ref: "#/components/schemas/UploadSearch"
-    UploadUpdate:
+    PictureSearchRequestBody:
+      $ref: "#/components/schemas/PictureSearch"
+    PictureUpdate:
       type: object
       required:
         - userId
@@ -65,13 +65,13 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         filename:
           type: string
-    UploadSearch:
+    PictureSearch:
       allOf:
-        - $ref: "#/components/schemas/UploadPaginationQuery"
-        - $ref: "#/components/schemas/UploadConditionQuery"
-        - $ref: "#/components/schemas/UploadPopulateRequestBody"
-        - $ref: "#/components/schemas/UploadDistinctQuery"
-    UploadConditionFields:
+        - $ref: "#/components/schemas/PicturePaginationQuery"
+        - $ref: "#/components/schemas/PictureConditionQuery"
+        - $ref: "#/components/schemas/PicturePopulateRequestBody"
+        - $ref: "#/components/schemas/PictureDistinctQuery"
+    PictureConditionFields:
       type: object
       x-min-properties: 1
       properties:
@@ -85,7 +85,7 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
-    UploadConditionQuery:
+    PictureConditionQuery:
       type: object
       x-min-required:
         - and
@@ -95,25 +95,25 @@ components:
           type: array
           x-min-length: 1
           items:
-            $ref: "#/components/schemas/UploadConditionFields"
+            $ref: "#/components/schemas/PictureConditionFields"
         or:
           type: array
           x-min-length: 1
           items:
-            $ref: "#/components/schemas/UploadConditionFields"
-    UploadPaginationQuery:
+            $ref: "#/components/schemas/PictureConditionFields"
+    PicturePaginationQuery:
       type: object
       properties:
         pagination:
-          $ref: "#/components/schemas/UploadPagination"
-    UploadPagination:
+          $ref: "#/components/schemas/PicturePagination"
+    PicturePagination:
       allOf:
         - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Pagination
         - type: object
           properties:
             sort:
-              $ref: "#/components/schemas/UploadSort"
-    UploadSort:
+              $ref: "#/components/schemas/PictureSort"
+    PictureSort:
       type: object
       properties:
         id:
@@ -126,36 +126,36 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
-    UploadPopulateRequestBody:
+    PicturePopulateRequestBody:
       type: object
       properties:
         populate:
-          $ref: "#/components/schemas/UploadPopulateFields"
-    UploadPopulateFields:
+          $ref: "#/components/schemas/PicturePopulateFields"
+    PicturePopulateFields:
       type: array
       items:
-        $ref: "#/components/schemas/UploadPopulateField"
-    UploadPopulateField:
+        $ref: "#/components/schemas/PicturePopulateField"
+    PicturePopulateField:
       type: object
       required:
         - label
       properties:
         label:
-          $ref: "#/components/schemas/UploadPopulateEnum"
+          $ref: "#/components/schemas/PicturePopulateEnum"
         match:
           type: object
-    UploadPopulateEnum:
+    PicturePopulateEnum:
       type: string
       enum:
         - user
-    UploadDistinctQuery:
+    PictureDistinctQuery:
       type: object
       properties:
         distincts:
           type: array
           items:
-            $ref: "#/components/schemas/UploadDistinctFields"
-    UploadDistinctFields:
+            $ref: "#/components/schemas/PictureDistinctFields"
+    PictureDistinctFields:
       type: string
       enum:
         - userId

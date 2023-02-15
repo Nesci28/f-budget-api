@@ -9,10 +9,16 @@ components:
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
-            balanceMonth:
+            incomeMonth:
               default: 0
               type: number
-            balanceTotal:
+            incomeTotal:
+              default: 0
+              type: number
+            outcomeMonth:
+              default: 0
+              type: number
+            outcomeTotal:
               default: 0
               type: number
             user:

@@ -8,9 +8,8 @@ components:
             - userId
             - envelopId
             - amount
-            - date
-            - isBusinessDay
             - description
+            - type
           properties:
             userId:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -18,13 +17,34 @@ components:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
             amount:
               type: number
-            date:
-              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
-            isBusinessDay:
-              type: boolean
             description:
               type: string
+            type:
+              $ref: "#/components/schemas/RenewType"
+            dayOfMonth:
+              type: number
+            isBusinessDay:
+              type: boolean
+            dayOfWeek:
+              type: number
+            frequence:
+              $ref: "#/components/schemas/RenewFrequence"
+            startDate:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
             user:
               $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
             envelop:
               $ref: ../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop
+    RenewType:
+      type: string
+      enum:
+        - DayOfMonth
+        - DayOfWeek
+    RenewFrequence:
+      type: string
+      enum:
+        - EveryWeek
+        - Every2Weeks
+        - EveryMonth
+        - Every3Months
+        - EveryYear

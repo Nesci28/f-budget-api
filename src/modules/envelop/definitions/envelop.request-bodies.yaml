@@ -41,22 +41,27 @@ components:
         - userId
         - name
         - type
-        - budget
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
         type:
           $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+        budget:
+          type: number
+        incomeMonth:
+          default: 0
+          type: number
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
+          default: 0
+          type: number
     EnvelopPatch:
       x-min-properties: 1
       type: object
@@ -65,16 +70,22 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
         type:
           $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+        budget:
+          type: number
+        incomeMonth:
+          default: 0
+          type: number
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
+          default: 0
+          type: number
     EnvelopSearchRequestBody:
       $ref: "#/components/schemas/EnvelopSearch"
     EnvelopUpdate:
@@ -83,22 +94,27 @@ components:
         - userId
         - name
         - type
-        - budget
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         name:
           type: string
-        budget:
-          type: number
-        balanceMonth:
-          default: 0
-          type: number
-        balanceTotal:
-          default: 0
-          type: number
         type:
           $ref: ./envelop.schemas.yaml#/components/schemas/EnvelopType
+        budget:
+          type: number
+        incomeMonth:
+          default: 0
+          type: number
+        incomeTotal:
+          default: 0
+          type: number
+        outcomeMonth:
+          default: 0
+          type: number
+        outcomeTotal:
+          default: 0
+          type: number
     EnvelopSearch:
       allOf:
         - $ref: "#/components/schemas/EnvelopPaginationQuery"
@@ -118,6 +134,8 @@ components:
         archived:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
         userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        type:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
     EnvelopConditionQuery:
       type: object
@@ -160,6 +178,8 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        type:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     EnvelopPopulateRequestBody:
       type: object
       properties:
@@ -193,3 +213,4 @@ components:
       type: string
       enum:
         - userId
+        - type

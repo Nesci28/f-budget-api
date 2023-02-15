@@ -36,6 +36,8 @@ components:
           $ref: "../../node_modules/@yest/healthcheck/resources.yaml#/components/schemas/Healthcheck"
         mongoose:
           $ref: "../../node_modules/@yest/mongoose/resources.yaml#/components/schemas/AccessModelCreate"
+        minio:
+          $ref: "../../node_modules/@yest/minio/resources.yaml#/components/schemas/Upload"
         # security:
         #   $ref: "../../node_modules/@yest/security/resources.yaml#/components/schemas/RefreshResponse"
     SupportedLanguage:

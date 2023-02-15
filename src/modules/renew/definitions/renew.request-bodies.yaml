@@ -41,9 +41,8 @@ components:
         - userId
         - envelopId
         - amount
-        - date
-        - isBusinessDay
         - description
+        - type
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -51,12 +50,20 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         amount:
           type: number
-        date:
-          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        type:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewType
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
+        startDate:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        frequence:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewFrequence
     RenewPatch:
       x-min-properties: 1
       type: object
@@ -67,12 +74,20 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         amount:
           type: number
-        date:
-          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        type:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewType
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
+        startDate:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        frequence:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewFrequence
     RenewSearchRequestBody:
       $ref: "#/components/schemas/RenewSearch"
     RenewUpdate:
@@ -81,9 +96,8 @@ components:
         - userId
         - envelopId
         - amount
-        - date
-        - isBusinessDay
         - description
+        - type
       properties:
         userId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
@@ -91,12 +105,20 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
         amount:
           type: number
-        date:
-          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
-        isBusinessDay:
-          type: boolean
         description:
           type: string
+        type:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewType
+        dayOfMonth:
+          type: number
+        isBusinessDay:
+          type: boolean
+        dayOfWeek:
+          type: number
+        startDate:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+        frequence:
+          $ref: ./renew.schemas.yaml#/components/schemas/RenewFrequence
     RenewSearch:
       allOf:
         - $ref: "#/components/schemas/RenewPaginationQuery"
@@ -119,8 +141,14 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
         envelopId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
-        date:
-          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateCondition
+        type:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringCondition
+        dayOfMonth:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchNumberCondition
+        isBusinessDay:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchBooleanCondition
+        dayOfWeek:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchNumberCondition
     RenewConditionQuery:
       type: object
       x-min-required:
@@ -164,7 +192,13 @@ components:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
         envelopId:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
-        date:
+        type:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        dayOfMonth:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        isBusinessDay:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
+        dayOfWeek:
           $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Sorting
     RenewPopulateRequestBody:
       type: object
@@ -201,4 +235,7 @@ components:
       enum:
         - userId
         - envelopId
-        - date
+        - type
+        - dayOfMonth
+        - isBusinessDay
+        - dayOfWeek
