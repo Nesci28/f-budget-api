@@ -1,3 +1,8 @@
+import {
+  EnvelopCreate,
+  EnvelopType,
+  UserCreate,
+} from "@f-budget/f-budget-api-typescript-fetch";
 import { StatusCodes } from "http-status-codes";
 
 import { ReceiptErrors } from "../../receipt.errors";
@@ -8,6 +13,26 @@ export function receiptArchiveTest(): void {
 
   beforeAll(() => {
     ctx = this.ctx;
+  });
+
+  beforeEach(async () => {
+    const userCreate: UserCreate = {
+      email: "test@test.com",
+      password: "testtest",
+    };
+    const user = await ctx.userService.create(userCreate);
+
+    const envelopCreate: EnvelopCreate = {
+      id: ctx.receiptCreate.envelopId,
+      userId: user.id,
+      name: "test",
+      budget: 10000000000000,
+      type: EnvelopType.Outcome,
+    } as any;
+    const envelop = await ctx.envelopRepository.create(envelopCreate);
+
+    ctx.receiptCreate.userId = user.id;
+    ctx.receiptCreate.envelopId = envelop.id;
   });
 
   it("should archive the specified Receipt", async () => {

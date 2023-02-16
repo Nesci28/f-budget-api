@@ -1,6 +1,6 @@
-import { unset } from "lodash";
+const { unset } = require("lodash");
 
-export default async (): Promise<void> => {
+module.exports = async () => {
   await globalThis.context.testHandler.close();
   await globalThis.context.mongoMemory.stop();
   unset(globalThis, "context");

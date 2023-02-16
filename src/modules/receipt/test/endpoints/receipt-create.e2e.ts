@@ -1,3 +1,9 @@
+import {
+  EnvelopCreate,
+  EnvelopType,
+  UserCreate,
+} from "@f-budget/f-budget-api-typescript-fetch";
+
 import { ReceiptContext } from "../receipt.e2e-spec";
 
 export function receiptCreateTest(): void {
@@ -5,6 +11,26 @@ export function receiptCreateTest(): void {
 
   beforeAll(() => {
     ctx = this.ctx;
+  });
+
+  beforeEach(async () => {
+    const userCreate: UserCreate = {
+      email: "test@test.com",
+      password: "testtest",
+    };
+    const user = await ctx.userService.create(userCreate);
+
+    const envelopCreate: EnvelopCreate = {
+      id: ctx.receiptCreate.envelopId,
+      userId: user.id,
+      name: "test",
+      budget: 10000000000000,
+      type: EnvelopType.Outcome,
+    } as any;
+    const envelop = await ctx.envelopRepository.create(envelopCreate);
+
+    ctx.receiptCreate.userId = user.id;
+    ctx.receiptCreate.envelopId = envelop.id;
   });
 
   it("should create a new Receipt", async () => {

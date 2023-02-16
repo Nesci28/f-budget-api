@@ -1128,6 +1128,189 @@ paths:
           $ref: '#/components/responses/NotFoundResultResponse'
         '406':
           $ref: '#/components/responses/NotAcceptableResultResponse'
+  /access-model:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelCreate
+      summary: Creates a new AccessModel
+      description: Creates a new AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelCreateRequestBody'
+      parameters:
+        - $ref: '#/components/parameters/IsAccessModelDryRun'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelCreateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model-all:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelGetAll
+      summary: Get all AccessModel
+      description: Get all AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      parameters:
+        - $ref: '#/components/parameters/IsAccessModelArchived'
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelGetAllResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model-search:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelSearch
+      summary: Search AccessModel
+      description: Search AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelSearchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+  /access-model/{id}:
+    post:
+      tags:
+        - AccessModel
+      operationId: accessModelGetById
+      summary: Get by Id a AccessModel
+      description: Get by Id a AccessModel
+      security:
+        - E2E: []
+        - Dev: []
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelFindByIdResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    patch:
+      tags:
+        - AccessModel
+      operationId: accessModelPatch
+      summary: Patch a AccessModel
+      description: Patch a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelPatchRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelPatchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    put:
+      tags:
+        - AccessModel
+      operationId: accessModelUpdate
+      summary: Update a AccessModel
+      description: Update a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+        - $ref: '#/components/parameters/IsAccessModelDryRun'
+      security:
+        - E2E: []
+        - Dev: []
+      requestBody:
+        $ref: '#/components/requestBodies/AccessModelUpdateRequestBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
+    delete:
+      tags:
+        - AccessModel
+      operationId: accessModelArchive
+      summary: Archive a AccessModel
+      description: Archive a AccessModel
+      parameters:
+        - $ref: '#/components/parameters/AccessModelId'
+      security:
+        - E2E: []
+        - Dev: []
+      responses:
+        '200':
+          $ref: '#/components/responses/AccessModelArchiveResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResultResponse'
+        '401':
+          $ref: '#/components/responses/MissingTokenResultResponse'
+        '403':
+          $ref: '#/components/responses/MissingPermissionResultResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResultResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorResultResponse'
   /access-scope:
     post:
       tags:
@@ -1471,189 +1654,6 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/PropertyControlLinkArchiveResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelCreate
-      summary: Creates a new AccessModel
-      description: Creates a new AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelCreateRequestBody'
-      parameters:
-        - $ref: '#/components/parameters/IsAccessModelDryRun'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelCreateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model-all:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelGetAll
-      summary: Get all AccessModel
-      description: Get all AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      parameters:
-        - $ref: '#/components/parameters/IsAccessModelArchived'
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelGetAllResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model-search:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelSearch
-      summary: Search AccessModel
-      description: Search AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelSearchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelSearchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-  /access-model/{id}:
-    post:
-      tags:
-        - AccessModel
-      operationId: accessModelGetById
-      summary: Get by Id a AccessModel
-      description: Get by Id a AccessModel
-      security:
-        - E2E: []
-        - Dev: []
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPopulateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelFindByIdResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    patch:
-      tags:
-        - AccessModel
-      operationId: accessModelPatch
-      summary: Patch a AccessModel
-      description: Patch a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelPatchRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelPatchResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    put:
-      tags:
-        - AccessModel
-      operationId: accessModelUpdate
-      summary: Update a AccessModel
-      description: Update a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-        - $ref: '#/components/parameters/IsAccessModelDryRun'
-      security:
-        - E2E: []
-        - Dev: []
-      requestBody:
-        $ref: '#/components/requestBodies/AccessModelUpdateRequestBody'
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelUpdateResponse'
-        '400':
-          $ref: '#/components/responses/BadRequestResultResponse'
-        '401':
-          $ref: '#/components/responses/MissingTokenResultResponse'
-        '403':
-          $ref: '#/components/responses/MissingPermissionResultResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResultResponse'
-        '500':
-          $ref: '#/components/responses/InternalErrorResultResponse'
-    delete:
-      tags:
-        - AccessModel
-      operationId: accessModelArchive
-      summary: Archive a AccessModel
-      description: Archive a AccessModel
-      parameters:
-        - $ref: '#/components/parameters/AccessModelId'
-      security:
-        - E2E: []
-        - Dev: []
-      responses:
-        '200':
-          $ref: '#/components/responses/AccessModelArchiveResponse'
         '400':
           $ref: '#/components/responses/BadRequestResultResponse'
         '401':
@@ -2231,72 +2231,6 @@ components:
         exp:
           description: Expiration time
           type: number
-    BalanceCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Balance'
-    BalanceFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Balance'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/BalanceSearchDistincts'
-    BalancePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Balance'
-    BalanceSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     BalanceCreate:
       type: object
       required:
@@ -2449,6 +2383,72 @@ components:
       type: string
       enum:
         - userId
+    BalanceCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+    BalanceFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Balance'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/BalanceSearchDistincts'
+    BalancePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Balance'
+    BalanceSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     Balance:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2753,6 +2753,72 @@ components:
       enum:
         - Income
         - Outcome
+    PictureCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Picture'
+    PictureFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Picture'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/PictureSearchDistincts'
+    PicturePatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Picture'
+    PictureSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     PictureCreate:
       type: object
       required:
@@ -2877,72 +2943,6 @@ components:
       type: string
       enum:
         - userId
-    PictureCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Picture'
-    PictureGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Picture'
-    PictureFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Picture'
-    PictureSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Picture'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/PictureSearchDistincts'
-    PicturePatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Picture'
-    PictureUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Picture'
-    PictureArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Picture'
-    PictureSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     Picture:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -2957,74 +2957,6 @@ components:
               type: string
             user:
               $ref: '#/components/schemas/User'
-    ReceiptCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Receipt'
-    ReceiptFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/Receipt'
-        - type: object
-          properties:
-            distincts:
-              $ref: '#/components/schemas/ReceiptSearchDistincts'
-    ReceiptPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Receipt'
-    ReceiptSearchDistincts:
-      type: object
-      properties:
-        userId:
-          $ref: '#/components/schemas/SearchStringDistincts'
-        envelopId:
-          $ref: '#/components/schemas/SearchStringDistincts'
     ReceiptCreate:
       type: object
       required:
@@ -3243,6 +3175,74 @@ components:
         - userId
         - envelopId
         - date
+    ReceiptCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+    ReceiptFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/Receipt'
+        - type: object
+          properties:
+            distincts:
+              $ref: '#/components/schemas/ReceiptSearchDistincts'
+    ReceiptPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/Receipt'
+    ReceiptSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/SearchStringDistincts'
+        envelopId:
+          $ref: '#/components/schemas/SearchStringDistincts'
     Receipt:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -3842,12 +3842,9 @@ components:
         - type: object
           required:
             - email
-            - password
           properties:
             email:
               $ref: '#/components/schemas/Email'
-            password:
-              type: string
             refreshTokens:
               type: array
               items:
@@ -4689,36 +4686,6 @@ components:
       type: string
       enum:
         - accessScopes
-    AccessModel:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - label
-            - accessScopeIds
-            - usage
-            - isAssignable
-          properties:
-            label:
-              $ref: '#/components/schemas/TranslatableText'
-            accessScopeIds:
-              type: array
-              items:
-                $ref: '#/components/schemas/ObjectID'
-            usage:
-              $ref: '#/components/schemas/AccessModelUsage'
-            isAssignable:
-              type: boolean
-            accessScopes:
-              type: array
-              items:
-                $ref: '#/components/schemas/AccessScope'
-    AccessModelUsage:
-      type: string
-      enum:
-        - User
-        - Dealer
-        - Both
     AccessModelCreateResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -4776,6 +4743,36 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/AccessModel'
+    AccessModel:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - label
+            - accessScopeIds
+            - usage
+            - isAssignable
+          properties:
+            label:
+              $ref: '#/components/schemas/TranslatableText'
+            accessScopeIds:
+              type: array
+              items:
+                $ref: '#/components/schemas/ObjectID'
+            usage:
+              $ref: '#/components/schemas/AccessModelUsage'
+            isAssignable:
+              type: boolean
+            accessScopes:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccessScope'
+    AccessModelUsage:
+      type: string
+      enum:
+        - User
+        - Dealer
+        - Both
     AccessScopeCreate:
       type: object
       required:
@@ -5045,192 +5042,6 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/PropertyControlLink'
-    PropertyControlLinkCreate:
-      type: object
-      required:
-        - propertyControlId
-        - extensionModule
-      properties:
-        propertyControlId:
-          x-index: true
-          $ref: '#/components/schemas/ObjectID'
-        extensionModule:
-          x-index: true
-          type: string
-        hiddenPropertyOptionIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        coloredPropertyOptions:
-          type: array
-          items:
-            type: object
-            required:
-              - bgColor
-              - textColor
-              - propertyOptionId
-            properties:
-              bgColor:
-                $ref: '#/components/schemas/HexColor'
-              textColor:
-                $ref: '#/components/schemas/HexColor'
-              propertyOptionId:
-                $ref: '#/components/schemas/ObjectID'
-    PropertyControlLinkPatch:
-      x-min-properties: 1
-      type: object
-      properties:
-        propertyControlId:
-          x-index: true
-          $ref: '#/components/schemas/ObjectID'
-        extensionModule:
-          x-index: true
-          type: string
-        hiddenPropertyOptionIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        coloredPropertyOptions:
-          type: array
-          items:
-            type: object
-            required:
-              - bgColor
-              - textColor
-              - propertyOptionId
-            properties:
-              bgColor:
-                $ref: '#/components/schemas/HexColor'
-              textColor:
-                $ref: '#/components/schemas/HexColor'
-              propertyOptionId:
-                $ref: '#/components/schemas/ObjectID'
-    PropertyControlLinkSearchRequestBody:
-      $ref: '#/components/schemas/PropertyControlLinkSearch'
-    PropertyControlLinkUpdate:
-      type: object
-      required:
-        - propertyControlId
-        - extensionModule
-      properties:
-        propertyControlId:
-          x-index: true
-          $ref: '#/components/schemas/ObjectID'
-        extensionModule:
-          x-index: true
-          type: string
-        hiddenPropertyOptionIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObjectID'
-        coloredPropertyOptions:
-          type: array
-          items:
-            type: object
-            required:
-              - bgColor
-              - textColor
-              - propertyOptionId
-            properties:
-              bgColor:
-                $ref: '#/components/schemas/HexColor'
-              textColor:
-                $ref: '#/components/schemas/HexColor'
-              propertyOptionId:
-                $ref: '#/components/schemas/ObjectID'
-    PropertyControlLinkSearch:
-      allOf:
-        - $ref: '#/components/schemas/PropertyControlLinkPaginationQuery'
-        - $ref: '#/components/schemas/PropertyControlLinkConditionQuery'
-        - $ref: '#/components/schemas/PropertyControlLinkPopulateRequestBody'
-    PropertyControlLinkConditionFields:
-      type: object
-      x-min-properties: 1
-      properties:
-        id:
-          $ref: '#/components/schemas/SearchStringCondition'
-        updatedAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        createdAt:
-          $ref: '#/components/schemas/SearchDateCondition'
-        archived:
-          $ref: '#/components/schemas/SearchBooleanCondition'
-        propertyControlId:
-          $ref: '#/components/schemas/SearchStringCondition'
-        extensionModule:
-          $ref: '#/components/schemas/SearchStringCondition'
-    PropertyControlLinkConditionQuery:
-      type: object
-      x-min-required:
-        - and
-        - or
-      properties:
-        and:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/PropertyControlLinkConditionFields'
-        or:
-          type: array
-          x-min-length: 1
-          items:
-            $ref: '#/components/schemas/PropertyControlLinkConditionFields'
-    PropertyControlLinkPaginationQuery:
-      type: object
-      properties:
-        pagination:
-          $ref: '#/components/schemas/PropertyControlLinkPagination'
-    PropertyControlLinkPagination:
-      allOf:
-        - $ref: '#/components/schemas/Pagination'
-        - type: object
-          properties:
-            sort:
-              $ref: '#/components/schemas/PropertyControlLinkSort'
-    PropertyControlLinkSort:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/Sorting'
-        updatedAt:
-          $ref: '#/components/schemas/Sorting'
-        createdAt:
-          $ref: '#/components/schemas/Sorting'
-        archived:
-          $ref: '#/components/schemas/Sorting'
-        propertyControlId:
-          $ref: '#/components/schemas/Sorting'
-        extensionModule:
-          $ref: '#/components/schemas/Sorting'
-        hiddenPropertyOptionIds:
-          $ref: '#/components/schemas/Sorting'
-        propertyControl:
-          $ref: '#/components/schemas/Sorting'
-        coloredPropertyOptions:
-          $ref: '#/components/schemas/Sorting'
-    PropertyControlLinkPopulateRequestBody:
-      type: object
-      properties:
-        populate:
-          $ref: '#/components/schemas/PropertyControlLinkPopulateFields'
-    PropertyControlLinkPopulateFields:
-      type: array
-      items:
-        $ref: '#/components/schemas/PropertyControlLinkPopulateField'
-    PropertyControlLinkPopulateField:
-      type: object
-      required:
-        - label
-      properties:
-        label:
-          $ref: '#/components/schemas/PropertyControlLinkPopulateEnum'
-        match:
-          type: object
-    PropertyControlLinkPopulateEnum:
-      type: string
-      enum:
-        - propertyControl
-        - propertyControl_propertyControlOptions
     PropertyControlLink:
       allOf:
         - $ref: '#/components/schemas/BaseModel'
@@ -5635,84 +5446,6 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/PropertyControlOption'
-    SecureLinkFindByTokenResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkCreateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkGetAllResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/SecureLink'
-    SecureLinkFindByIdResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkSearchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              type: array
-              minItems: 0
-              maxItems: 1000
-              items:
-                $ref: '#/components/schemas/SecureLink'
-    SecureLinkPatchResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkUpdateResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLinkArchiveResponse:
-      allOf:
-        - $ref: '#/components/schemas/ResultHandlerInterface'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/SecureLink'
-    SecureLink:
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
-        - type: object
-          required:
-            - source
-            - target
-          properties:
-            source:
-              type: string
-            target:
-              type: string
-            expirationDate:
-              $ref: '#/components/schemas/DateTime'
     SecureLinkCreate:
       type: object
       required:
@@ -5804,6 +5537,270 @@ components:
           $ref: '#/components/schemas/Sorting'
         archived:
           $ref: '#/components/schemas/Sorting'
+    SecureLinkFindByTokenResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkCreateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkGetAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/SecureLink'
+    SecureLinkFindByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkSearchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: '#/components/schemas/SecureLink'
+    SecureLinkPatchResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLinkArchiveResponse:
+      allOf:
+        - $ref: '#/components/schemas/ResultHandlerInterface'
+        - type: object
+          properties:
+            value:
+              $ref: '#/components/schemas/SecureLink'
+    SecureLink:
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+        - type: object
+          required:
+            - source
+            - target
+          properties:
+            source:
+              type: string
+            target:
+              type: string
+            expirationDate:
+              $ref: '#/components/schemas/DateTime'
+    PropertyControlLinkCreate:
+      type: object
+      required:
+        - propertyControlId
+        - extensionModule
+      properties:
+        propertyControlId:
+          x-index: true
+          $ref: '#/components/schemas/ObjectID'
+        extensionModule:
+          x-index: true
+          type: string
+        hiddenPropertyOptionIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+        coloredPropertyOptions:
+          type: array
+          items:
+            type: object
+            required:
+              - bgColor
+              - textColor
+              - propertyOptionId
+            properties:
+              bgColor:
+                $ref: '#/components/schemas/HexColor'
+              textColor:
+                $ref: '#/components/schemas/HexColor'
+              propertyOptionId:
+                $ref: '#/components/schemas/ObjectID'
+    PropertyControlLinkPatch:
+      x-min-properties: 1
+      type: object
+      properties:
+        propertyControlId:
+          x-index: true
+          $ref: '#/components/schemas/ObjectID'
+        extensionModule:
+          x-index: true
+          type: string
+        hiddenPropertyOptionIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+        coloredPropertyOptions:
+          type: array
+          items:
+            type: object
+            required:
+              - bgColor
+              - textColor
+              - propertyOptionId
+            properties:
+              bgColor:
+                $ref: '#/components/schemas/HexColor'
+              textColor:
+                $ref: '#/components/schemas/HexColor'
+              propertyOptionId:
+                $ref: '#/components/schemas/ObjectID'
+    PropertyControlLinkSearchRequestBody:
+      $ref: '#/components/schemas/PropertyControlLinkSearch'
+    PropertyControlLinkUpdate:
+      type: object
+      required:
+        - propertyControlId
+        - extensionModule
+      properties:
+        propertyControlId:
+          x-index: true
+          $ref: '#/components/schemas/ObjectID'
+        extensionModule:
+          x-index: true
+          type: string
+        hiddenPropertyOptionIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectID'
+        coloredPropertyOptions:
+          type: array
+          items:
+            type: object
+            required:
+              - bgColor
+              - textColor
+              - propertyOptionId
+            properties:
+              bgColor:
+                $ref: '#/components/schemas/HexColor'
+              textColor:
+                $ref: '#/components/schemas/HexColor'
+              propertyOptionId:
+                $ref: '#/components/schemas/ObjectID'
+    PropertyControlLinkSearch:
+      allOf:
+        - $ref: '#/components/schemas/PropertyControlLinkPaginationQuery'
+        - $ref: '#/components/schemas/PropertyControlLinkConditionQuery'
+        - $ref: '#/components/schemas/PropertyControlLinkPopulateRequestBody'
+    PropertyControlLinkConditionFields:
+      type: object
+      x-min-properties: 1
+      properties:
+        id:
+          $ref: '#/components/schemas/SearchStringCondition'
+        updatedAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        createdAt:
+          $ref: '#/components/schemas/SearchDateCondition'
+        archived:
+          $ref: '#/components/schemas/SearchBooleanCondition'
+        propertyControlId:
+          $ref: '#/components/schemas/SearchStringCondition'
+        extensionModule:
+          $ref: '#/components/schemas/SearchStringCondition'
+    PropertyControlLinkConditionQuery:
+      type: object
+      x-min-required:
+        - and
+        - or
+      properties:
+        and:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/PropertyControlLinkConditionFields'
+        or:
+          type: array
+          x-min-length: 1
+          items:
+            $ref: '#/components/schemas/PropertyControlLinkConditionFields'
+    PropertyControlLinkPaginationQuery:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PropertyControlLinkPagination'
+    PropertyControlLinkPagination:
+      allOf:
+        - $ref: '#/components/schemas/Pagination'
+        - type: object
+          properties:
+            sort:
+              $ref: '#/components/schemas/PropertyControlLinkSort'
+    PropertyControlLinkSort:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Sorting'
+        updatedAt:
+          $ref: '#/components/schemas/Sorting'
+        createdAt:
+          $ref: '#/components/schemas/Sorting'
+        archived:
+          $ref: '#/components/schemas/Sorting'
+        propertyControlId:
+          $ref: '#/components/schemas/Sorting'
+        extensionModule:
+          $ref: '#/components/schemas/Sorting'
+        hiddenPropertyOptionIds:
+          $ref: '#/components/schemas/Sorting'
+        propertyControl:
+          $ref: '#/components/schemas/Sorting'
+        coloredPropertyOptions:
+          $ref: '#/components/schemas/Sorting'
+    PropertyControlLinkPopulateRequestBody:
+      type: object
+      properties:
+        populate:
+          $ref: '#/components/schemas/PropertyControlLinkPopulateFields'
+    PropertyControlLinkPopulateFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/PropertyControlLinkPopulateField'
+    PropertyControlLinkPopulateField:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          $ref: '#/components/schemas/PropertyControlLinkPopulateEnum'
+        match:
+          type: object
+    PropertyControlLinkPopulateEnum:
+      type: string
+      enum:
+        - propertyControl
+        - propertyControl_propertyControlOptions
     UploadResponse:
       allOf:
         - $ref: '#/components/schemas/ResultHandlerInterface'
@@ -6636,40 +6633,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AccessScopeUpdate'
-    PropertyControlLinkCreateRequestBody:
-      description: Body needed to create a PropertyControlLink
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PropertyControlLinkCreate'
-    PropertyControlLinkSearchRequestBody:
-      description: Body needed to search PropertyControlLinks
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PropertyControlLinkSearchRequestBody'
-    PropertyControlLinkPatchRequestBody:
-      description: Body needed to modify a PropertyControlLink
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PropertyControlLinkPatch'
-    PropertyControlLinkUpdateRequestBody:
-      description: Body needed to update a PropertyControlLink
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PropertyControlLinkUpdate'
-    PropertyControlLinkPopulateRequestBody:
-      description: Body needed populate fields in PropertyControlLink
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PropertyControlLinkPopulateRequestBody'
     PropertyControlOptionCreateRequestBody:
       description: Body needed to create a PropertyControlOption
       required: true
@@ -6731,6 +6694,40 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/PropertyControlPopulateRequestBody'
+    PropertyControlLinkCreateRequestBody:
+      description: Body needed to create a PropertyControlLink
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyControlLinkCreate'
+    PropertyControlLinkSearchRequestBody:
+      description: Body needed to search PropertyControlLinks
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyControlLinkSearchRequestBody'
+    PropertyControlLinkPatchRequestBody:
+      description: Body needed to modify a PropertyControlLink
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyControlLinkPatch'
+    PropertyControlLinkUpdateRequestBody:
+      description: Body needed to update a PropertyControlLink
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyControlLinkUpdate'
+    PropertyControlLinkPopulateRequestBody:
+      description: Body needed populate fields in PropertyControlLink
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PropertyControlLinkPopulateRequestBody'
     MinioRequestBody:
       content:
         multipart/form-data:

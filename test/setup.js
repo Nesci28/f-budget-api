@@ -1,26 +1,26 @@
-import { Configuration } from "@f-budget/f-budget-api-typescript-fetch";
-import { MongoMemoryHandler } from "@yest/mongoose-test";
-import { YestRouterModule } from "@yest/router";
-import { SecurityService } from "@yest/security";
-import { TestHandler } from "@yest/test";
-import { cloneDeep, unset } from "lodash";
-import mongoose from "mongoose";
+const { MongoMemoryHandler } = require("@yest/mongoose-test");
+const { YestRouterModule } = require("@yest/router");
+const { SecurityService } = require("@yest/security");
+const { TestHandler } = require("@yest/test");
+const { cloneDeep, unset } = require("lodash");
+const mongoose = require("mongoose");
 
-import { AppModule, meta } from "../src/app.module";
-import { configs } from "../src/constants/configs.constant";
-import {
-  Context,
+const { Configuration } = require("@f-budget/f-budget-api-typescript-fetch");
+const { AppModule, meta } = require("../src/app.module");
+const { configs } = require("../src/constants/configs.constant");
+
+const {
   createMany,
   createOne,
   generateOptionIdMap,
   updateField,
-} from "./global";
+} = require("./global");
 
-export default async (): Promise<void> => {
+module.exports = async () => {
   const startBuildDate = new Date().getTime();
   console.log("Building test App");
   unset(globalThis, "context");
-  globalThis.context = {} as Context<any, any>;
+  globalThis.context = {};
   globalThis.context.testHandler = new TestHandler();
   globalThis.context.mongoMemory = new MongoMemoryHandler();
 
@@ -45,9 +45,8 @@ export default async (): Promise<void> => {
 
   const startSetupDate = new Date().getTime();
   // Fill CTX
-  globalThis.context.securityService = (
-    globalThis.context.testHandler as TestHandler
-  ).get<SecurityService>(SecurityService);
+  globalThis.context.securityService =
+    globalThis.context.testHandler.get(SecurityService);
 
   const jwtToken = globalThis.context.securityService.signJwtToken({
     id: new mongoose.Types.ObjectId().toHexString(),
@@ -62,7 +61,6 @@ export default async (): Promise<void> => {
   globalThis.context.createMany = createMany;
   globalThis.context.updateField = updateField;
   globalThis.context.optionIdMap = generateOptionIdMap();
-  globalThis.context.testHandler.optionIdMap = globalThis.context.optionIdMap;
 
   const endSetupDate = new Date().getTime();
   console.log(`Setup done in: ${endSetupDate - startSetupDate}ms`);

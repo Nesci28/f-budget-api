@@ -4,8 +4,11 @@ import {
   ReceiptPatch,
   ReceiptUpdate,
 } from "@f-budget/f-budget-api-typescript-fetch";
+import { unset } from "lodash";
 
 import { Context } from "../../../../test/global";
+import { EnvelopRepository } from "../../envelop/envelop.repository";
+import { UserService } from "../../user/user.service";
 import { ReceiptRepository } from "../receipt.repository";
 import { ReceiptService } from "../receipt.service";
 import { receiptArchiveTest } from "./endpoints/receipt-archive.e2e";
@@ -25,6 +28,8 @@ export interface ReceiptContext extends Context<ReceiptCreate, ReceiptUpdate> {
   receiptUpdate: ReceiptUpdate;
   receiptPatch: ReceiptPatch;
   receiptCreates: ReceiptCreate[];
+  userService: UserService;
+  envelopRepository: EnvelopRepository;
 }
 
 describe("ReceiptController", () => {
@@ -37,14 +42,34 @@ describe("ReceiptController", () => {
     );
     ctx.receiptService = ctx.testHandler.get("ReceiptService");
     ctx.receiptRepository = ctx.testHandler.get("ReceiptRepository");
+    ctx.userService = ctx.testHandler.get("UserService");
+    ctx.envelopRepository = ctx.testHandler.get("EnvelopRepository");
 
     ctx.receiptCreate = ctx.createOne("ReceiptCreate", ctx.testHandler, false);
+    unset(ctx.receiptCreate, "incomeMonth");
+    unset(ctx.receiptCreate, "incomeTotal");
+    unset(ctx.receiptCreate, "outcomeMonth");
+    unset(ctx.receiptCreate, "outcomeTotal");
+    unset(ctx.receiptCreate, "envelopIncomeMonth");
+    unset(ctx.receiptCreate, "envelopIncomeTotal");
+    unset(ctx.receiptCreate, "envelopOutcomeMonth");
+    unset(ctx.receiptCreate, "envelopOutcomeTotal");
     ctx.receiptCreates = ctx.createMany(
       "ReceiptCreate",
       ctx.testHandler,
       false,
       20,
     );
+    ctx.receiptCreates.forEach((x) => {
+      unset(x, "incomeMonth");
+      unset(x, "incomeTotal");
+      unset(x, "outcomeMonth");
+      unset(x, "outcomeTotal");
+      unset(x, "envelopIncomeMonth");
+      unset(x, "envelopIncomeTotal");
+      unset(x, "envelopOutcomeMonth");
+      unset(x, "envelopOutcomeTotal");
+    });
     const { key, update } = ctx.updateField(
       "ReceiptUpdate",
       ctx.receiptCreate,
@@ -60,11 +85,6 @@ describe("ReceiptController", () => {
 
   beforeEach(async () => {
     await ctx.mongoMemory.clean();
-    await ctx.createOptionIds(
-      ctx.testHandler,
-      ctx.propertyControlRepository,
-      ctx.propertyControlOptionRepository,
-    );
     jest.restoreAllMocks();
   });
 

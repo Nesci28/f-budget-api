@@ -19,7 +19,6 @@ export function userGetByIdTest(): void {
   it("should return a specific User", async () => {
     const results = await ctx.userConnector.userGetById({
       id: users[0].id,
-      userPopulateRequestBody: {},
     });
 
     expect(results.isSuccess).toEqual(true);
@@ -31,7 +30,6 @@ export function userGetByIdTest(): void {
 
     const results = await ctx.userConnector.userGetById({
       id: fakeUserId,
-      userPopulateRequestBody: {},
     });
 
     expect(results.isSuccess).toEqual(false);

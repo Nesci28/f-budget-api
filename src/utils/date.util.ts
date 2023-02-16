@@ -33,6 +33,12 @@ export class DateUtil {
     return utc;
   }
 
+  public static newDateFrom(date: Date): Date {
+    const now = moment(date).utc().toDate();
+    const utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+    return utc;
+  }
+
   public static getTimeFromDate(date: Date): string {
     const momentDate = moment(date);
     const time = momentDate.format("HH:mm:ss");
@@ -64,7 +70,7 @@ export class DateUtil {
 
   public static isBusinessDay(date: Date): boolean {
     const now = moment(date).day();
-    const isBusinessDay = now === 0 || now === 6;
+    const isBusinessDay = now > 0 && now < 6;
     return isBusinessDay;
   }
 
@@ -86,6 +92,13 @@ export class DateUtil {
   public static getTimezoneOffset(timezone: string): number {
     const timezoneOffset = moment.tz(timezone).utcOffset();
     return timezoneOffset;
+  }
+
+  public static getMonthDifference(date: Date, compareDate: Date): number {
+    const momentDate = moment(date).utc();
+    const momentCompareDate = moment(compareDate).utc();
+    const difference = momentCompareDate.diff(momentDate, "months");
+    return difference;
   }
 
   public static getYearDifference(date: Date, compareDate: Date): number {

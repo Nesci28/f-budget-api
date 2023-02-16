@@ -31,7 +31,10 @@ export class EnvelopService {
   }
 
   public async createMany(envelopBulk: EnvelopCreate[]): Promise<Envelop[]> {
-    const res = await this.envelopRepository.createMany(envelopBulk);
+    const createPromises = envelopBulk.map((x) => {
+      return this.create(x);
+    });
+    const res = await Promise.all(createPromises);
     return res;
   }
 

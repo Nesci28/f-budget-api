@@ -4,6 +4,7 @@ import {
   EnvelopPatch,
   EnvelopUpdate,
 } from "@f-budget/f-budget-api-typescript-fetch";
+import { unset } from "lodash";
 
 import { Context } from "../../../../test/global";
 import { EnvelopRepository } from "../envelop.repository";
@@ -39,12 +40,24 @@ describe("EnvelopController", () => {
     ctx.envelopRepository = ctx.testHandler.get("EnvelopRepository");
 
     ctx.envelopCreate = ctx.createOne("EnvelopCreate", ctx.testHandler, false);
+    ctx.envelopCreate.incomeMonth = ctx.envelopCreate.budget;
+    ctx.envelopCreate.incomeTotal = ctx.envelopCreate.budget;
+    unset(ctx.envelopCreate, "outcomeMonth");
+    unset(ctx.envelopCreate, "outcomeTotal");
     ctx.envelopCreates = ctx.createMany(
       "EnvelopCreate",
       ctx.testHandler,
       false,
       20,
     );
+    ctx.envelopCreates.forEach((x) => {
+      // eslint-disable-next-line no-param-reassign
+      x.incomeMonth = x.budget;
+      // eslint-disable-next-line no-param-reassign
+      x.incomeTotal = x.budget;
+      unset(x, "outcomeMonth");
+      unset(x, "outcomeTotal");
+    });
     const { key, update } = ctx.updateField(
       "EnvelopUpdate",
       ctx.envelopCreate,
@@ -60,11 +73,6 @@ describe("EnvelopController", () => {
 
   beforeEach(async () => {
     await ctx.mongoMemory.clean();
-    await ctx.createOptionIds(
-      ctx.testHandler,
-      ctx.propertyControlRepository,
-      ctx.propertyControlOptionRepository,
-    );
     jest.restoreAllMocks();
   });
 

@@ -27,6 +27,7 @@ import { PictureModule } from "./modules/picture/picture.module";
 import { ReceiptModule } from "./modules/receipt/receipt.module";
 import { RenewModule } from "./modules/renew/renew.module";
 import { UserModule } from "./modules/user/user.module";
+import { CronModule } from "./services/cron/cron.module";
 
 const configModule = ConfigModule.forRoot({
   validationSchema: Joi.object({
@@ -108,6 +109,7 @@ const moduleImports = [
   RenewModule,
   PictureModule,
   UserModule,
+  CronModule,
 ];
 
 const appProviders = [

@@ -12,9 +12,7 @@ export function userGetAllTest(): void {
   });
 
   it("should return an array of Users", async () => {
-    const results = await ctx.userConnector.userGetAll({
-      userPopulateRequestBody: {},
-    });
+    const results = await ctx.userConnector.userGetAll({});
 
     expect(results.isSuccess).toEqual(true);
     expect(results.value?.length).toEqual(20);

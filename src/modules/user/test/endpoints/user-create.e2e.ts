@@ -28,7 +28,6 @@ export function userCreateTest(): void {
 
     const checkFindResult = await ctx.userConnector.userGetById({
       id: result.value!.id,
-      userPopulateRequestBody: {},
     });
     expect(checkFindResult.isSuccess).toEqual(false);
     expect(checkFindResult.error?.httpCode).toEqual(404);

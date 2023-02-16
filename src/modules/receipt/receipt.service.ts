@@ -38,6 +38,10 @@ export class ReceiptService {
   ): Promise<Receipt> {
     const res = await this.receiptRepository.create(receipt, isDryRun);
 
+    if (isDryRun) {
+      return res;
+    }
+
     const { envelopId, amount, userId } = receipt;
 
     // Get the Envelop

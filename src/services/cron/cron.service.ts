@@ -18,6 +18,8 @@ import { DateUtil } from "../../utils/date.util";
 
 @Injectable()
 export class CronService {
+  public today = new Date();
+
   private logger = new Logger(CronService.name);
 
   constructor(
@@ -27,7 +29,7 @@ export class CronService {
   ) {}
 
   @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_MIDNIGHT)
-  public async fullEnvelops(): Promise<void> {
+  public async resetEnvelops(): Promise<void> {
     const startTime = new Date().getTime();
     this.logger.debug("Fulling envelopes");
 
@@ -42,9 +44,9 @@ export class CronService {
 
     for (let i = 0; i < envelops.length; i += 1) {
       const envelop = envelops[i];
-      const { incomeMonth, incomeTotal, id: envelopId, budget } = envelop;
+      const { incomeTotal, id: envelopId, budget } = envelop;
       const envelopPatch: EnvelopPatch = {
-        incomeMonth: (incomeMonth || 0) + (budget || 0),
+        incomeMonth: budget,
         incomeTotal: (incomeTotal || 0) + (budget || 0),
         outcomeMonth: 0,
       };
@@ -62,22 +64,24 @@ export class CronService {
     const startTime = new Date().getTime();
     this.logger.debug("Checking for Renew");
 
-    const today = DateUtil.newDate();
+    this.setDate();
     const renews: Renew[] = [];
 
     // Get weekend and isBusinessDay renews if we are monday
-    const isMonday = DateUtil.isMonday(today);
+    const isMonday = DateUtil.isMonday(this.today);
     if (isMonday) {
-      const weekendRenews = await this.searchForBusinessDayRenewsWeekend(today);
+      const weekendRenews = await this.searchForBusinessDayRenewsWeekend(
+        this.today,
+      );
       renews.push(...weekendRenews);
     }
 
     // Get today's Renews
-    const todayMonthRenews = await this.searchForTodayMonthRenews(today);
+    const todayMonthRenews = await this.searchForTodayMonthRenews(this.today);
     renews.push(...todayMonthRenews);
 
     // Get dayOfWeeks renews
-    const todayWeekRenews = await this.searchForTodayWeekRenews(today);
+    const todayWeekRenews = await this.searchForTodayWeekRenews(this.today);
     renews.push(...todayWeekRenews);
 
     const receiptCreates: ReceiptCreate[] = [];
@@ -88,7 +92,7 @@ export class CronService {
       const { envelopId, amount, userId, description, id: renewId } = renew;
       const receiptCreate: ReceiptCreate = {
         envelopId,
-        date: today,
+        date: this.today,
         amount,
         description,
         userId,
@@ -147,6 +151,11 @@ export class CronService {
     return renews;
   }
 
+  private setDate(): void {
+    const today = DateUtil.newDate();
+    this.today = today;
+  }
+
   private async searchForTodayMonthRenews(today: Date): Promise<Renew[]> {
     const isBusinessDay = DateUtil.isBusinessDay(today);
     const dayOfMonth = DateUtil.getMonthDay(today);
@@ -169,8 +178,42 @@ export class CronService {
       });
     }
     const renewSearchApi = await this.renewService.search(renewSearch);
+    const allRenews = renewSearchApi.value;
 
-    const renews = renewSearchApi.value;
+    const renews: Renew[] = [];
+
+    // Every Month
+    const everyMonthRenews = allRenews.filter((x) => {
+      return x.frequence === RenewFrequence.EveryMonth;
+    });
+    renews.push(...everyMonthRenews);
+
+    // Every 3 Months
+    const every3MonthRenews = allRenews.filter((x) => {
+      const { frequence, startDate } = x;
+      const isEvery3Months = frequence === RenewFrequence.Every3Months;
+      if (!isEvery3Months || !startDate) {
+        return false;
+      }
+      const diff = Math.abs(DateUtil.getMonthDifference(today, startDate));
+      const is3MonthsDiff = diff % 3 === 0;
+      return is3MonthsDiff;
+    });
+    renews.push(...every3MonthRenews);
+
+    // Every Year
+    const everyYearRenews = allRenews.filter((x) => {
+      const { frequence, startDate } = x;
+      const isEveryYears = frequence === RenewFrequence.EveryYear;
+      if (!isEveryYears || !startDate) {
+        return false;
+      }
+      const diff = Math.abs(DateUtil.getMonthDifference(today, startDate));
+      const isYearsDiff = diff % 12 === 0;
+      return isYearsDiff;
+    });
+    renews.push(...everyYearRenews);
+
     return renews;
   }
 
