@@ -1,0 +1,23 @@
+components:
+  parameters:
+    PaymentId:
+      name: id
+      description: Payment's Id
+      in: path
+      required: true
+      schema:
+        $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+    IsPaymentDryRun:
+        name: isDryRun
+        description: Should this request be ran as a dry run (no save)
+        in: query
+        required: false
+        schema:
+          type: boolean
+    IsPaymentArchived:
+      name: isArchived
+      description: Get archived Payment
+      in: query
+      required: false
+      schema:
+        type: boolean

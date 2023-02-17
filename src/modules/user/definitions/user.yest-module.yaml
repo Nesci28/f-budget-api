@@ -18,6 +18,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RefreshToken"
+        uuid:
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid"
 
     JwtTokenPayload:
       type: object

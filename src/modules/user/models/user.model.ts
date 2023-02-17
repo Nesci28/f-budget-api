@@ -1,10 +1,8 @@
 /* eslint-disable no-use-before-define */
 import { RefreshToken, User } from "@f-budget/f-budget-api-typescript-fetch";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, MongoBase, MongoUtil } from "@yest/mongoose";
-import * as bcrypt from "bcrypt";
+import { Document, MongoBase } from "@yest/mongoose";
 
-import { configs } from "../../../constants/configs.constant";
 import { MongoRefreshTokenSchema } from "./refresh-token.model";
 
 export type UserDocument = MongoUser & Document<MongoUser>;
@@ -28,10 +26,6 @@ export class MongoUser extends MongoBase implements User {
   @Prop({
     type: String,
     required: true,
-    set: (x: string) => {
-      return bcrypt.hashSync(x, configs.bcryptRound);
-    },
-    get: MongoUtil.unset,
   })
   public password: string;
 
@@ -39,6 +33,11 @@ export class MongoUser extends MongoBase implements User {
     type: [MongoRefreshTokenSchema],
   })
   public refreshTokens?: RefreshToken[];
+
+  @Prop({
+    type: String,
+  })
+  public uuid?: string;
 }
 
 const schema = SchemaFactory.createForClass(MongoUser);

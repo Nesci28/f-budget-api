@@ -11,6 +11,7 @@ import { ConfigService } from "@nestjs/config";
 import { BasicOperator } from "@yest/contract";
 import { YestPaginateResult } from "@yest/mongoose";
 import { ResultHandlerException } from "@yest/router";
+import { v4 } from "uuid";
 
 import { Transactionnal } from "../../decorators/transactionnal.decorator";
 import { AuthErrors } from "../auth/auth.errors";
@@ -50,6 +51,8 @@ export class UserService implements OnApplicationBootstrap {
 
   @Transactionnal("MongoUser")
   public async create(user: UserCreate, isDryRun?: boolean): Promise<User> {
+    // eslint-disable-next-line no-param-reassign
+    user.uuid = v4();
     const res = await this.userRepository.create(user, isDryRun);
 
     const balanceCreate: BalanceCreate = {

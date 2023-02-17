@@ -94,6 +94,13 @@ export class DateUtil {
     return timezoneOffset;
   }
 
+  public static getDayDifference(date: Date, compareDate: Date): number {
+    const momentDate = moment(date).utc().startOf("day");
+    const momentCompareDate = moment(compareDate).utc().startOf("day");
+    const difference = momentCompareDate.diff(momentDate, "days");
+    return difference;
+  }
+
   public static getMonthDifference(date: Date, compareDate: Date): number {
     const momentDate = moment(date).utc();
     const momentCompareDate = moment(compareDate).utc();

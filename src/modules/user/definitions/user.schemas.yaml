@@ -6,13 +6,18 @@ components:
         - type: object
           required:
             - email
+            - password
           properties:
             email:
               $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Email
+            password:
+              type: string
             refreshTokens:
               type: array
               items:
                 $ref: "#/components/schemas/RefreshToken"
+            uuid:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
     JwtTokenPayload:
       type: object
       required:

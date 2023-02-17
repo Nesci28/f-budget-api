@@ -66,6 +66,8 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
     UserPatch:
       x-min-properties: 1
       type: object
@@ -95,6 +97,8 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
     UserSearchRequestBody:
       $ref: "#/components/schemas/UserSearch"
     UserUpdate:
@@ -135,6 +139,8 @@ components:
               exp:
                 description: Expiration Time (timestamp in UTC)
                 type: number
+        uuid:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/Uuid
     UserSearch:
       allOf:
         - $ref: "#/components/schemas/UserPaginationQuery"

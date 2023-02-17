@@ -1,0 +1,33 @@
+configs:
+  moduleName: User
+  connectionName: f-budget
+components:
+  schemas:
+    Payment:
+      type: object
+      required:
+        - userId
+        - date
+        - envelopId
+        - description
+        - amount
+      properties:
+        userId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        date:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime"
+        amount:
+          type: number
+        envelopId:
+          x-index: true
+          $ref: "../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID"
+        description:
+          type: string
+        user:
+          x-localField: userId
+          $ref: "../../user/definitions/user.schemas.yaml#/components/schemas/User"
+        envelop:
+          x-localField: envelopId
+          $ref: "../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop"

@@ -1,0 +1,113 @@
+components:
+  responses:
+    PaymentCreateResponse:
+      description: Returns a Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentCreateResponse"
+    PaymentGetAllResponse:
+      description: Returns an array of Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentGetAllResponse"
+    PaymentFindByIdResponse:
+      description: Returns a Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentFindByIdResponse"
+    PaymentSearchResponse:
+      description: Returns a paginated array of Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentSearchResponse"
+    PaymentPatchResponse:
+      description: Returns a modified Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentPatchResponse"
+    PaymentUpdateResponse:
+      description: Returns an updated Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentUpdateResponse"
+    PaymentArchiveResponse:
+      description: Returns a ResultHandler with the archived Payment
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PaymentArchiveResponse"
+  schemas:
+    PaymentCreateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentGetAllResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentFindByIdResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentSearchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              type: array
+              minItems: 0
+              maxItems: 1000
+              items:
+                $ref: ./payment.schemas.yaml#/components/schemas/Payment
+        - type: object
+          properties:
+            distincts:
+              $ref: "#/components/schemas/PaymentSearchDistincts"
+    PaymentPatchResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentUpdateResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentArchiveResponse:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ResultHandlerInterface
+        - type: object
+          properties:
+            value:
+              $ref: ./payment.schemas.yaml#/components/schemas/Payment
+    PaymentSearchDistincts:
+      type: object
+      properties:
+        userId:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchStringDistincts
+        date:
+          $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/SearchDateDistincts

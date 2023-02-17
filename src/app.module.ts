@@ -23,6 +23,7 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { BalanceModule } from "./modules/balance/balance.module";
 import { EnvelopModule } from "./modules/envelop/envelop.module";
+import { PaymentModule } from "./modules/payment/payment.module";
 import { PictureModule } from "./modules/picture/picture.module";
 import { ReceiptModule } from "./modules/receipt/receipt.module";
 import { RenewModule } from "./modules/renew/renew.module";
@@ -42,6 +43,9 @@ const configModule = ConfigModule.forRoot({
     REFRESH_PRIVATE_KEY: Joi.string().required(),
     REFRESH_EXPIRATION_LONG: Joi.string().required(),
     REFRESH_EXPIRATION_SHORT: Joi.string().required(),
+    NTFY_HOST: Joi.string().required(),
+    NTFY_USERNAME: Joi.string().required(),
+    NTFY_PASSWORD: Joi.string().required(),
     MONGO_USERNAME: Joi.string().required(),
     MONGO_PASSWORD: Joi.string().required(),
     MONGO_URL_1: Joi.string().required(),
@@ -110,6 +114,7 @@ const moduleImports = [
   PictureModule,
   UserModule,
   CronModule,
+  PaymentModule,
 ];
 
 const appProviders = [

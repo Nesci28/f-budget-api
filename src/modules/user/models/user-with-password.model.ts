@@ -34,6 +34,11 @@ export class MongoUserWithPassword extends MongoBase implements User {
     type: [MongoRefreshTokenSchema],
   })
   public refreshTokens?: RefreshToken[];
+
+  @Prop({
+    type: String,
+  })
+  public uuid?: string;
 }
 
 const schema = SchemaFactory.createForClass(MongoUserWithPassword);

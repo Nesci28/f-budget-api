@@ -1,0 +1,27 @@
+components:
+  schemas:
+    Payment:
+      allOf:
+        - $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/BaseModel
+        - type: object
+          required:
+            - userId
+            - date
+            - envelopId
+            - description
+            - amount
+          properties:
+            userId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            date:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/DateTime
+            amount:
+              type: number
+            envelopId:
+              $ref: ../../../../node_modules/@yest/contract/resources.yaml#/components/schemas/ObjectID
+            description:
+              type: string
+            user:
+              $ref: ../../user/definitions/user.schemas.yaml#/components/schemas/User
+            envelop:
+              $ref: ../../envelop/definitions/envelop.schemas.yaml#/components/schemas/Envelop
